@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+/Users/
+/.idea/
+/spring-cloud-oauth/springcloud-eureka-server/target/
+/spring-cloud-oauth/springcloud-oauth-resource/target/
+/spring-cloud-oauth/springcloud-oauth-server/target/
+/spring-cloud-oauth/springcloud-zuul-getway/target/

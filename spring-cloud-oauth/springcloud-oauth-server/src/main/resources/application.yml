@@ -1,0 +1,58 @@
+# Make the application available at http://localhost:7070/authserver
+server:
+  port: 7070
+  contextPath: /authserver
+
+# Our certificate settings for enabling JWT tokens
+jwt:
+  certificate:
+    store:
+      file: classpath:/certificate/mykeystore.jks
+      password: abirkhan04
+    key:
+      alias: myauthkey
+      password: abirkhan04
+
+      
+security:
+  oauth2:
+    resource: 
+      filter-order: 3
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8888/eureka/
+spring:
+  resources:
+    static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  mvc:
+    static-path-pattern: /**
+  thymeleaf:
+    prefix: classpath:/templates/
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3306/dwsurvey?useUnicode=true&characterEncoding=utf8
+    type: com.alibaba.druid.pool.DruidDataSource
+    tomcat:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM t_user
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+    dbcp2:
+      pool-prepared-statements: true
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  type-aliases-package: com.camel.oauth.server.entity
+  configuration:
+    map-underscore-to-camel-case: true
