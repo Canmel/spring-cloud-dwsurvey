@@ -28,6 +28,9 @@ zuul:
     user: 
       path: /user/**
       url: http://localhost:9000/user
+    auth:
+      path: /authserver/**
+      url: http://localhost:7070
 
 # Make sure the OAuth2 token is only relayed when using the internal API,
 # do not pass any authentication to the external API

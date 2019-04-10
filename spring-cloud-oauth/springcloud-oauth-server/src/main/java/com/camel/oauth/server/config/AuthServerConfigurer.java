@@ -43,44 +43,44 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 @Order(6)
 public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
 
-	@Value("${jwt.certificate.store.file}")
-	private Resource keystore;
+    @Value("${jwt.certificate.store.file}")
+    private Resource keystore;
 
-	@Value("${jwt.certificate.store.password}")
-	private String keystorePassword;
+    @Value("${jwt.certificate.store.password}")
+    private String keystorePassword;
 
-	@Value("${jwt.certificate.key.alias}")
-	private String keyAlias;
+    @Value("${jwt.certificate.key.alias}")
+    private String keyAlias;
 
-	@Value("${jwt.certificate.key.password}")
-	private String keyPassword;
+    @Value("${jwt.certificate.key.password}")
+    private String keyPassword;
 
-	@Autowired
-	private MyUserDetailsService userDetailsService;
+    @Autowired
+    private MyUserDetailsService userDetailsService;
 
-	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory()
-				.withClient("first").secret("passwordforauthserver")
-				.redirectUris("http://localhost:8080/").authorizedGrantTypes("authorization_code", "refresh_token")
-				.scopes("myscope").autoApprove(true).accessTokenValiditySeconds(30).refreshTokenValiditySeconds(1800)
-			   .and()
-				.withClient("second").secret("passwordforauthserver")
-				.redirectUris("http://localhost:8081/").authorizedGrantTypes("authorization_code", "refresh_token")
-				.scopes("myscope").autoApprove(true).accessTokenValiditySeconds(30).refreshTokenValiditySeconds(1800);
-	}
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
+                .withClient("first").secret("passwordforauthserver")
+                .redirectUris("http://127.0.0.1:8080/", "http://127.0.0.1:4200/").authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("myscope").autoApprove(true).accessTokenValiditySeconds(30).refreshTokenValiditySeconds(1800)
+                .and()
+                .withClient("second").secret("passwordforauthserver")
+                .redirectUris("http://127.0.0.1:8081/").authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("myscope").autoApprove(true).accessTokenValiditySeconds(30).refreshTokenValiditySeconds(1800);
+    }
 
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailsService);
-	}
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailsService);
+    }
 
-	@Bean
-	public JwtAccessTokenConverter jwtAccessTokenConverter() {
-		KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(keystore, keystorePassword.toCharArray());
-		KeyPair keyPair = keyStoreKeyFactory.getKeyPair(keyAlias, keyPassword.toCharArray());
-		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setKeyPair(keyPair);
-		return converter;
-	}
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(keystore, keystorePassword.toCharArray());
+        KeyPair keyPair = keyStoreKeyFactory.getKeyPair(keyAlias, keyPassword.toCharArray());
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setKeyPair(keyPair);
+        return converter;
+    }
 }
