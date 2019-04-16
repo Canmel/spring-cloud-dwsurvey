@@ -8,15 +8,15 @@ server:
 security:
   oauth2:
     client:
-      accessTokenUri: http://localhost:7070/authserver/oauth/token
-      userAuthorizationUri: http://localhost:7070/authserver/oauth/authorize
+      accessTokenUri: http://127.0.0.1:7070/authserver/oauth/token
+      userAuthorizationUri: http://127.0.0.1:7070/authserver/oauth/authorize
       clientId: first
       clientSecret: passwordforauthserver
     resource:
-      userInfoUri: http://localhost:9000/user
+      userInfoUri: http://127.0.0.1:9000/user
 
 person:
-  url: http://localhost:9000/person
+  url: http://127.0.0.1:9000/person
 
 # Proxies the calls to http://localhost:8080/api/* to our REST service at http://localhost:9000/*
 # and automatically includes our OAuth2 token in the request headers
@@ -24,13 +24,13 @@ zuul:
   routes:
     resource:
       path: /api/**
-      url: http://localhost:9000
+      url: http://127.0.0.1:9000
     user: 
       path: /user/**
-      url: http://localhost:9000/user
+      url: http://127.0.0.1:9000/user
     auth:
-      path: /authserver/**
-      url: http://localhost:7070
+      path: /auth/**
+      url: http://127.0.0.1:7070
 
 # Make sure the OAuth2 token is only relayed when using the internal API,
 # do not pass any authentication to the external API

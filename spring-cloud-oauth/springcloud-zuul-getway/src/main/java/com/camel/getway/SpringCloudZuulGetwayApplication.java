@@ -39,5 +39,5 @@ public class SpringCloudZuulGetwayApplication {
     @Bean
     public SimpleFilter simpleFilter() {
       return new SimpleFilter();
-    } 
+    }
 }
