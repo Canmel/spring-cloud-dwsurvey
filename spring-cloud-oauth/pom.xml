@@ -12,5 +12,6 @@
   	<module>springcloud-oauth-resource</module>
   	<module>springcloud-zuul-getway</module>
   	<module>springcloud-eureka-server</module>
+    <module>springcloud-base-core</module>
   </modules>
 </project>

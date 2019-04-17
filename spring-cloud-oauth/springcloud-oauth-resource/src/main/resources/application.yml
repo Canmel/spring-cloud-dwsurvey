@@ -24,3 +24,19 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:8888/eureka/
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/dwsurvey?useUnicode=true&characterEncoding=utf8&useSSL=true
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.camel.oauth.resource.model
+  configuration:
+    map-underscore-to-camel-case: true
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
