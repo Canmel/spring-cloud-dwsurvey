@@ -5,3 +5,6 @@
 /spring-cloud-oauth/springcloud-oauth-resource/target/
 /spring-cloud-oauth/springcloud-oauth-server/target/
 /spring-cloud-oauth/springcloud-zuul-getway/target/
+/spring-cloud-oauth/springcloud-base-core/springcloud-base-core.iml
+/spring-cloud-oauth/springcloud-oauth-resource/pringcloud-oauth-server.iml
+/spring-cloud-oauth/springcloud-oauth-resource/springcloud-oauth-resource.iml

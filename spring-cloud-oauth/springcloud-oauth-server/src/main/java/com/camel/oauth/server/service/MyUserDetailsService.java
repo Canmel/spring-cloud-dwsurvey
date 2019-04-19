@@ -37,11 +37,7 @@ public class MyUserDetailsService implements UserDetailsService {
         boolean userAccountNonLocked = !ObjectUtils.isEmpty(user.getLoginFailureCount()) && user.getLoginFailureCount() < 3;
         boolean accountNonExpired = !ObjectUtils.isEmpty(user.getPasswordExpiredTime()) && user.getPasswordExpiredTime().getTime() > new Date().getTime();
         boolean userEnable = EntityStatus.ENABLE.getCode().equals(user.getStatus());
-        System.out.println(userAccountNonLocked);
-        System.out.println(accountNonExpired);
-        System.out.println(userEnable);
         MyUserDetails myUserDetails = new MyUserDetails(user.getEmail(), user.getPassword(), userEnable, accountNonExpired, true, userAccountNonLocked, user.roles2Names());
-//        MyUserDetails myUserDetails = new MyUserDetails(user);
         return myUserDetails;
     }
 }
