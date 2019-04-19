@@ -14,14 +14,30 @@ import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 /**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author ${author}
- * @since 2019-04-17
+ *　　　　　　　 ┏┓    ┏┓+ +
+ *　　　　　　　┏┛┻━━━━┛┻┓ + +
+ *　　　　　　　┃        ┃ 　问卷服务实现类
+ *　　　　　　　┃     ━  ┃ ++ + + +
+ *           ████━████ ┃+
+ *　　　　　　　┃        ┃ +
+ *　　　　　　　┃   ┻    ┃
+ *　　　　　　　┃        ┃ + +
+ *　　　　　　　┗━┓   ┏━━┛
+ *　　　　　　　  ┃   ┃　　　　　　　　　　
+ *　　　　　　　  ┃   ┃ + + + +
+ *　　　　　　　  ┃   ┃　　　Code is far away from bug with the animal protecting　　　　　　　
+ *　　　　　　　  ┃   ┃+ 　　　　神兽保佑,代码无bug　　
+ *　　　　　　　  ┃   ┃
+ *　　　　　　　  ┃   ┃　　+　　　　　　　　　
+ *　　　　　　　  ┃   ┗━━━━━━━┓ + +
+ *　　　　　　　  ┃           ┣┓
+ *　　　　　　　  ┃           ┏┛
+ *              ┗┓┓┏━━━━━┳┓┏┛ + + + +
+ *               ┃┫┫     ┃┫┫
+ *               ┗┻┛     ┗┻┛+ + + +
  */
 @Service
 public class TSurveyDirectoryServiceImpl extends ServiceImpl<TSurveyDirectoryMapper, TSurveyDirectory> implements TSurveyDirectoryService {
@@ -30,8 +46,16 @@ public class TSurveyDirectoryServiceImpl extends ServiceImpl<TSurveyDirectoryMap
     private TSurveyDirectoryMapper tSurveyDirectoryMapper;
 
     @Override
-    public PageInfo<TSurveyDirectory> pageQuery(TSurveyDirectory tSurveyDirectory) {
-        PageInfo pageInfo = com.github.pagehelper.PageHelper.startPage(1, 10).doSelectPageInfo(()-> tSurveyDirectoryMapper.list(tSurveyDirectory));
+    public PageInfo<TSurveyDirectory> pageQuery(TSurveyDirectory entity) {
+        PageInfo pageInfo = com.github.pagehelper.PageHelper.startPage(entity.getPageNum(), entity.getPageSize()).doSelectPageInfo(()-> tSurveyDirectoryMapper.list(entity));
         return pageInfo;
+    }
+
+    @Override
+    public Page<TSurveyDirectory> selectListPage(TSurveyDirectory tSurveyDirectory) {
+        // 新建分页
+        Page<TSurveyDirectory> page = new Page<TSurveyDirectory>(1, 10);
+        // 返回分页结果 1为id
+        return page.setRecords(tSurveyDirectoryMapper.list(tSurveyDirectory));
     }
 }

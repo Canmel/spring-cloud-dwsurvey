@@ -4,12 +4,27 @@ import com.camel.oauth.resource.model.TUser;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
- * @author ${author}
- * @since 2019-04-17
+ * 　　　　　　　 ┏┓    ┏┓+ +
+ * 　　　　　　　┏┛┻━━━━┛┻┓ + +
+ * 　　　　　　　┃        ┃ 　  用户服务类
+ * 　　　　　　　┃     ━  ┃ ++ + + +
+ * 　　　　　 　████━████ ┃+
+ * 　　　　　　　┃        ┃ +
+ * 　　　　　　　┃   ┻    ┃
+ * 　　　　　　　┃        ┃ + +
+ * 　　　　　　　┗━┓   ┏━━┛
+ * 　　　　　　　  ┃   ┃
+ * 　　　　　　　  ┃   ┃ + + + +
+ * 　　　　　　　  ┃   ┃　　　Code is far away from bug with the animal protecting
+ * 　　　　　　　  ┃   ┃+ 　　　　神兽保佑,代码无bug
+ * 　　　　　　　  ┃   ┃
+ * 　　　　　　　  ┃   ┃　　+
+ * 　　　　　　　  ┃   ┗━━━━━━━┓ + +
+ * 　　　　　　　  ┃           ┣┓
+ * 　　　　　　　  ┃           ┏┛
+ * 　　　　　　　  ┗┓┓┏━━━━━┳┓┏┛ + + + +
+ * 　　　　　　　   ┃┫┫     ┃┫┫
+ * 　　　　　　　   ┗┻┛     ┗┻┛+ + + +
  */
 public interface TUserService extends IService<TUser> {
 

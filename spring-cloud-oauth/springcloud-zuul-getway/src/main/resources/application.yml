@@ -25,6 +25,9 @@ zuul:
     resource:
       path: /api/**
       url: http://127.0.0.1:9000
+    system:
+      path: /system/**
+      url: http://127.0.0.1:9001
     user: 
       path: /user/**
       url: http://127.0.0.1:9000/user

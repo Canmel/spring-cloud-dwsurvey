@@ -69,7 +69,14 @@
 		  <artifactId>pagehelper-spring-boot-starter</artifactId>
 		  <version>1.2.5</version>
 	  </dependency>
-	</dependencies>
+	  <!-- https://mvnrepository.com/artifact/org.openanzo.dependencies/org.apache.commons.dbcp -->
+	  <dependency>
+		  <groupId>org.openanzo.dependencies</groupId>
+		  <artifactId>org.apache.commons.dbcp</artifactId>
+		  <version>1.2.2</version>
+	  </dependency>
+
+  </dependencies>
 
 	<dependencyManagement>
 		<dependencies>

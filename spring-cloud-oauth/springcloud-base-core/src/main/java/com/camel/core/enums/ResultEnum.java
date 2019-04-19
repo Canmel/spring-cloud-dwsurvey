@@ -7,6 +7,8 @@ public enum ResultEnum {
     CREDENTIALS_EXPIRED(40001, "您的密码已过期,请修改密码!"),
     CREDENTIALS_TOO_WEAK(40002, "您的密码强度太弱,请修改密码!"),
     NOT_VALID_PARAM(40005, "参数不合法"),
+    BAD_REQUEST(400, "参数类型错误，请确认后重试"),
+    RESOURCESNOTFOUND(404, "未找到相关资源"),
     SUCCESS(200, "操作成功");
 
     private Integer code;

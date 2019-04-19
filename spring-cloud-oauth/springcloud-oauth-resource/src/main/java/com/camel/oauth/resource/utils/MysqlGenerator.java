@@ -7,6 +7,29 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
+/**
+ * 　　　　　　　 ┏┓    ┏┓+ +
+ * 　　　　　　　┏┛┻━━━━┛┻┓ + +
+ * 　　　　　　　┃        ┃ 　  代码生成器2
+ * 　　　　　　　┃     ━  ┃ ++ + + +
+ * 　　　　　 　████━████ ┃+
+ * 　　　　　　　┃        ┃ +
+ * 　　　　　　　┃   ┻    ┃
+ * 　　　　　　　┃        ┃ + +
+ * 　　　　　　　┗━┓   ┏━━┛
+ * 　　　　　　　  ┃   ┃
+ * 　　　　　　　  ┃   ┃ + + + +
+ * 　　　　　　　  ┃   ┃　　　Code is far away from bug with the animal protecting
+ * 　　　　　　　  ┃   ┃+ 　　　　神兽保佑,代码无bug
+ * 　　　　　　　  ┃   ┃
+ * 　　　　　　　  ┃   ┃　　+
+ * 　　　　　　　  ┃   ┗━━━━━━━┓ + +
+ * 　　　　　　　  ┃           ┣┓
+ * 　　　　　　　  ┃           ┏┛
+ * 　　　　　　　  ┗┓┓┏━━━━━┳┓┏┛ + + + +
+ * 　　　　　　　   ┃┫┫     ┃┫┫
+ * 　　　　　　　   ┗┻┛     ┗┻┛+ + + +
+ */
 public class MysqlGenerator {
     public static void main(String[] args) {
         String path = new MysqlGenerator().getClass().getResource("/").getPath();

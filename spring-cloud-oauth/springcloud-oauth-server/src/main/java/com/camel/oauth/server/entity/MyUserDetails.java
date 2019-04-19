@@ -5,12 +5,13 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
+import java.util.List;
 
 public class MyUserDetails extends User {
-    private TUser user;
+    private SysUser user;
 
-    public MyUserDetails(TUser user) {
-        super(user.getEmail(), user.getShaPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+    public MyUserDetails(SysUser user) {
+        super(user.getEmail(), user.getPassword(), user.roles2Names());
         this.user = user;
     }
 
@@ -21,4 +22,6 @@ public class MyUserDetails extends User {
     public MyUserDetails(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
+
+
 }

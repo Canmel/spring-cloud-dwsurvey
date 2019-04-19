@@ -2,6 +2,7 @@ package com.camel.oauth.resource.model;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.camel.core.entity.BasePaginationEntity;
 import lombok.Data;
 import lombok.Getter;
 
@@ -18,7 +19,7 @@ import java.io.Serializable;
  */
 @Data
 @TableName("t_survey_directory")
-public class TSurveyDirectory implements Serializable {
+public class TSurveyDirectory extends BasePaginationEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

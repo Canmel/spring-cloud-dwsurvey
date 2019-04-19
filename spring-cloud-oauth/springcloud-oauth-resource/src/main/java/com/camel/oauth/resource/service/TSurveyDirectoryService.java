@@ -7,15 +7,33 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
- * @author ${author}
- * @since 2019-04-17
+ * 　　　　　　　 ┏┓    ┏┓+ +
+ * 　　　　　　　┏┛┻━━━━┛┻┓ + +
+ * 　　　　　　　┃        ┃ 　  问卷服务接口
+ * 　　　　　　　┃     ━  ┃ ++ + + +
+ * 　　　　　 　████━████ ┃+
+ * 　　　　　　　┃        ┃ +
+ * 　　　　　　　┃   ┻    ┃
+ * 　　　　　　　┃        ┃ + +
+ * 　　　　　　　┗━┓   ┏━━┛
+ * 　　　　　　　  ┃   ┃
+ * 　　　　　　　  ┃   ┃ + + + +
+ * 　　　　　　　  ┃   ┃　　　Code is far away from bug with the animal protecting
+ * 　　　　　　　  ┃   ┃+ 　　　　神兽保佑,代码无bug
+ * 　　　　　　　  ┃   ┃
+ * 　　　　　　　  ┃   ┃　　+
+ * 　　　　　　　  ┃   ┗━━━━━━━┓ + +
+ * 　　　　　　　  ┃           ┣┓
+ * 　　　　　　　  ┃           ┏┛
+ * 　　　　　　　  ┗┓┓┏━━━━━┳┓┏┛ + + + +
+ * 　　　　　　　   ┃┫┫     ┃┫┫
+ * 　　　　　　　   ┗┻┛     ┗┻┛+ + + +
  */
 public interface TSurveyDirectoryService extends IService<TSurveyDirectory> {
     PageInfo<TSurveyDirectory> pageQuery(TSurveyDirectory tSurveyDirectory);
+
+    Page<TSurveyDirectory> selectListPage(TSurveyDirectory tSurveyDirectory);
 }

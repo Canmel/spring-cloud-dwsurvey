@@ -30,7 +30,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @EnableEurekaClient
 @SpringBootApplication
-@MapperScan(value = "com.camel.oauth.resource.mapper")
+@MapperScan("com.camel.oauth.resource.mapper")
 public class SpringCloudOauthResourceApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringCloudOauthResourceApplication.class, args);

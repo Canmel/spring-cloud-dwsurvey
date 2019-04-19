@@ -2,6 +2,11 @@ package com.camel.core.utils;
 
 import com.camel.core.entity.Result;
 import com.camel.core.enums.ResultEnum;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ResultUtil {
     public ResultUtil() {
@@ -28,5 +33,11 @@ public class ResultUtil {
 
     public static Result error(ResultEnum resultEnum) {
         return error(resultEnum.getCode(), resultEnum.getMsg());
+    }
+
+    public static Result notFound(){
+        HttpServletResponse response = ApplicationUtils.getHttpServletResponse();
+        response.setStatus(ResultEnum.RESOURCESNOTFOUND.getCode());
+        return error(ResultEnum.RESOURCESNOTFOUND);
     }
 }

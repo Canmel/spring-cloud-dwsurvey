@@ -3,24 +3,42 @@ package com.camel.oauth.resource.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.camel.core.entity.Result;
+import com.camel.core.enums.ResultEnum;
 import com.camel.core.utils.ResultUtil;
 import com.camel.oauth.resource.model.TSurveyDirectory;
 import com.camel.oauth.resource.service.TSurveyDirectoryService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author ${author}
- * @since 2019-04-17
+ * 　　　　　　　 ┏┓    ┏┓+ +
+ * 　　　　　　　┏┛┻━━━━┛┻┓ + +
+ * 　　　　　　　┃        ┃ 　  前端控制器
+ * 　　　　　　　┃     ━  ┃ ++ + + +
+ * 　　　　　 　████━████ ┃+
+ * 　　　　　　　┃        ┃ +
+ * 　　　　　　　┃   ┻    ┃
+ * 　　　　　　　┃        ┃ + +
+ * 　　　　　　　┗━┓   ┏━━┛
+ * 　　　　　　　  ┃   ┃
+ * 　　　　　　　  ┃   ┃ + + + +
+ * 　　　　　　　  ┃   ┃　　　Code is far away from bug with the animal protecting
+ * 　　　　　　　  ┃   ┃+ 　　　　神兽保佑,代码无bug
+ * 　　　　　　　  ┃   ┃
+ * 　　　　　　　  ┃   ┃　　+
+ * 　　　　　　　  ┃   ┗━━━━━━━┓ + +
+ * 　　　　　　　  ┃           ┣┓
+ * 　　　　　　　  ┃           ┏┛
+ * 　　　　　　　  ┗┓┓┏━━━━━┳┓┏┛ + + + +
+ * 　　　　　　　   ┃┫┫     ┃┫┫
+ * 　　　　　　　   ┗┻┛     ┗┻┛+ + + +
  */
 @RestController
 @RequestMapping("/tSurveyDirectory")
@@ -30,8 +48,16 @@ public class TSurveyDirectoryController {
 
     @GetMapping
     public Result pageQuery(TSurveyDirectory tSurveyDirectory){
-       PageInfo<TSurveyDirectory> pageInfo = tSurveyDirectoryService.pageQuery(tSurveyDirectory);
-        return ResultUtil.success(pageInfo);
+       return ResultUtil.success(tSurveyDirectoryService.pageQuery(tSurveyDirectory));
+    }
+
+    @GetMapping("/{id}")
+    public Result list(@PathVariable(required = true) String id) {
+        TSurveyDirectory tSurveyDirectory = tSurveyDirectoryService.selectById(id);
+        if(ObjectUtils.isEmpty(tSurveyDirectory)){
+            return ResultUtil.notFound();
+        }
+        return ResultUtil.success(tSurveyDirectory);
     }
 }
 

@@ -27,12 +27,12 @@ public class MysqlGenerator {
         path += "src/main/java";
 
         com.baomidou.mybatisplus.generator.config.GlobalConfig config = new com.baomidou.mybatisplus.generator.config.GlobalConfig();
-        String dbUrl = "jdbc:mysql://localhost:3306/dwsurvey?useSSL=false";
+        String dbUrl = "jdbc:mysql://localhost:3306/dw_oauth2?useSSL=false&serverTimezone=UTC";
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)
                 .setUsername("root")
-                .setPassword("1234")
+                .setPassword("123456")
                 .setDriverName("com.mysql.jdbc.Driver");
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig
@@ -40,6 +40,7 @@ public class MysqlGenerator {
                 .setEntityLombokModel(false)
                 .setDbColumnUnderline(true)
                 .setNaming(NamingStrategy.underline_to_camel);
+        strategyConfig.setInclude(new String[] {"sys_role", "sys_user_role", "sys_menu", "sys_role_menu"});
         config.setActiveRecord(false)
                 .setEnableCache(false)
                 .setAuthor(" * \n" +
