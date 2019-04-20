@@ -5,7 +5,7 @@ import lombok.Data;
 
 
 @Data
-public class BasePaginationEntity {
+public class BasePaginationEntity extends BaseEntity{
 
     @TableField(exist = false)
     private Integer pageNum;

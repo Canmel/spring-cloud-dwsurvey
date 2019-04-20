@@ -1,16 +1,17 @@
 package com.canmel.dwsurvey.system.controller;
 
 
+import com.baomidou.mybatisplus.service.IService;
+import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
 import com.canmel.dwsurvey.system.model.SysMenu;
 import com.canmel.dwsurvey.system.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -22,14 +23,44 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/sysMenu")
-public class SysMenuController {
+public class SysMenuController extends BaseCommonController {
 
     @Autowired
     private SysMenuService sysMenuService;
 
     @GetMapping
-    public Result test(SysMenu sysMenu){
+    public Result index(SysMenu sysMenu){
         return ResultUtil.success(sysMenuService.selectPage(sysMenu));
+    }
+
+    @GetMapping("/{id}")
+    public Result detail(@PathVariable Integer id){
+        return super.details(id);
+    }
+
+    @PostMapping
+    public Result save(SysMenu sysMenu){
+        return super.save(sysMenu);
+    }
+
+    @PutMapping
+    public Result update(SysMenu sysMenu){
+        return super.update(sysMenu);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id){
+        return super.delete(id);
+    }
+
+    @Override
+    public IService getiService() {
+        return sysMenuService;
+    }
+
+    @Override
+    public String getMouduleName() {
+        return "菜单";
     }
 }
 
