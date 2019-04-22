@@ -5,6 +5,8 @@ import com.camel.core.entity.BaseEntity;
 import com.camel.core.entity.BasePaginationEntity;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ObjectUtils;
 

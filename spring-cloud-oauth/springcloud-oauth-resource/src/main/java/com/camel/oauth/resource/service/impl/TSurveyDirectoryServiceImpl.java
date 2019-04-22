@@ -1,20 +1,14 @@
 package com.camel.oauth.resource.service.impl;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
-import com.camel.oauth.resource.model.TSurveyDirectory;
-import com.camel.oauth.resource.mapper.TSurveyDirectoryMapper;
-import com.camel.oauth.resource.service.TSurveyDirectoryService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.camel.oauth.resource.mapper.TSurveyDirectoryMapper;
+import com.camel.oauth.resource.model.TSurveyDirectory;
+import com.camel.oauth.resource.service.TSurveyDirectoryService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.awt.*;
-import java.util.List;
-import java.util.Map;
 
 /**
  *　　　　　　　 ┏┓    ┏┓+ +
@@ -47,7 +41,7 @@ public class TSurveyDirectoryServiceImpl extends ServiceImpl<TSurveyDirectoryMap
 
     @Override
     public PageInfo<TSurveyDirectory> pageQuery(TSurveyDirectory entity) {
-        PageInfo pageInfo = com.github.pagehelper.PageHelper.startPage(entity.getPageNum(), entity.getPageSize()).doSelectPageInfo(()-> tSurveyDirectoryMapper.list(entity));
+        PageInfo pageInfo = PageHelper.startPage(entity.getPageNum(), entity.getPageSize()).doSelectPageInfo(()-> tSurveyDirectoryMapper.list(entity));
         return pageInfo;
     }
 
