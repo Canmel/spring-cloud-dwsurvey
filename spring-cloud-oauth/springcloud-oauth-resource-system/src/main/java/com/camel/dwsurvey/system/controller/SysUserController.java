@@ -8,9 +8,10 @@ import com.camel.core.utils.ResultUtil;
 import com.camel.dwsurvey.system.model.SysUser;
 import com.camel.dwsurvey.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -30,6 +31,24 @@ public class SysUserController extends BaseCommonController{
     @GetMapping
     public Result index(SysUser sysUser){
         return ResultUtil.success(userService.pageQuery(sysUser));
+    }
+
+    @PostMapping
+    public Result save(@RequestBody SysUser sysUser) {
+        return super.save(sysUser);
+    }
+
+    @GetMapping("/{id}")
+    public Result save(@PathVariable(required = true) Integer id){
+        Result result = super.details(id);
+        SysUser user = (SysUser) result.getData();
+        user.setPassword("");
+        return ResultUtil.success(user);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody SysUser sysUser){
+        return super.update(sysUser);
     }
 
     @Override

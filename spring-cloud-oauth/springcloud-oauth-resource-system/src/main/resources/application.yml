@@ -37,6 +37,7 @@ mybatis-plus:
   type-aliases-package: com.camel.dwsurvey.system.model
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 pagehelper:
   helper-dialect: mysql
