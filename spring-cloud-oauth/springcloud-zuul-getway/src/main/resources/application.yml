@@ -12,6 +12,7 @@ security:
       userAuthorizationUri: http://127.0.0.1:7070/authserver/oauth/authorize
       clientId: first
       clientSecret: passwordforauthserver
+      refresh-token-validity-seconds: 60
     resource:
       userInfoUri: http://127.0.0.1:9000/user
 

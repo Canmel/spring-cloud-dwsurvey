@@ -42,5 +42,10 @@
             sys_user.org_name
             FROM
             sys_user
+        <where>
+            <if test="email !=null and email != ''">and sys_user.email like CONCAT('%', #{email}, '%') </if>
+            <if test="username !=null and username != ''">and sys_user.username like CONCAT('%', #{username}, '%') </if>
+        </where>
+        ORDER BY sys_user.uid
     </select>
 </mapper>

@@ -51,6 +51,11 @@ public class SysUserController extends BaseCommonController{
         return super.update(sysUser);
     }
 
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable(required = true) Integer id){
+        return ResultUtil.success(super.delete(id));
+    }
+
     @Override
     public IService getiService() {
         return userService;
