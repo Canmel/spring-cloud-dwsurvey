@@ -1,17 +1,15 @@
 package com.camel.oauth.server.entity;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
-import java.util.List;
 
 public class MyUserDetails extends User {
     private SysUser user;
 
     public MyUserDetails(SysUser user) {
-        super(user.getEmail(), user.getPassword(), user.roles2Names());
+        super(user.getEmail(), user.getPassword(), user.roles2Names("ROLE_"));
         this.user = user;
     }
 
