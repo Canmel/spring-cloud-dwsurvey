@@ -67,3 +67,5 @@ springcloud:
   oauth:
     signin:
       colum: email
+    role:
+      prefix: ROLE_

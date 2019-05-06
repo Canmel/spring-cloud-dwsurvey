@@ -28,6 +28,9 @@ public class MyUserDetailsService implements UserDetailsService {
     @Value("${springcloud.oauth.signin.colum}")
     private String signInColum;
 
+    @Value("${springcloud.oauth.role.prefix}")
+    private String rolePrefix;
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         EntityWrapper<SysUser> userWrapper = new EntityWrapper<>();
@@ -37,7 +40,7 @@ public class MyUserDetailsService implements UserDetailsService {
         boolean userAccountNonLocked = !ObjectUtils.isEmpty(user.getLoginFailureCount()) && user.getLoginFailureCount() < 3;
         boolean accountNonExpired = !ObjectUtils.isEmpty(user.getPasswordExpiredTime()) && user.getPasswordExpiredTime().getTime() > new Date().getTime();
         boolean userEnable = EntityStatus.ENABLE.getCode().equals(user.getStatus());
-        MyUserDetails myUserDetails = new MyUserDetails(user.getEmail(), user.getPassword(), userEnable, accountNonExpired, true, userAccountNonLocked, user.roles2Names());
+        MyUserDetails myUserDetails = new MyUserDetails(user.getEmail(), user.getPassword(), userEnable, accountNonExpired, true, userAccountNonLocked, user.roles2Names(rolePrefix));
         return myUserDetails;
     }
 }
