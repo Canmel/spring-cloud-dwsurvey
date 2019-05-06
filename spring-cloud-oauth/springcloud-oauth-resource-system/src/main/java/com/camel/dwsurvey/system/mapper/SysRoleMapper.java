@@ -5,6 +5,8 @@ import com.camel.dwsurvey.system.model.SysRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -16,5 +18,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface SysRoleMapper extends BaseMapper<SysRole> {
-
+    List<SysRole> list(SysRole sysRole);
 }

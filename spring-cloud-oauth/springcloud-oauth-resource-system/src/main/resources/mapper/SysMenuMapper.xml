@@ -15,7 +15,7 @@
     </resultMap>
     
     <select id="list" resultMap="BaseResultMap">
-        SELECT *,
+        SELECT
             sys_menu.menu_id,
             sys_menu.parent_id,
             sys_menu.`name`,
@@ -27,6 +27,6 @@
             sys_menu.order_num,
             sys_menu.gmt_modifiled,
             sys_menu.`status`
-        FROM sys_menu
-    </select>
+            FROM sys_menu
+</select>
 </mapper>

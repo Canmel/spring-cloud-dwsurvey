@@ -117,11 +117,11 @@ public class SysUser implements Serializable {
     @TableField(exist = false)
     private List<SysRole> roles;
 
-    public List<SimpleGrantedAuthority> roles2Names(){
+    public List<SimpleGrantedAuthority> roles2Names(String rolePrefix){
         List<SimpleGrantedAuthority> roleNames = new ArrayList<>();
         Iterator<SysRole> iterator = this.roles.iterator();
         while (iterator.hasNext()){
-            roleNames.add(new SimpleGrantedAuthority(iterator.next().getRoleName()));
+            roleNames.add(new SimpleGrantedAuthority(rolePrefix + iterator.next().getRoleName()));
         }
         return roleNames;
     }

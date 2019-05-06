@@ -2,6 +2,7 @@ package com.camel.dwsurvey.system.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.camel.dwsurvey.system.model.SysRole;
+import com.github.pagehelper.PageInfo;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.camel.dwsurvey.system.model.SysRole;
  * @since 2019-04-19
  */
 public interface SysRoleService extends IService<SysRole> {
-
+    PageInfo<SysRole> pageQuery(SysRole sysRole);
 }
