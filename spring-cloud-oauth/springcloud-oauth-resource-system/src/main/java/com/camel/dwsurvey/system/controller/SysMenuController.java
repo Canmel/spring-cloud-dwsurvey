@@ -50,6 +50,17 @@ public class SysMenuController extends BaseCommonController {
         return super.delete(id);
     }
 
+    @GetMapping("/tops")
+    public Result tops(SysMenu sysMenu) {
+        return ResultUtil.success("");
+    }
+
+    @GetMapping("/subs")
+    public Result subs(SysMenu sysMenu){
+        return ResultUtil.success("");
+    }
+
+
     @Override
     public IService getiService() {
         return sysMenuService;
