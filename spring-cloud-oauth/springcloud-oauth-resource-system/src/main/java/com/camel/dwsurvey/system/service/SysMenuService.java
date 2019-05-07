@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.service.IService;
 import com.camel.dwsurvey.system.model.SysMenu;
 import com.github.pagehelper.PageInfo;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -14,4 +17,12 @@ import com.github.pagehelper.PageInfo;
  */
 public interface SysMenuService extends IService<SysMenu> {
     PageInfo<SysMenu> selectPage(SysMenu sysMenu);
+
+    List<SysMenu> tops();
+
+    List<SysMenu> subs();
+
+    boolean exist(String name);
+
+    boolean delete(Serializable serializable);
 }

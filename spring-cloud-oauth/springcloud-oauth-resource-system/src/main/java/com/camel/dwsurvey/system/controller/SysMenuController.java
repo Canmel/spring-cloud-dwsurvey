@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
+import com.camel.dwsurvey.system.enums.MenuStatus;
+import com.camel.dwsurvey.system.enums.MenuType;
 import com.camel.dwsurvey.system.model.SysMenu;
 import com.camel.dwsurvey.system.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,12 @@ import org.springframework.web.bind.annotation.*;
 public class SysMenuController extends BaseCommonController {
 
     @Autowired
-    private SysMenuService sysMenuService;
+    private SysMenuService service;
 
     @GetMapping
     public Result index(SysMenu sysMenu){
-        return ResultUtil.success(sysMenuService.selectPage(sysMenu));
+        sysMenu.setStatus(MenuStatus.NORMAL.getCode().toString());
+        return ResultUtil.success(service.selectPage(sysMenu));
     }
 
     @GetMapping("/{id}")
@@ -36,34 +39,48 @@ public class SysMenuController extends BaseCommonController {
     }
 
     @PostMapping
-    public Result save(SysMenu sysMenu){
+    public Result save(@RequestBody SysMenu sysMenu){
         return super.save(sysMenu);
     }
 
     @PutMapping
-    public Result update(SysMenu sysMenu){
+    public Result update(@RequestBody SysMenu sysMenu){
         return super.update(sysMenu);
     }
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id){
-        return super.delete(id);
+        if(service.delete(id)){
+            return ResultUtil.deleteSuccess(getMouduleName());
+        }else{
+            return ResultUtil.deleteError(getMouduleName());
+        }
     }
 
     @GetMapping("/tops")
     public Result tops(SysMenu sysMenu) {
-        return ResultUtil.success("");
+        return ResultUtil.success(service.tops());
     }
 
     @GetMapping("/subs")
     public Result subs(SysMenu sysMenu){
-        return ResultUtil.success("");
+        return ResultUtil.success(service.subs());
+    }
+
+    @GetMapping("/typies")
+    public Result typies(){
+        return ResultUtil.success(MenuType.all());
+    }
+
+    @GetMapping("/valid/{name}")
+    public Result nameValid(@PathVariable String name){
+        return ResultUtil.success(service.exist(name));
     }
 
 
     @Override
     public IService getiService() {
-        return sysMenuService;
+        return service;
     }
 
     @Override

@@ -154,6 +154,14 @@ public class SysMenu extends BasePaginationEntity implements Serializable {
         this.status = status;
     }
 
+    public SysMenu(Integer menuId, String status) {
+        this.menuId = menuId;
+        this.status = status;
+    }
+
+    public SysMenu() {
+    }
+
     @Override
     public String toString() {
         return "SysMenu{" +

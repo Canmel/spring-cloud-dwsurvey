@@ -28,5 +28,8 @@
             sys_menu.gmt_modifiled,
             sys_menu.`status`
             FROM sys_menu
+        <where>
+            <if test="status != null and status != ''">sys_menu.`status` = #{status}</if>
+        </where>
 </select>
 </mapper>
