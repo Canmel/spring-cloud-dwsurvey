@@ -23,9 +23,8 @@
         <result column="remark" property="remark" jdbcType="VARCHAR"></result>
     </resultMap>
 
-    <select id="list" resultMap="BaseResultMap" parameterType="com.camel.dwsurvey.system.model.SysUser">
-        SELECT
-            sys_user.uid,
+    <sql id="baseSql">
+        sys_user.uid,
             sys_user.username,
             sys_user.`password`,
             sys_user.nickname,
@@ -44,6 +43,11 @@
             sys_user.org_name,
             sys_user.address,
             sys_user.remark
+    </sql>
+
+    <select id="list" resultMap="BaseResultMap" parameterType="com.camel.dwsurvey.system.model.SysUser">
+        SELECT
+            <include refid="baseSql"></include>
             FROM
             sys_user
         <where>
