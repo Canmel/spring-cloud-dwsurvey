@@ -19,6 +19,8 @@
         <result column="gender" property="gender" jdbcType="VARCHAR"></result>
         <result column="org_no" property="orgNo" jdbcType="VARCHAR"></result>
         <result column="org_name" property="orgName" jdbcType="VARCHAR"></result>
+        <result column="address" property="address" jdbcType="VARCHAR"></result>
+        <result column="remark" property="remark" jdbcType="VARCHAR"></result>
     </resultMap>
 
     <select id="list" resultMap="BaseResultMap" parameterType="com.camel.dwsurvey.system.model.SysUser">
@@ -39,7 +41,9 @@
             sys_user.age,
             sys_user.gender,
             sys_user.org_no,
-            sys_user.org_name
+            sys_user.org_name,
+            sys_user.address,
+            sys_user.remark
             FROM
             sys_user
         <where>

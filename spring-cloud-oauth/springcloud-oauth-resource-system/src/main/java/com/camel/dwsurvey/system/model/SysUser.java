@@ -91,6 +91,10 @@ public class SysUser extends BasePaginationEntity implements Serializable {
      */
     private String orgName;
 
+    private String address;
+
+    private String remark;
+
     @Override
     public String toString() {
         return "SysUser{" +

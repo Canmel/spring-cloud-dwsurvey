@@ -56,6 +56,12 @@ public class SysUserController extends BaseCommonController{
         return ResultUtil.success(super.delete(id));
     }
 
+    @GetMapping("/valid/{name}")
+    public Result nameValid(@PathVariable String name, Integer id){
+        System.out.println(userService.exist(name, id));
+        return ResultUtil.success(userService.exist(name, id));
+    }
+
     @Override
     public IService getiService() {
         return userService;

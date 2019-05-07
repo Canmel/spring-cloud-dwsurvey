@@ -10,7 +10,7 @@
         <result column="icon" property="icon" jdbcType="VARCHAR"></result>
         <result column="gmt_create" property="gmtCreate" jdbcType="DATE"></result>
         <result column="order_num" property="orderNum" jdbcType="INTEGER"></result>
-        <result column="gmt_modifiled" property="gmtModifiled" jdbcType="DATE"></result>
+        <result column="gmt_modifiled" property="gmtModifiled" jdbcType="VARCHAR"></result>
         <result column="status" property="status" jdbcType="VARCHAR"></result>
     </resultMap>
     
@@ -30,6 +30,8 @@
             FROM sys_menu
         <where>
             <if test="status != null and status != ''">sys_menu.`status` = #{status}</if>
+            <if test="name != null and name != ''">AND sys_menu.`name` LIKE CONCAT('%', #{name}, '%') </if>
         </where>
+        ORDER BY sys_menu.gmt_create DESC
 </select>
 </mapper>

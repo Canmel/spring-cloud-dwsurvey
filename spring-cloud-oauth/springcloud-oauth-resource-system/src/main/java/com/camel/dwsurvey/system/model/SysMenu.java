@@ -1,11 +1,12 @@
 package com.camel.dwsurvey.system.model;
 
 import com.baomidou.mybatisplus.enums.IdType;
-import java.util.Date;
+
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.camel.core.entity.BasePaginationEntity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * <p>
@@ -55,7 +56,7 @@ public class SysMenu extends BasePaginationEntity implements Serializable {
     /**
      * 创建时间
      */
-    private Date gmtCreate;
+    private String gmtCreate;
     /**
      * 更新时间
      */
@@ -130,11 +131,11 @@ public class SysMenu extends BasePaginationEntity implements Serializable {
         this.orderNum = orderNum;
     }
 
-    public Date getGmtCreate() {
+    public String getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(String gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 

@@ -14,4 +14,6 @@ import com.github.pagehelper.PageInfo;
  */
 public interface SysUserService extends IService<SysUser> {
     PageInfo<SysUser> pageQuery(SysUser user);
+
+    boolean exist(String name, Integer id);
 }
