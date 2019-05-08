@@ -2,9 +2,14 @@ package com.camel.dwsurvey.system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.camel.core.utils.ResultUtil;
+import com.camel.dwsurvey.system.mapper.SysUserRoleMapper;
 import com.camel.dwsurvey.system.model.SysMenu;
+import com.camel.dwsurvey.system.model.SysRole;
 import com.camel.dwsurvey.system.model.SysUser;
 import com.camel.dwsurvey.system.mapper.SysUserMapper;
+import com.camel.dwsurvey.system.model.SysUserRole;
+import com.camel.dwsurvey.system.service.SysRoleService;
 import com.camel.dwsurvey.system.service.SysUserService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
@@ -12,6 +17,9 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -26,6 +34,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Autowired
     private SysUserMapper mapper;
+
+    @Autowired
+    private SysUserRoleMapper userRoleMapper;
+
+    @Autowired
+    private SysRoleService roleService;
 
     @Override
     public PageInfo<SysUser> pageQuery(SysUser entity) {
@@ -43,5 +57,19 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         Integer count = mapper.selectCount(userWrapper);
         return !(count > 0);
+    }
+
+    @Override
+    public void getRolesByUser(SysUser user) {
+        Wrapper<SysUserRole> sysUserRoleWrapper = new EntityWrapper<>();
+        sysUserRoleWrapper.eq("user_id", user.getUid());
+        List<SysUserRole> userRoleList = userRoleMapper.selectList(sysUserRoleWrapper);
+        List<Integer> roleIds = new ArrayList<>();
+        List<SysRole> roles = new ArrayList<>();
+        userRoleList.forEach(userRole -> {
+            roleIds.add(userRole.getRoleId());
+        });
+        user.setRoleIds(roleIds);
+        user.setSysRoles(roleService.loadRolesByRoleIds(roleIds));
     }
 }

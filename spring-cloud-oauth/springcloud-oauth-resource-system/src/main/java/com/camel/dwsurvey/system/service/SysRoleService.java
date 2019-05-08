@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.service.IService;
 import com.camel.dwsurvey.system.model.SysRole;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -14,4 +16,6 @@ import com.github.pagehelper.PageInfo;
  */
 public interface SysRoleService extends IService<SysRole> {
     PageInfo<SysRole> pageQuery(SysRole sysRole);
+
+    List<SysRole> loadRolesByRoleIds(List<Integer> ids);
 }

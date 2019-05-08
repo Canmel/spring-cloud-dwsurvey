@@ -1,6 +1,7 @@
 package com.camel.dwsurvey.system.controller;
 
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
@@ -20,16 +21,16 @@ import org.springframework.stereotype.Controller;
  * @author ${author}
  * @since 2019-04-19
  */
-@Controller
-@RestController("/sysRole")
+@RestController
+@RequestMapping(("/sysRole"))
 public class SysRoleController extends BaseCommonController {
 
     @Autowired
-    private SysRoleService sysRoleService;
+    private SysRoleService service;
 
     @Override
     public IService getiService() {
-        return sysRoleService;
+        return service;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class SysRoleController extends BaseCommonController {
 
     @GetMapping
     public Result index(SysRole sysUser){
-        return ResultUtil.success(sysRoleService.pageQuery(sysUser));
+        return ResultUtil.success(service.pageQuery(sysUser));
     }
 
     @PostMapping
@@ -60,6 +61,12 @@ public class SysRoleController extends BaseCommonController {
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable(required = true) Integer id){
         return super.delete(id);
+    }
+
+    @GetMapping("/all/list")
+    public Result all(){
+        System.out.println(service.selectList(new EntityWrapper<>()));
+        return ResultUtil.success(service.selectList(new EntityWrapper<>()));
     }
 }
 

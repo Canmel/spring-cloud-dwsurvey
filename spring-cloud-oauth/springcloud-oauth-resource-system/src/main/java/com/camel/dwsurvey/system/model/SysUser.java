@@ -1,5 +1,6 @@
 package com.camel.dwsurvey.system.model;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -7,6 +8,7 @@ import com.camel.core.entity.BasePaginationEntity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -61,7 +63,7 @@ public class SysUser extends BasePaginationEntity implements Serializable {
     /**
      * 最后一次登录时间
      */
-    private Date lastLoginTime;
+    private String lastLoginTime;
     /**
      * 密码生效时间
      */
@@ -94,6 +96,12 @@ public class SysUser extends BasePaginationEntity implements Serializable {
     private String address;
 
     private String remark;
+
+    @TableField(exist = false)
+    private List roleIds;
+
+    @TableField(exist = false)
+    private List<SysRole> sysRoles;
 
     @Override
     public String toString() {

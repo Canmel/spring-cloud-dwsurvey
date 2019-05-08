@@ -26,11 +26,11 @@ import java.io.Serializable;
 public class SysUserController extends BaseCommonController{
 
     @Autowired
-    private SysUserService userService;
+    private SysUserService service;
 
     @GetMapping
     public Result index(SysUser sysUser){
-        return ResultUtil.success(userService.pageQuery(sysUser));
+        return ResultUtil.success(service.pageQuery(sysUser));
     }
 
     @PostMapping
@@ -42,6 +42,7 @@ public class SysUserController extends BaseCommonController{
     public Result save(@PathVariable(required = true) Integer id){
         Result result = super.details(id);
         SysUser user = (SysUser) result.getData();
+        service.getRolesByUser(user);
         user.setPassword("");
         return ResultUtil.success(user);
     }
@@ -58,13 +59,13 @@ public class SysUserController extends BaseCommonController{
 
     @GetMapping("/valid/{name}")
     public Result nameValid(@PathVariable String name, Integer id){
-        System.out.println(userService.exist(name, id));
-        return ResultUtil.success(userService.exist(name, id));
+        System.out.println(service.exist(name, id));
+        return ResultUtil.success(service.exist(name, id));
     }
 
     @Override
     public IService getiService() {
-        return userService;
+        return service;
     }
 
     @Override

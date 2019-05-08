@@ -11,7 +11,7 @@
         <result column="status" property="status" jdbcType="VARCHAR"></result>
         <result column="gmt_create" property="gmtCreate" jdbcType="DATE"></result>
         <result column="gmt_modified" property="gmtModified" jdbcType="DATE"></result>
-        <result column="last_login_time" property="lastLoginTime" jdbcType="DATE"></result>
+        <result column="last_login_time" property="lastLoginTime" jdbcType="VARCHAR"></result>
         <result column="password_expired_time" property="passwordExpiredTime" jdbcType="DATE"></result>
         <result column="login_failure_count" property="loginFailureCount" jdbcType="INTEGER"></result>
         <result column="szbm" property="szbm" jdbcType="VARCHAR"></result>
