@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
+import com.camel.dwsurvey.system.annotation.Log;
 import com.camel.dwsurvey.system.model.SysUser;
 import com.camel.dwsurvey.system.service.SysUserRoleService;
 import com.camel.dwsurvey.system.service.SysUserService;
@@ -29,6 +30,7 @@ public class SysUserController extends BaseCommonController{
     @Autowired
     private SysUserService service;
 
+    @Log(moduleName = "用户", option = "查询列表")
     @GetMapping
     public Result index(SysUser sysUser){
         return ResultUtil.success(service.pageQuery(sysUser));

@@ -42,11 +42,11 @@ public class MysqlGenerator {
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)
                 .setUsername("root")
-                .setPassword("123456")
+                .setPassword("1234")
                 .setDriverName("com.mysql.cj.jdbc.Driver");
         StrategyConfig strategyConfig = new StrategyConfig();
         // 指定表名
-        strategyConfig.setInclude(new String[] {"sys_user"});
+        strategyConfig.setInclude(new String[] {"sys_log"});
         strategyConfig
                 .setCapitalMode(true)
                 .setEntityLombokModel(false)
