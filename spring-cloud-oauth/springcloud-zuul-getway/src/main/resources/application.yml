@@ -3,6 +3,8 @@
 server:
   port: 8080
   contextPath: /
+  session:
+    timeout: 10
 
 # Configure the Authorization Server and User Info Resource Server details
 security:
@@ -13,6 +15,7 @@ security:
       clientId: first
       clientSecret: passwordforauthserver
       refresh-token-validity-seconds: 60
+      access-token-validity-seconds: 2592000
     resource:
       userInfoUri: http://127.0.0.1:9000/user
 
@@ -22,6 +25,9 @@ person:
 # Proxies the calls to http://localhost:8080/api/* to our REST service at http://localhost:9000/*
 # and automatically includes our OAuth2 token in the request headers
 zuul:
+  SendErrorFilter:
+    post:
+      desable: true
   routes:
     resource:
       path: /api/**

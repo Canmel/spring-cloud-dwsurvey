@@ -79,6 +79,7 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailsService);
+        endpoints.reuseRefreshTokens(true);
     }
 
 

@@ -22,7 +22,7 @@ public interface SysMenuService extends IService<SysMenu> {
 
     List<SysMenu> subs();
 
-    boolean exist(String name);
+    boolean exist(String name, Integer id);
 
     boolean delete(Serializable serializable);
 }

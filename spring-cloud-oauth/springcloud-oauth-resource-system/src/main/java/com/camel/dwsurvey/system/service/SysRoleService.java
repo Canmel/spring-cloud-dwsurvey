@@ -18,4 +18,6 @@ public interface SysRoleService extends IService<SysRole> {
     PageInfo<SysRole> pageQuery(SysRole sysRole);
 
     List<SysRole> loadRolesByRoleIds(List<Integer> ids);
+
+    boolean exist(String name, Integer id);
 }

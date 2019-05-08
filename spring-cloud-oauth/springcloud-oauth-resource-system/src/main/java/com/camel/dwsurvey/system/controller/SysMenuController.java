@@ -73,8 +73,8 @@ public class SysMenuController extends BaseCommonController {
     }
 
     @GetMapping("/valid/{name}")
-    public Result nameValid(@PathVariable String name){
-        return ResultUtil.success(service.exist(name));
+    public Result nameValid(@PathVariable String name, Integer id){
+        return ResultUtil.success(service.exist(name, id));
     }
 
 

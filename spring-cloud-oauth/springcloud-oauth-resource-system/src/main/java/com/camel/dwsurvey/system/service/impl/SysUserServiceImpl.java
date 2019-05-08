@@ -14,11 +14,15 @@ import com.camel.dwsurvey.system.service.SysUserService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.deploy.util.ArrayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -71,5 +75,26 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         });
         user.setRoleIds(roleIds);
         user.setSysRoles(roleService.loadRolesByRoleIds(roleIds));
+    }
+
+    @Override
+    @Transactional
+    public boolean addRoles(SysUser user) {
+        Wrapper<SysUserRole> userRoleWrapper = new EntityWrapper<>();
+        userRoleWrapper.eq("user_id", user.getUid());
+
+        userRoleMapper.delete(userRoleWrapper);
+        removeRepeat(user.getRoleIds()).forEach(roleId -> {
+            userRoleMapper.insert(new SysUserRole(user.getUid(), (Integer) roleId));
+        });
+        return true;
+    }
+
+    public List removeRepeat(List list){
+        LinkedHashSet lhs = new LinkedHashSet();
+        lhs.addAll(list);
+        list.clear();
+        list.addAll(lhs);
+        return list;
     }
 }

@@ -12,6 +12,7 @@ import com.camel.dwsurvey.system.model.SysMenu;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -52,9 +53,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     }
 
     @Override
-    public boolean exist(String name) {
+    public boolean exist(String name, Integer id) {
         Wrapper<SysMenu> menuWrapper = new EntityWrapper<>();
         menuWrapper.eq("name", name);
+        if(!ObjectUtils.isEmpty(id)){
+            menuWrapper.notIn("menu_id", id);
+        }
         Integer count = mapper.selectCount(menuWrapper);
         return !(count > 0);
     }

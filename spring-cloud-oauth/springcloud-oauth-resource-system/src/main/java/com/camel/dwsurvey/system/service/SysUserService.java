@@ -18,4 +18,6 @@ public interface SysUserService extends IService<SysUser> {
     boolean exist(String name, Integer id);
 
     void getRolesByUser(SysUser user);
+
+    boolean addRoles(SysUser user);
 }

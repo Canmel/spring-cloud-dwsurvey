@@ -1,5 +1,6 @@
 package com.camel.getway;
 
+import com.camel.getway.filters.ErrorFilter;
 import com.camel.getway.filters.SimpleFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -39,5 +40,10 @@ public class SpringCloudZuulGetwayApplication {
     @Bean
     public SimpleFilter simpleFilter() {
       return new SimpleFilter();
+    }
+
+    @Bean
+    public SimpleFilter errorFilter(){
+        return new SimpleFilter();
     }
 }

@@ -44,12 +44,12 @@ public class SysRoleController extends BaseCommonController {
     }
 
     @PostMapping
-    public Result save(SysRole sysRole){
+    public Result save(@RequestBody SysRole sysRole){
         return super.save(sysRole);
     }
 
     @PutMapping
-    public Result update(SysRole sysRole){
+    public Result update(@RequestBody SysRole sysRole){
         return super.update(sysRole);
     }
 
@@ -61,6 +61,11 @@ public class SysRoleController extends BaseCommonController {
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable(required = true) Integer id){
         return super.delete(id);
+    }
+
+    @GetMapping("/valid/{name}")
+    public Result nameValid(@PathVariable String name, Integer id){
+        return ResultUtil.success(service.exist(name, id));
     }
 
     @GetMapping("/all/list")

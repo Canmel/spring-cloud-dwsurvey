@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.camel.core.entity.BasePaginationEntity;
+import com.camel.dwsurvey.system.enums.RoleStatus;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -15,6 +17,7 @@ import java.io.Serializable;
  * @author ${author}
  * @since 2019-04-19
  */
+@Data
 public class SysUserRole extends BasePaginationEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,53 +48,13 @@ public class SysUserRole extends BasePaginationEntity implements Serializable {
      */
     private Date gmtModified;
 
-
-    public Integer getId() {
-        return id;
+    public SysUserRole() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
+    public SysUserRole(Integer userId, Integer roleId) {
         this.userId = userId;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
+        this.status = RoleStatus.NORMAL.getCode();
     }
 
     @Override

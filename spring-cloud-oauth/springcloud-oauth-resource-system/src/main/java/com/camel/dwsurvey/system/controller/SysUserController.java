@@ -6,6 +6,7 @@ import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
 import com.camel.dwsurvey.system.model.SysUser;
+import com.camel.dwsurvey.system.service.SysUserRoleService;
 import com.camel.dwsurvey.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -59,8 +60,15 @@ public class SysUserController extends BaseCommonController{
 
     @GetMapping("/valid/{name}")
     public Result nameValid(@PathVariable String name, Integer id){
-        System.out.println(service.exist(name, id));
         return ResultUtil.success(service.exist(name, id));
+    }
+
+    @PostMapping("/roles")
+    public Result addRole(@RequestBody SysUser user){
+        if (service.addRoles(user)) {
+            return ResultUtil.success("修改用户角色成功");
+        }
+        return ResultUtil.error(400, "修改用户角色失败");
     }
 
     @Override
