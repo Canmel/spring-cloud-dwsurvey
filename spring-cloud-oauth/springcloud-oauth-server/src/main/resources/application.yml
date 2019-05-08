@@ -20,7 +20,7 @@ security:
       filter-order: 3
     client:
       refresh-token-validity-seconds: 20
-      access-token-validity-seconds: 30
+      access-token-validity-seconds: 5
 
 
 eureka:

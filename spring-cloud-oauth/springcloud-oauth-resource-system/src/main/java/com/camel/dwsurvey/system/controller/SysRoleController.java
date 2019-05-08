@@ -60,7 +60,11 @@ public class SysRoleController extends BaseCommonController {
 
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable(required = true) Integer id){
-        return super.delete(id);
+        if(service.delete(id)){
+            return ResultUtil.deleteSuccess(getMouduleName());
+        }else{
+            return ResultUtil.deleteError(getMouduleName());
+        }
     }
 
     @GetMapping("/valid/{name}")

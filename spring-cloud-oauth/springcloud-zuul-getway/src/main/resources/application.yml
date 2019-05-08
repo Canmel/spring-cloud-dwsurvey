@@ -15,7 +15,7 @@ security:
       clientId: first
       clientSecret: passwordforauthserver
       refresh-token-validity-seconds: 60
-      access-token-validity-seconds: 2592000
+      access-token-validity-seconds: 10
     resource:
       userInfoUri: http://127.0.0.1:9000/user
 

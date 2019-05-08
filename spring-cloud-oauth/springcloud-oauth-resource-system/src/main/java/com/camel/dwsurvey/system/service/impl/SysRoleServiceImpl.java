@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.camel.dwsurvey.system.enums.RoleStatus;
 import com.camel.dwsurvey.system.mapper.SysRoleMapper;
+import com.camel.dwsurvey.system.model.SysMenu;
 import com.camel.dwsurvey.system.model.SysRole;
 import com.camel.dwsurvey.system.model.SysUser;
 import com.camel.dwsurvey.system.service.SysRoleService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -50,5 +52,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         }
         Integer count = mapper.selectCount(roleWrapper);
         return !(count > 0);
+    }
+
+    @Override
+    public boolean delete(Serializable serializable) {
+        SysRole sysRole = new SysRole((Integer) serializable, RoleStatus.NORMAL.UNVALID.getCode());
+        return mapper.updateById(sysRole) > -1;
     }
 }

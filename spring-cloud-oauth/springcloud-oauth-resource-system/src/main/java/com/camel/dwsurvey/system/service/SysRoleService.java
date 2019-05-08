@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.camel.dwsurvey.system.model.SysRole;
 import com.github.pagehelper.PageInfo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -20,4 +21,6 @@ public interface SysRoleService extends IService<SysRole> {
     List<SysRole> loadRolesByRoleIds(List<Integer> ids);
 
     boolean exist(String name, Integer id);
+
+    boolean delete(Serializable serializable);
 }
