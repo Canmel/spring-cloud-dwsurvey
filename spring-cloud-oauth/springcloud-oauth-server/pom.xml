@@ -108,7 +108,18 @@
 			<artifactId>spring-boot-starter-redis</artifactId>
 			<version>1.4.7.RELEASE</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.canmel.dwsurvey</groupId>
+			<artifactId>springcloud-base-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.canmel.dwsurvey</groupId>
+			<artifactId>springcloud-redis</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

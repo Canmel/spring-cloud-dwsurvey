@@ -1,8 +1,8 @@
 package com.camel.oauth.server.service;
 
-import com.camel.oauth.server.entity.SysRole;
+import com.camel.redis.entity.SysRole;
 import com.baomidou.mybatisplus.service.IService;
-import com.camel.oauth.server.entity.SysUser;
+import com.camel.redis.entity.SysUser;
 
 import java.util.List;
 

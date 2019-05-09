@@ -33,7 +33,8 @@
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>1.2.5</version>
 		</dependency>
-	</dependencies>
+
+    </dependencies>
 
 	<dependencyManagement>
 		<dependencies>

@@ -1,6 +1,6 @@
 package com.camel.oauth.server.service.impl;
 
-import com.camel.oauth.server.entity.TUser;
+import com.camel.redis.entity.TUser;
 import com.camel.oauth.server.mapper.TUserMapper;
 import com.camel.oauth.server.service.TUserService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;

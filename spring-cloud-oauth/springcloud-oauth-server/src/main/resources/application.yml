@@ -37,7 +37,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 123456
+    password: 1234
     url: jdbc:mysql://127.0.0.1:3306/dw_oauth2?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     tomcat:
@@ -59,7 +59,7 @@ spring:
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: com.camel.oauth.server.entity
+  type-aliases-package: com.camel.redis.entity
   configuration:
     map-underscore-to-camel-case: true
 

@@ -1,7 +1,7 @@
 package com.camel.oauth.server.service.impl;
 
-import com.camel.oauth.server.entity.SysRole;
-import com.camel.oauth.server.entity.SysUser;
+import com.camel.redis.entity.SysRole;
+import com.camel.redis.entity.SysUser;
 import com.camel.oauth.server.mapper.SysRoleMapper;
 import com.camel.oauth.server.service.SysRoleService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;

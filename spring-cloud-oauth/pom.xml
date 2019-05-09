@@ -14,5 +14,6 @@
   	<module>springcloud-eureka-server</module>
     <module>springcloud-base-core</module>
     <module>springcloud-oauth-resource-system</module>
+      <module>springcloud-redis</module>
   </modules>
 </project>

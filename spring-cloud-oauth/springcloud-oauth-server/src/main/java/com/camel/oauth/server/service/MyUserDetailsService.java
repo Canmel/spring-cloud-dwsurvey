@@ -1,21 +1,22 @@
 package com.camel.oauth.server.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.camel.oauth.server.entity.MyUserDetails;
-import com.camel.oauth.server.entity.SysRole;
-import com.camel.oauth.server.entity.SysUser;
-import com.camel.oauth.server.entity.TUser;
+import com.camel.redis.entity.MyUserDetails;
+import com.camel.redis.entity.SysUser;
 import com.camel.oauth.server.enums.EntityStatus;
+import com.camel.oauth.server.utils.SerizlizeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
@@ -24,6 +25,9 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private SysRoleService roleService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Value("${springcloud.oauth.signin.colum}")
     private String signInColum;
@@ -37,6 +41,13 @@ public class MyUserDetailsService implements UserDetailsService {
         userWrapper.eq(signInColum, s);
         SysUser user = userService.selectOne(userWrapper);
         user.setRoles(roleService.selectRoleByUser(user));
+        try {
+            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            operations.set("CURRENT_USER", SerizlizeUtil.serialize(user));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         boolean userAccountNonLocked = !ObjectUtils.isEmpty(user.getLoginFailureCount()) && user.getLoginFailureCount() < 3;
         boolean accountNonExpired = !ObjectUtils.isEmpty(user.getPasswordExpiredTime()) && user.getPasswordExpiredTime().getTime() > new Date().getTime();
         boolean userEnable = EntityStatus.ENABLE.getCode().equals(user.getStatus());

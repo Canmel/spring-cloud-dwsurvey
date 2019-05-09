@@ -1,6 +1,6 @@
 package com.camel.oauth.server.service;
 
-import com.camel.oauth.server.entity.SysUser;
+import com.camel.redis.entity.SysUser;
 import com.baomidou.mybatisplus.service.IService;
 
 /**

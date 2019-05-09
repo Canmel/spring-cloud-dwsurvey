@@ -1,6 +1,6 @@
 package com.camel.oauth.server.service.impl;
 
-import com.camel.oauth.server.entity.SysRoleMenu;
+import com.camel.redis.entity.SysRoleMenu;
 import com.camel.oauth.server.mapper.SysRoleMenuMapper;
 import com.camel.oauth.server.service.SysRoleMenuService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
