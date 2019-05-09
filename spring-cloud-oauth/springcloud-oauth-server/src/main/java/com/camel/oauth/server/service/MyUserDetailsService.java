@@ -1,10 +1,8 @@
 package com.camel.oauth.server.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.camel.oauth.server.entity.MyUserDetails;
-import com.camel.oauth.server.entity.SysRole;
-import com.camel.oauth.server.entity.SysUser;
-import com.camel.oauth.server.entity.TUser;
+import com.camel.core.entity.MyUserDetails;
+import com.camel.core.entity.SysUser;
 import com.camel.oauth.server.enums.EntityStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
