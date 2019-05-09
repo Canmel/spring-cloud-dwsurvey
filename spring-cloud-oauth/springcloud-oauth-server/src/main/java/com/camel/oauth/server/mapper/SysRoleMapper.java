@@ -1,8 +1,8 @@
 package com.camel.oauth.server.mapper;
 
+import com.camel.oauth.server.entity.SysRole;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.camel.core.entity.SysRole;
-import com.camel.core.entity.SysUser;
+import com.camel.oauth.server.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

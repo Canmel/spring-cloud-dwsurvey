@@ -1,10 +1,9 @@
-package com.camel.core.entity;
+package com.camel.oauth.server.entity;
 
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
-
-import java.io.Serializable;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import java.io.Serializable;
 
 /**
  * <p>

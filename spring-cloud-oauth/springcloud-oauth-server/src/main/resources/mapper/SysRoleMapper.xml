@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.camel.oauth.server.mapper.SysRoleMapper">
-    <resultMap id="BaseResultMap" type="com.camel.core.entity.SysRole">
+    <resultMap id="BaseResultMap" type="com.camel.oauth.server.entity.SysRole">
         <id jdbcType="INTEGER" property="roleId" column="role_id"></id>
         <result jdbcType="VARCHAR" property="roleName" column="role_name"></result>
         <result jdbcType="VARCHAR" property="roleSign" column="role_sign"></result>
