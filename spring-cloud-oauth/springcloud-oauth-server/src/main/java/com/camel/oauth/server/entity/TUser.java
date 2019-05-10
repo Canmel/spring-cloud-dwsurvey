@@ -1,4 +1,4 @@
-package com.camel.redis.entity;
+package com.camel.oauth.server.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;

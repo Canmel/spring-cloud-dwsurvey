@@ -1,4 +1,4 @@
-package com.camel.redis.entity;
+package com.camel.oauth.server.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

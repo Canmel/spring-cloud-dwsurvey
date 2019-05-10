@@ -1,10 +1,11 @@
 package com.camel.oauth.server.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.camel.redis.entity.MyUserDetails;
-import com.camel.redis.entity.SysUser;
+import com.camel.oauth.server.entity.MyUserDetails;
+import com.camel.oauth.server.entity.SysUser;
 import com.camel.oauth.server.enums.EntityStatus;
 import com.camel.oauth.server.utils.SerizlizeUtil;
+import com.camel.redis.entity.RedisUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -43,7 +44,8 @@ public class MyUserDetailsService implements UserDetailsService {
         user.setRoles(roleService.selectRoleByUser(user));
         try {
             ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-            operations.set("CURRENT_USER", SerizlizeUtil.serialize(user));
+            RedisUser redisUser = new RedisUser(user.getUid(), user.getUsername(), user.getNickname());
+            operations.set("CURRENT_USER", SerizlizeUtil.serialize(redisUser));
         } catch (Exception e) {
             e.printStackTrace();
         }

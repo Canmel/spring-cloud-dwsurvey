@@ -73,7 +73,7 @@ public class MysqlGenerator {
                         new PackageConfig()
                                 .setParent("com.camel.oauth.server")
                                 .setController("controller")
-                                .setEntity("entity")
+                                .setEntity("com/camel/oauth/server/entity")
                 ).execute();
     }
 }

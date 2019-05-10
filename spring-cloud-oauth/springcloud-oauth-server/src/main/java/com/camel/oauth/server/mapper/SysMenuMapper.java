@@ -1,6 +1,6 @@
 package com.camel.oauth.server.mapper;
 
-import com.camel.redis.entity.SysMenu;
+import com.camel.oauth.server.entity.SysMenu;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**

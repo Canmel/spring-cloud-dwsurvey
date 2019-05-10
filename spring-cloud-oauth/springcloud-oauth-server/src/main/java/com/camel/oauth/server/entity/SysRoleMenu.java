@@ -1,4 +1,4 @@
-package com.camel.redis.entity;
+package com.camel.oauth.server.entity;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;

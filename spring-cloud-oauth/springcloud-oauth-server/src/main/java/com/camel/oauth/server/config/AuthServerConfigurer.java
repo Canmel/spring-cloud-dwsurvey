@@ -21,6 +21,7 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import java.security.KeyPair;
+import java.util.concurrent.TimeUnit;
 
 /**
                    _ooOoo_
@@ -69,11 +70,11 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
         clients.inMemory()
                 .withClient("first").secret("passwordforauthserver")
                 .redirectUris("http://127.0.0.1:8080/", "http://127.0.0.1:4200/").authorizedGrantTypes("authorization_code", "refresh_token")
-                .scopes("myscope").autoApprove(true).accessTokenValiditySeconds(30).refreshTokenValiditySeconds(1800)
+                .scopes("myscope").autoApprove(true).accessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30)).refreshTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(2))
                 .and()
                 .withClient("second").secret("passwordforauthserver")
                 .redirectUris("http://127.0.0.1:8081/").authorizedGrantTypes("authorization_code", "refresh_token")
-                .scopes("myscope").autoApprove(true).accessTokenValiditySeconds(30).refreshTokenValiditySeconds(1800);
+                .scopes("myscope").autoApprove(true).accessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30)).refreshTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(2));
     }
 
     @Override
