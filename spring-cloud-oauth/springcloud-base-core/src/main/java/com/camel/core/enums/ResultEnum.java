@@ -9,7 +9,8 @@ public enum ResultEnum {
     NOT_VALID_PARAM(40005, "参数不合法"),
     BAD_REQUEST(400, "参数类型错误，请确认后重试"),
     RESOURCESNOTFOUND(404, "未找到相关资源"),
-    SUCCESS(200, "操作成功");
+    SUCCESS(200, "操作成功"),
+    SERVICE_ERROR(500, "服务器错误");
 
     private Integer code;
     private String msg;

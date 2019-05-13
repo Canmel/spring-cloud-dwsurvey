@@ -8,6 +8,7 @@ import com.camel.oauth.server.utils.SerizlizeUtil;
 import com.camel.redis.entity.RedisUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,7 +38,7 @@ public class MyUserDetailsService implements UserDetailsService {
     private String rolePrefix;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException, RedisConnectionFailureException {
         EntityWrapper<SysUser> userWrapper = new EntityWrapper<>();
         userWrapper.eq(signInColum, s);
         SysUser user = userService.selectOne(userWrapper);
@@ -47,7 +48,7 @@ public class MyUserDetailsService implements UserDetailsService {
             RedisUser redisUser = new RedisUser(user.getUid(), user.getUsername(), user.getNickname());
             operations.set("CURRENT_USER", SerizlizeUtil.serialize(redisUser));
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RedisConnectionFailureException("未发现可用的Redis服务器！请检查");
         }
 
         boolean userAccountNonLocked = !ObjectUtils.isEmpty(user.getLoginFailureCount()) && user.getLoginFailureCount() < 3;

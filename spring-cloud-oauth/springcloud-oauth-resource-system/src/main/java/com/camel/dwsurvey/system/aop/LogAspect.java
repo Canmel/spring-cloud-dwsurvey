@@ -13,6 +13,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
@@ -44,9 +45,14 @@ public class LogAspect {
         Object result = joinPoint.proceed();
         //执行时长(毫秒)
         long time = System.currentTimeMillis() - beginTime;
-        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-        byte[] cu = (byte[]) operations.get("CURRENT_USER");
-        RedisUser sysUser = (RedisUser) SerizlizeUtil.unserizlize(cu);
+        RedisUser sysUser = new RedisUser();
+        try{
+            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            byte[] cu = (byte[]) operations.get("CURRENT_USER");
+            sysUser = (RedisUser) SerizlizeUtil.unserizlize(cu);
+        }catch (Exception e){
+            throw new RedisConnectionFailureException("未发现可用的Redis服务器！请检查");
+        }
         SysLog sysLog = new SysLog(sysUser.getId(), sysUser.getUsername(), log.option(), time, joinPoint.getArgs().toString(), joinPoint.getSignature().toShortString(), joinPoint.getArgs().toString(), log.moduleName());
         sysLogService.insert(sysLog);
         LOGGER.info("==============================================用户操作日志-通知结束执行......==========================================");
