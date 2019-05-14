@@ -22,7 +22,7 @@
 			sys_log.ip,
 			sys_log.method,
 			sys_log.params,
-			sys_log.gmt_create,
+			DATE_FORMAT(sys_log.gmt_create, '%Y-%c-%d %h:%i:%s') gmt_create,
 			sys_log.operation,
 			sys_log.module
 		FROM sys_log
@@ -30,6 +30,7 @@
 			<if test="username != null and username != ''">AND sys_log.username like concat('%', #{username} ,'%')</if>
 			<if test="method != null and method != ''">AND sys_log.method like concat('%', #{method} ,'%')</if>
             <if test="module != null and module != ''">AND sys_log.module like concat('%', #{module} ,'%')</if>
+			<if test="userId != null and userId != ''">AND sys_log.user_id like concat('%', #{userId} ,'%')</if>
 		</where>
 		ORDER BY sys_log.id DESC
     </select>

@@ -114,6 +114,10 @@ public class SysUser implements Serializable {
      */
     private String orgName;
 
+    private String address;
+
+    private String remark;
+
     @TableField(exist = false)
     private List<SysRole> roles;
 
@@ -146,6 +150,7 @@ public class SysUser implements Serializable {
         ", gender=" + gender +
         ", orgNo=" + orgNo +
         ", orgName=" + orgName +
+        ", address=" + address +
         "}";
     }
 }

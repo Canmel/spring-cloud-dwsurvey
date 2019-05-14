@@ -56,7 +56,7 @@ public class SysLog extends BasePaginationEntity implements Serializable {
     /**
      创建时间
      */
-    private Date gmtCreate;
+    private String gmtCreate;
     /**
      模块名称
      */

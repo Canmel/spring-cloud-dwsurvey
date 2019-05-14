@@ -5,11 +5,15 @@ import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
+import com.camel.core.utils.SerizlizeUtil;
 import com.camel.dwsurvey.system.annotation.Log;
 import com.camel.dwsurvey.system.model.SysUser;
 import com.camel.dwsurvey.system.service.SysUserRoleService;
 import com.camel.dwsurvey.system.service.SysUserService;
+import com.camel.redis.entity.RedisUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -29,6 +33,9 @@ public class SysUserController extends BaseCommonController{
 
     @Autowired
     private SysUserService service;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Log(moduleName = "用户", option = "查询列表")
     @GetMapping
@@ -71,6 +78,14 @@ public class SysUserController extends BaseCommonController{
             return ResultUtil.success("修改用户角色成功");
         }
         return ResultUtil.error(400, "修改用户角色失败");
+    }
+
+    @GetMapping("/me")
+    public Result me(){
+        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+        byte[] cu = (byte[]) operations.get("CURRENT_USER");
+        RedisUser sysUser = (RedisUser) SerizlizeUtil.unserizlize(cu);
+        return ResultUtil.success(sysUser);
     }
 
     @Override

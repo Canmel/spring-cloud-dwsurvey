@@ -45,7 +45,7 @@ public class MyUserDetailsService implements UserDetailsService {
         user.setRoles(roleService.selectRoleByUser(user));
         try {
             ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-            RedisUser redisUser = new RedisUser(user.getUid(), user.getUsername(), user.getNickname());
+            RedisUser redisUser = new RedisUser(user.getUid(), user.getUsername(), user.getNickname(), user.getAddress(), user.getMobile(), user.getRemark(), user.getEmail());
             operations.set("CURRENT_USER", SerizlizeUtil.serialize(redisUser));
         } catch (Exception e) {
             throw new RedisConnectionFailureException("未发现可用的Redis服务器！请检查");
