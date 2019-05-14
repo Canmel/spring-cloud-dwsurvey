@@ -31,6 +31,6 @@
 			<if test="method != null and method != ''">AND sys_log.method like concat('%', #{method} ,'%')</if>
             <if test="module != null and module != ''">AND sys_log.module like concat('%', #{module} ,'%')</if>
 		</where>
-		ORDER BY sys_log.gmt_create DESC
+		ORDER BY sys_log.id DESC
     </select>
 </mapper>

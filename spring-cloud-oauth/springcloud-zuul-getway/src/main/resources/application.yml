@@ -4,7 +4,7 @@ server:
   port: 8080
   contextPath: /
   session:
-    timeout: 10
+    timeout: 1800
 
 # Configure the Authorization Server and User Info Resource Server details
 security:
@@ -15,7 +15,7 @@ security:
       clientId: first
       clientSecret: passwordforauthserver
       refresh-token-validity-seconds: 3600
-      access-token-validity-seconds: 1800
+      access-token-validity-seconds: 3000
     resource:
       userInfoUri: http://127.0.0.1:9000/user
 

@@ -69,11 +69,13 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("first").secret("passwordforauthserver")
-                .redirectUris("http://127.0.0.1:8080/", "http://127.0.0.1:4200/").authorizedGrantTypes("authorization_code", "refresh_token")
+                .redirectUris("http://127.0.0.1:8080/", "http://127.0.0.1:4200/").authorizedGrantTypes("authorization_code", "client_credentials", "refresh_token",
+                "password", "implicit")
                 .scopes("myscope").autoApprove(true).accessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30)).refreshTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(2))
                 .and()
                 .withClient("second").secret("passwordforauthserver")
-                .redirectUris("http://127.0.0.1:8081/").authorizedGrantTypes("authorization_code", "refresh_token")
+                .redirectUris("http://127.0.0.1:8081/").authorizedGrantTypes("authorization_code", "client_credentials", "refresh_token",
+                "password", "implicit")
                 .scopes("myscope").autoApprove(true).accessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30)).refreshTokenValiditySeconds((int) TimeUnit.HOURS.toSeconds(2));
     }
 
@@ -102,4 +104,19 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
         converter.setKeyPair(keyPair);
         return converter;
     }
+
+    @Primary
+    @Bean
+    public DefaultTokenServices defaultTokenServices(){
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(redisTokenStore());
+        tokenServices.setSupportRefreshToken(true);
+        //tokenServices.setClientDetailsService(clientDetails());
+        // token有效期自定义设置，默认12小时
+        tokenServices.setAccessTokenValiditySeconds(60*60*12);
+        // refresh_token默认30天
+        tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
+        return tokenServices;
+    }
+
 }
