@@ -16,5 +16,6 @@
         <module>springcloud-base-core</module>
         <module>springcloud-oauth-resource-system</module>
         <module>springcloud-redis</module>
+        <module>springcloud-bpm-server</module>
     </modules>
 </project>
