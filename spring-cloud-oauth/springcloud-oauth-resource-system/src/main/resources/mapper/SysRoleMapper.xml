@@ -10,15 +10,20 @@
         <result column="gmt_modifiled" property="gmtModifiled" jdbcType="DATE"></result>
         <result column="status" property="status" jdbcType="VARCHAR"></result>
     </resultMap>
+
+    <sql id="BASE_SQL">
+        sys_role.role_id,
+        sys_role.role_name,
+        sys_role.role_sign,
+        sys_role.remark,
+        sys_role.gmt_create,
+        sys_role.gmt_modifiled,
+        sys_role.`status`
+    </sql>
+
     <select id="list" resultMap="BaseResultMap">
         SELECT
-            sys_role.role_id,
-            sys_role.role_name,
-            sys_role.role_sign,
-            sys_role.remark,
-            sys_role.gmt_create,
-            sys_role.gmt_modifiled,
-            sys_role.`status`
+            <include refid="BASE_SQL"></include>
             FROM
             sys_role
         <where>

@@ -1,6 +1,6 @@
 package com.camel.dwsurvey.system.enums;
 
-public enum RoleStatus {
+public enum RoleStatus implements BaseEnum{
     NORMAL("1", "正常"), UNVALID("0", "无效");
 
     private String code;
@@ -17,5 +17,10 @@ public enum RoleStatus {
 
     public String getDesc() {
         return desc;
+    }
+
+    @Override
+    public Integer getValue() {
+        return Integer.parseInt(getCode());
     }
 }

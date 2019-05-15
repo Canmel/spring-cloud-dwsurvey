@@ -23,31 +23,31 @@
         <result column="remark" property="remark" jdbcType="VARCHAR"></result>
     </resultMap>
 
-    <sql id="baseSql">
+    <sql id="BASE_SQL">
         sys_user.uid,
-            sys_user.username,
-            sys_user.`password`,
-            sys_user.nickname,
-            sys_user.email,
-            sys_user.mobile,
-            sys_user.`status`,
-            sys_user.gmt_create,
-            sys_user.gmt_modified,
-            sys_user.last_login_time,
-            sys_user.password_expired_time,
-            sys_user.login_failure_count,
-            sys_user.szbm,
-            sys_user.age,
-            sys_user.gender,
-            sys_user.org_no,
-            sys_user.org_name,
-            sys_user.address,
-            sys_user.remark
+        sys_user.username,
+        sys_user.`password`,
+        sys_user.nickname,
+        sys_user.email,
+        sys_user.mobile,
+        sys_user.`status`,
+        sys_user.gmt_create,
+        sys_user.gmt_modified,
+        sys_user.last_login_time,
+        sys_user.password_expired_time,
+        sys_user.login_failure_count,
+        sys_user.szbm,
+        sys_user.age,
+        sys_user.gender,
+        sys_user.org_no,
+        sys_user.org_name,
+        sys_user.address,
+        sys_user.remark
     </sql>
 
     <select id="list" resultMap="BaseResultMap" parameterType="com.camel.dwsurvey.system.model.SysUser">
         SELECT
-            <include refid="baseSql"></include>
+            <include refid="BASE_SQL"></include>
             FROM
             sys_user
         <where>

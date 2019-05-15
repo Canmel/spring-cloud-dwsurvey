@@ -4,7 +4,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
-public enum MenuType {
+public enum MenuType implements BaseEnum{
     TOP(0, "一级菜单"), SUB(1, "二级菜单");
 
     private Integer code;
@@ -47,5 +47,11 @@ public enum MenuType {
             list.add(type.getValueMap());
         }
         return list;
+    }
+
+
+    @Override
+    public Integer getValue() {
+        return getCode();
     }
 }
