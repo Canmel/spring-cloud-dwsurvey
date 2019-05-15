@@ -42,6 +42,12 @@ public class ResultUtil {
         return error(ResultEnum.RESOURCESNOTFOUND);
     }
 
+    public static Result notFound(String msg) {
+        HttpServletResponse response = ApplicationUtils.getHttpServletResponse();
+        response.setStatus(ResultEnum.RESOURCESNOTFOUND.getCode());
+        return error(ResultEnum.RESOURCESNOTFOUND.getCode(), msg);
+    }
+
     public static Result createSuccess(String entityName) {
         return success("新增" + entityName + "成功");
     }
