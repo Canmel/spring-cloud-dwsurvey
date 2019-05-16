@@ -2,24 +2,23 @@ package com.camel.dwsurvey.bpm.controller;
 
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
-import javafx.concurrent.Task;
+import com.camel.dwsurvey.bpm.service.BpmService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
-import org.activiti.engine.repository.DeploymentQuery;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/flow")
@@ -27,14 +26,16 @@ public class SpringCloudBpmController {
     @Autowired
     private ProcessEngine engine;
 
+    @Autowired
+    private BpmService service;
+
     /**
      部署
      @return
      */
-    @GetMapping("/deploy")
-    public Result deploy(){
-        DeploymentBuilder builder = engine.getRepositoryService().createDeployment();
-        Deployment deployment = builder.addClasspathResource("processes/first.bpmn").deploy();
+    @GetMapping("/deploy/{path}")
+    public Result deploy(@PathVariable String path){
+        Deployment deployment = service.deploy(path);
         return ResultUtil.success("部署完成" + deployment.getId(), deployment);
     }
 
@@ -45,15 +46,10 @@ public class SpringCloudBpmController {
      */
     @GetMapping("/def/{key}")
     public Result definition(@PathVariable String key){
-        List<ProcessDefinition> processDefinitions = engine.getRepositoryService().createProcessDefinitionQuery().processDefinitionKey(key).orderByProcessDefinitionVersion().desc().list();
-        List result = new ArrayList();
-        processDefinitions.forEach(processDefinition -> {
-            Map map = new HashMap();
-            map.put("id", processDefinition.getId());
-            map.put("name", processDefinition.getName());
-            map.put("description", processDefinition.getDescription());
-            result.add(map);
-        });
+        List result = service.definition(key);
+        if(CollectionUtils.isEmpty(result)){
+            return ResultUtil.success("未找到相关流程", result);
+        }
         return ResultUtil.success("查询成功", result);
     }
 
@@ -68,20 +64,18 @@ public class SpringCloudBpmController {
         return ResultUtil.success("启动完成", instance.getId());
     }
 
+    /**
+     根据用户,查询当前任务
+     @param assignee
+     @return
+     */
     @GetMapping("/task/{assignee}")
     public Result queryTask(@PathVariable String assignee){
-        TaskQuery query = engine.getTaskService().createTaskQuery();
-//        assignee = "张三";
-//        query.taskAssignee(assignee);
-        List list = new ArrayList();
-        query.list().forEach(task -> {
-            Map map = new HashMap();
-            map.put("id", task.getId());
-            map.put("assignee", task.getAssignee());
-            map.put("name", task.getName());
-            map.put("description", task.getDescription());
-            list.add(map);
-        });
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+        List list = service.queryTask(assignee);
+        if(CollectionUtils.isEmpty(list)){
+            return ResultUtil.success("未找到相关流程", list);
+        }
         return ResultUtil.success("查询成功", list);
     }
 

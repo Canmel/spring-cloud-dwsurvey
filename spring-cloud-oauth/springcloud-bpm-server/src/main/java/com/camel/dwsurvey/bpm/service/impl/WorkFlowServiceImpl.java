@@ -1,0 +1,58 @@
+package com.camel.dwsurvey.bpm.service.impl;
+
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.camel.dwsurvey.bpm.mapper.WorkFlowMapper;
+import com.camel.dwsurvey.bpm.model.WorkFlow;
+import com.camel.dwsurvey.bpm.service.WorkFlowService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.impl.persistence.entity.DeploymentEntity;
+import org.activiti.engine.repository.Deployment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since 2019-05-16
+ */
+@Service
+public class WorkFlowServiceImpl extends ServiceImpl<WorkFlowMapper, WorkFlow> implements WorkFlowService {
+    @Autowired
+    private WorkFlowMapper mapper;
+
+    @Autowired
+    private ProcessEngine engine;
+
+    @Override
+    public PageInfo<WorkFlow> pageQuery(WorkFlow entity) {
+        PageInfo pageInfo = PageHelper.startPage(entity.getPageNum(), entity.getPageSize()).doSelectPageInfo(() -> mapper.list(entity));
+        return pageInfo;
+    }
+
+    @Override
+    public PageInfo<Deployment> pageQueryDeployed(WorkFlow entity) {
+        PageInfo<Deployment> page = new PageInfo();
+        List<Deployment> list = engine.getRepositoryService().createDeploymentQuery().list();
+        page.setTotal(list.size());
+        Collections.reverse(list);
+        list.forEach((item) -> {
+            DeploymentEntity deploymentEntity = (DeploymentEntity) item;
+            deploymentEntity.setResources(new HashMap<>());
+        });
+        List<Deployment> deployments = list.subList((entity.getPageNum() - 1) * entity.getPageSize(), list.size());
+        page.setList(deployments);
+        return page;
+    }
+}
