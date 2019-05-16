@@ -119,8 +119,7 @@ public class WorkFlowController extends BaseCommonController {
      * creat_user: baily
      * creat_date: 2018/8/19
      **/
-    @GetMapping("" +
-            "/typies")
+    @GetMapping("/typies")
     public Result menuLevel(HttpServletRequest request) {
         return ResultUtil.success(WorkFlowType.all());
     }
