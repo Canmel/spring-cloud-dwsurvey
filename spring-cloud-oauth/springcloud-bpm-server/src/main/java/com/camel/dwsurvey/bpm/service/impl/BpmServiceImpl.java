@@ -1,5 +1,7 @@
 package com.camel.dwsurvey.bpm.service.impl;
 
+import com.camel.dwsurvey.bpm.mapper.WorkFlowMapper;
+import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.camel.dwsurvey.bpm.service.BpmService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.TaskService;
@@ -25,10 +27,17 @@ public class BpmServiceImpl implements BpmService {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private WorkFlowMapper mapper;
+
     @Override
-    public Deployment deploy(String path) {
+    public Deployment deploy(Integer id) {
+        WorkFlow workFlow = mapper.selectById(id);
+
         DeploymentBuilder builder = repositoryService.createDeployment();
-        Deployment deployment = builder.addClasspathResource(path).deploy();
+        builder.addString(workFlow.getName(), workFlow.getFlow());
+        builder.name(workFlow.getName()).category(workFlow.getFlowType().toString());
+        Deployment deployment = builder.deploy();
         return deployment;
     }
 

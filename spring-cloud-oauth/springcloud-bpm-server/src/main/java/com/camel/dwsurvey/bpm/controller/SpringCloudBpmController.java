@@ -33,9 +33,9 @@ public class SpringCloudBpmController {
      部署
      @return
      */
-    @GetMapping("/deploy/{path}")
-    public Result deploy(@PathVariable String path){
-        Deployment deployment = service.deploy(path);
+    @GetMapping("/deploy/{id}")
+    public Result deploy(@PathVariable Integer id){
+        Deployment deployment = service.deploy(id);
         return ResultUtil.success("部署完成" + deployment.getId(), deployment);
     }
 

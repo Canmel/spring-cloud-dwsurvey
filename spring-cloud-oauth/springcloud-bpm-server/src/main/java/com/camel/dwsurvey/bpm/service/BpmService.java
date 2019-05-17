@@ -5,7 +5,7 @@ import org.activiti.engine.repository.Deployment;
 import java.util.List;
 
 public interface BpmService {
-    Deployment deploy(String path);
+    Deployment deploy(Integer path);
 
     Deployment deploy(String resourceName, String text);
 

@@ -67,6 +67,7 @@ public class WorkFlowController extends BaseCommonController {
             throw new UnAuthenticationException("当前用户不存在");
         }
         workFlow.setCreator(currentUser.getId());
+        WorkFlow.readKey(workFlow);
         if (service.insert(workFlow)) {
             return ResultUtil.success("新建流程成功");
         } else {

@@ -1,13 +1,18 @@
 package com.camel.dwsurvey.bpm.model;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 import com.camel.core.entity.BasePaginationEntity;
+import com.camel.dwsurvey.bpm.exceptions.String2XmlException;
 import lombok.Data;
+import org.apache.commons.lang.StringUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -48,6 +53,20 @@ public class WorkFlow extends BasePaginationEntity implements Serializable {
      */
     private String flow;
     private String key;
+
+    public static void readKey(WorkFlow workFlow) {
+        if(!StringUtils.isBlank(workFlow.getFlow())){
+            try {
+                Document document = DocumentHelper.parseText(workFlow.getFlow());
+                Element root = document.getRootElement();
+                Element data = root.element("process");
+                String id = data.attributeValue("id");
+                workFlow.setKey(id);
+            }catch (Exception e){
+                throw new String2XmlException();
+            }
+        }
+    }
 
     @Override
     public String toString() {
