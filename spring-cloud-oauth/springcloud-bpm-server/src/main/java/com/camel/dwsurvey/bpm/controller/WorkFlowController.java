@@ -1,6 +1,7 @@
 package com.camel.dwsurvey.bpm.controller;
 
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.List;
 
 /**
  * <p>
@@ -104,6 +106,21 @@ public class WorkFlowController extends BaseCommonController {
         }
     }
 
+
+    /**
+     * describe: 已发布流程
+     * creat_user: baily
+     * creat_date: 2018/8/19
+     **/
+    @GetMapping("/deployed")
+    public Result deployed(WorkFlow workFlow) {
+        EntityWrapper<WorkFlow> workFlowEntityWrapper = new EntityWrapper<>();
+        if (!ObjectUtils.isEmpty(workFlow.getFlowType())) {
+            workFlowEntityWrapper.eq("flowType", workFlow.getFlowType());
+        }
+        List<WorkFlow> workFlows = service.selectList(workFlowEntityWrapper);
+        return ResultUtil.success(workFlows);
+    }
 
     @Override
     public IService getiService() {
