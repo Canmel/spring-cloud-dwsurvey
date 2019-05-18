@@ -1,5 +1,6 @@
 package com.camel.oauth.resource.model;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -35,6 +36,10 @@ public class Reimbursement extends BasePaginationEntity implements Serializable 
      * 创建人
      */
     private Integer creator;
+
+    @TableField(exist = false)
+    private String creatorName;
+
     private Integer status;
     /**
      * 是否删除

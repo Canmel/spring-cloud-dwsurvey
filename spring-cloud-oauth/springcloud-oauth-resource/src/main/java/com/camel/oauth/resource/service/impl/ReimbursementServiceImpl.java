@@ -23,6 +23,11 @@ public class ReimbursementServiceImpl extends ServiceImpl<ReimbursementMapper, R
     private ReimbursementMapper mapper;
 
     @Override
+    public Boolean apply(Integer id) {
+        return null;
+    }
+
+    @Override
     public PageInfo<Reimbursement> selectPage(Reimbursement entity) {
         PageInfo pageInfo = PaginationUtil.startPage(entity, () -> {
             mapper.list(entity);

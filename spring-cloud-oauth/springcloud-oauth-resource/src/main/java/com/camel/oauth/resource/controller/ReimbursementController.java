@@ -5,12 +5,12 @@ import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
+import com.camel.oauth.resource.enums.ReimbursementStatus;
 import com.camel.oauth.resource.model.Reimbursement;
 import com.camel.oauth.resource.service.ReimbursementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 /**
  <p>
@@ -29,6 +29,34 @@ public class ReimbursementController extends BaseCommonController {
         return ResultUtil.success(service.selectPage(reimbursement));
     }
 
+    @GetMapping("/{id}")
+    public Result ditail(@PathVariable Integer id){
+        return super.details(id);
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Reimbursement reimbursement) {
+        return super.save(reimbursement);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Reimbursement reimbursement){
+        return super.update(reimbursement);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id){
+        return super.delete(id);
+    }
+
+    @GetMapping("/apply/{id}")
+    public Result apply(@PathVariable Integer id) {
+        if(service.apply(id)){
+            ResultUtil.success("发起流程成功");
+        }
+        return ResultUtil.error(HttpStatus.BAD_REQUEST.value(), "发起流程失败");
+    }
+
     @Override
     public IService getiService() {
         return service;
@@ -37,6 +65,11 @@ public class ReimbursementController extends BaseCommonController {
     @Override
     public String getMouduleName() {
         return "报销";
+    }
+
+    @GetMapping("/status")
+    public Result reimbursementStatus() {
+        return ResultUtil.success(ReimbursementStatus.all());
     }
 }
 

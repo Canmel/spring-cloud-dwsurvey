@@ -21,6 +21,8 @@ import java.util.Map;
 @Service
 public class BpmServiceImpl implements BpmService {
 
+    public static final String PROCESS_NAME_SUFFIX = ".bpmn";
+
     @Autowired
     private RepositoryService repositoryService;
 
@@ -36,7 +38,7 @@ public class BpmServiceImpl implements BpmService {
 
         DeploymentBuilder builder = repositoryService.createDeployment();
         builder.addString(workFlow.getName(), workFlow.getFlow());
-        builder.name(workFlow.getName()).category(workFlow.getFlowType().toString());
+        builder.name(workFlow.getName() + PROCESS_NAME_SUFFIX).category(workFlow.getFlowType().toString());
         Deployment deployment = builder.deploy();
         return deployment;
     }
