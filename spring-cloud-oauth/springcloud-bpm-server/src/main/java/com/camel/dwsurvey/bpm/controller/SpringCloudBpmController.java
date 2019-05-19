@@ -82,6 +82,15 @@ public class SpringCloudBpmController {
     }
 
 
+    /**
+     发起申请
+     @return
+     */
+    @GetMapping("/apply")
+    public Result apply(String busniessKey, String flowKey) {
+        System.out.println(busniessKey + "---------------------------------------" + flowKey);
+        return ResultUtil.success("收到");
+    }
 
     @GetMapping("/index")
     public String index(){

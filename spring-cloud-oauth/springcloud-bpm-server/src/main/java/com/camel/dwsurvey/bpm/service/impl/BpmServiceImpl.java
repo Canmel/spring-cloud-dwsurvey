@@ -38,7 +38,6 @@ public class BpmServiceImpl implements BpmService {
     @Override
     public Deployment deploy(Integer id) {
         WorkFlow workFlow = mapper.selectById(id);
-
         DeploymentBuilder builder = repositoryService.createDeployment();
         builder.addString(workFlow.getName() + PROCESS_NAME_SUFFIX, workFlow.getFlow());
         builder.name(workFlow.getName()).category(workFlow.getFlowType().toString());
