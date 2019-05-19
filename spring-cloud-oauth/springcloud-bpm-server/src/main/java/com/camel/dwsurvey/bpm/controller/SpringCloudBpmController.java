@@ -1,6 +1,5 @@
 package com.camel.dwsurvey.bpm.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
@@ -11,7 +10,6 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,6 +74,11 @@ public class SpringCloudBpmController {
             return ResultUtil.success("未找到相关流程", list);
         }
         return ResultUtil.success("查询成功", list);
+    }
+
+    @GetMapping("/defWorkflows")
+    public Result defWorkflows(WorkFlow workFlow){
+        return ResultUtil.success(service.defWorkflows(workFlow));
     }
 
 

@@ -1,5 +1,7 @@
 package com.camel.dwsurvey.bpm.service;
 
+import com.camel.dwsurvey.bpm.model.WorkFlow;
+import com.github.pagehelper.PageInfo;
 import org.activiti.engine.repository.Deployment;
 
 import java.util.List;
@@ -14,4 +16,6 @@ public interface BpmService {
     List queryTask(String key);
 
     List queryTaskByGroupId(List<String> groupId);
+
+    PageInfo<Deployment> defWorkflows(WorkFlow entity);
 }

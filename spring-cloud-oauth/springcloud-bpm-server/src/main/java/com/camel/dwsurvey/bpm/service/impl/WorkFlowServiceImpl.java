@@ -7,17 +7,17 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.camel.dwsurvey.bpm.mapper.WorkFlowMapper;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.camel.dwsurvey.bpm.service.WorkFlowService;
+import com.camel.dwsurvey.bpm.utils.ActivitiObj2HashMapUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.impl.persistence.entity.DeploymentEntity;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -54,5 +54,16 @@ public class WorkFlowServiceImpl extends ServiceImpl<WorkFlowMapper, WorkFlow> i
         List<Deployment> deployments = list.subList((entity.getPageNum() - 1) * entity.getPageSize(), list.size());
         page.setList(deployments);
         return page;
+    }
+
+    @Override
+    public List<Map<String, Object>> deployed(WorkFlow workFlow) {
+        List<Map<String, Object>> result = new ArrayList<>();
+        ActivitiObj2HashMapUtils insatnce = ActivitiObj2HashMapUtils.getInstance();
+        List<ProcessDefinition> list = engine.getRepositoryService().createProcessDefinitionQuery().processDefinitionKey(workFlow.getKey()).latestVersion().list();
+        list.forEach(processDefinition -> {
+            result.add(insatnce.processDefinition2Map(processDefinition));
+        });
+        return result;
     }
 }

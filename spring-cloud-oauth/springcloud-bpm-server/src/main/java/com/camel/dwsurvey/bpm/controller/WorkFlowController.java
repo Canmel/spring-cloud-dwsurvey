@@ -8,6 +8,7 @@ import com.camel.core.entity.Result;
 import com.camel.core.enums.ResultEnum;
 import com.camel.core.utils.ResultUtil;
 import com.camel.core.utils.SerizlizeUtil;
+import com.camel.dwsurvey.bpm.enums.WorkFlowStatus;
 import com.camel.dwsurvey.bpm.enums.WorkFlowType;
 import com.camel.dwsurvey.bpm.exceptions.UnAuthenticationException;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
@@ -47,6 +48,7 @@ public class WorkFlowController extends BaseCommonController {
 
     @GetMapping
     public Result index(WorkFlow entity){
+        entity.setStatus(WorkFlowStatus.CREATED.getValue());
         return ResultUtil.success(service.pageQuery(entity));
     }
 
@@ -114,12 +116,7 @@ public class WorkFlowController extends BaseCommonController {
      **/
     @GetMapping("/deployed")
     public Result deployed(WorkFlow workFlow) {
-        EntityWrapper<WorkFlow> workFlowEntityWrapper = new EntityWrapper<>();
-        if (!ObjectUtils.isEmpty(workFlow.getFlowType())) {
-            workFlowEntityWrapper.eq("flowType", workFlow.getFlowType());
-        }
-        List<WorkFlow> workFlows = service.selectList(workFlowEntityWrapper);
-        return ResultUtil.success(workFlows);
+        return ResultUtil.success(service.deployed(workFlow));
     }
 
     @Override

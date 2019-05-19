@@ -32,6 +32,7 @@
         FROM work_flow
         <where>
             <if test="name != null and name != ''" >AND work_flow.`name` LIKE CONCAT('%', #{name},'%')</if>
+            <if test="status != null">AND work_flow.`status` = 1</if>
         </where>
     </select>
 </mapper>
