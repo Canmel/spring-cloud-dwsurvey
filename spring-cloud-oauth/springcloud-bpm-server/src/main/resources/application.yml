@@ -1,5 +1,5 @@
 server:
-  port: 8889
+  port: 6789
 
 # Configure the public key to use for verifying the incoming JWT tokens
 security:

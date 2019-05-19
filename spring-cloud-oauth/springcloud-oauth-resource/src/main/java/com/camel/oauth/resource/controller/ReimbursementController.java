@@ -50,8 +50,9 @@ public class ReimbursementController extends BaseCommonController {
     }
 
     @GetMapping("/apply/{id}")
-    public Result apply(@PathVariable Integer id) {
-        if(service.apply(id)){
+    public Result apply(@PathVariable Integer id, String flowId) {
+        System.out.println(flowId);
+        if(service.apply(id, flowId)){
             ResultUtil.success("发起流程成功");
         }
         return ResultUtil.error(HttpStatus.BAD_REQUEST.value(), "发起流程失败");

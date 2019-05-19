@@ -41,6 +41,9 @@ zuul:
     auth:
       path: /auth/**
       url: http://127.0.0.1:7070
+    bpm:
+      path: /bpm/**
+      url: http://127.0.0.1:6789
 
 # Make sure the OAuth2 token is only relayed when using the internal API,
 # do not pass any authentication to the external API

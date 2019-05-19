@@ -15,5 +15,5 @@ import com.github.pagehelper.PageInfo;
 public interface ReimbursementService extends IService<Reimbursement> {
     PageInfo<Reimbursement> selectPage(Reimbursement entity);
 
-    Boolean apply(Integer id);
+    Boolean apply(Integer id, String flowId);
 }
