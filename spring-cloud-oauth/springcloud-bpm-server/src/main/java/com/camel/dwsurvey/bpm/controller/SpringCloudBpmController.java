@@ -68,12 +68,8 @@ public class SpringCloudBpmController {
      */
     @GetMapping("/task/{assignee}")
     public Result queryTask(@PathVariable String assignee){
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
         List list = service.queryTask(assignee);
-        if(CollectionUtils.isEmpty(list)){
-            return ResultUtil.success("未找到相关流程", list);
-        }
-        return ResultUtil.success("查询成功", list);
+        return CollectionUtils.isEmpty(list) ? ResultUtil.success("未找到相关流程", list) : ResultUtil.success("查询成功", list);
     }
 
     @GetMapping("/defWorkflows")
@@ -83,12 +79,12 @@ public class SpringCloudBpmController {
 
 
     /**
-     发起申请
+     发起申请 TODO
      @return
      */
     @GetMapping("/apply")
     public Result apply(String busniessKey, String flowKey) {
-        System.out.println(busniessKey + "---------------------------------------" + flowKey);
+        System.out.println(busniessKey + "-------------------------------TODO--------" + flowKey);
         return ResultUtil.success("收到");
     }
 

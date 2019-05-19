@@ -1,4 +1,4 @@
-package com.camel.oauth.resource.config;
+package com.canmel.dwsurvey.springcloudfeign.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -29,7 +29,7 @@ public class FeignBasicAuthRequestInterceptor implements RequestInterceptor {
             }
         }
         Enumeration<String> bodyNames = request.getParameterNames();
-        StringBuffer body =new StringBuffer();
+        StringBuffer body = new StringBuffer();
         if (bodyNames != null) {
             while (bodyNames.hasMoreElements()) {
                 String name = bodyNames.nextElement();
@@ -37,10 +37,10 @@ public class FeignBasicAuthRequestInterceptor implements RequestInterceptor {
                 body.append(name).append("=").append(values).append("&");
             }
         }
-        if(body.length()!=0) {
-            body.deleteCharAt(body.length()-1);
+        if (body.length() != 0) {
+            body.deleteCharAt(body.length() - 1);
             template.body(body.toString());
-            log.info("feign interceptor body:{}",body.toString());
+            log.info("feign interceptor body:{}", body.toString());
         }
     }
 }

@@ -15,13 +15,11 @@ import org.springframework.util.ObjectUtils;
 import javax.annotation.Resource;
 
 /**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author ${author}
- * @since 2019-05-17
- */
+ <p>
+ 服务实现类
+ </p>
+ @author ${author}
+ @since 2019-05-17 */
 @Service
 public class ReimbursementServiceImpl extends ServiceImpl<ReimbursementMapper, Reimbursement> implements ReimbursementService {
     @Autowired
@@ -32,12 +30,8 @@ public class ReimbursementServiceImpl extends ServiceImpl<ReimbursementMapper, R
 
     @Override
     public Boolean apply(Integer id, String flowId) {
-        System.out.println(id + "--------" + flowId);
-        Result result = springCloudBpmFeignClient.apply("" + id, flowId);
-        if(ObjectUtils.isEmpty(result)){
-            return false;
-        }
-        return result.isSuccess();
+        Result result = springCloudBpmFeignClient.apply(Reimbursement.class.getSimpleName().toUpperCase() + id, flowId);
+        return ObjectUtils.isEmpty(result) ? false : result.isSuccess();
     }
 
     @Override

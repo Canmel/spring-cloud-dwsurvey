@@ -30,7 +30,7 @@ public class ReimbursementController extends BaseCommonController {
     }
 
     @GetMapping("/{id}")
-    public Result ditail(@PathVariable Integer id){
+    public Result ditail(@PathVariable Integer id) {
         return super.details(id);
     }
 
@@ -40,22 +40,18 @@ public class ReimbursementController extends BaseCommonController {
     }
 
     @PutMapping
-    public Result update(@RequestBody Reimbursement reimbursement){
+    public Result update(@RequestBody Reimbursement reimbursement) {
         return super.update(reimbursement);
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id){
+    public Result delete(@PathVariable Integer id) {
         return super.delete(id);
     }
 
     @GetMapping("/apply/{id}")
     public Result apply(@PathVariable Integer id, String flowId) {
-        System.out.println(flowId);
-        if(service.apply(id, flowId)){
-            ResultUtil.success("发起流程成功");
-        }
-        return ResultUtil.error(HttpStatus.BAD_REQUEST.value(), "发起流程失败");
+        return service.apply(id, flowId) ? ResultUtil.success("发起流程成功") : ResultUtil.error(HttpStatus.BAD_REQUEST.value(), "发起流程失败");
     }
 
     @Override
