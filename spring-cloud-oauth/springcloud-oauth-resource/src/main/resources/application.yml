@@ -26,6 +26,8 @@ eureka:
       defaultZone: http://127.0.0.1:8888/eureka/
 
 spring:
+  application:
+    name: springcloud-oauth-resource
   datasource:
     url: jdbc:mysql://localhost:3306/dwsurvey?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
     username: root
@@ -42,3 +44,4 @@ pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
+

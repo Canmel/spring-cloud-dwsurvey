@@ -17,5 +17,7 @@
         <module>springcloud-oauth-resource-system</module>
         <module>springcloud-redis</module>
         <module>springcloud-bpm-server</module>
+        <module>spring-cloud-config</module>
+        <module>spring-cloud-feign</module>
     </modules>
 </project>

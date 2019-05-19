@@ -56,6 +56,8 @@ spring:
   redis:
     host: 127.0.0.1
     password:
+  application:
+    name: springcloud-oauth-server
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml

@@ -6,6 +6,7 @@ server:
   session:
     timeout: 1800
 
+
 # Configure the Authorization Server and User Info Resource Server details
 security:
   oauth2:
@@ -57,3 +58,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:8888/eureka/
+spring:
+  application:
+    name: springcloud-zuul-getway-server
