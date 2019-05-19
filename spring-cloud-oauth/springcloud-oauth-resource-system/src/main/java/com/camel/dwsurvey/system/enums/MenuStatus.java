@@ -1,6 +1,7 @@
 package com.camel.dwsurvey.system.enums;
 
 public enum MenuStatus implements BaseEnum {
+    /**/
     NORMAL("正常", 1), INVALID("无效", 0);
     private String description;
     private Integer code;

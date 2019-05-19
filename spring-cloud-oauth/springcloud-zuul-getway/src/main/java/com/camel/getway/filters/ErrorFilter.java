@@ -5,7 +5,6 @@ import com.netflix.zuul.context.RequestContext;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -59,16 +58,16 @@ public class ErrorFilter extends ZuulFilter {
                 }
             }
 
-            if (StringUtils.isBlank(message)) message = DEFAULT_ERR_MSG;
+            if (StringUtils.isBlank(message)) {
+                message = DEFAULT_ERR_MSG;
+            }
 
             request.setAttribute("javax.servlet.error.status_code", statusCode);
             request.setAttribute("javax.servlet.error.message", message);
 
-//            WebUtils.responseOutJson(ctx.getResponse(), JsonUtils.toJson(new WrapperResponse<>(statusCode, message)));
         } catch (Exception e) {
             String error = "Error during filtering[ErrorFilter]";
             log.error(error, e);
-//            WebUtils.responseOutJson(ctx.getResponse(), JsonUtils.toJson(new WrapperResponse<>(500, error)));
         }
         return null;
 

@@ -1,6 +1,7 @@
 package com.camel.core.enums;
 
 public enum ResultEnum {
+    /**/
     UNKONW_ERROR(-1, "未知错误"),
     UNAUTHORIZED(401, "访问的服务需要身份认证"),
     SESSION_INVALID(401, "session失效"),

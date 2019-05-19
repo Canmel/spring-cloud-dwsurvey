@@ -78,7 +78,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class )
     public boolean addRoles(SysUser user) {
         Wrapper<SysUserRole> userRoleWrapper = new EntityWrapper<>();
         userRoleWrapper.eq("user_id", user.getUid());

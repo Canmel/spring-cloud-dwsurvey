@@ -34,10 +34,18 @@ import java.util.Map;
  * @since 2018年08月17日
  */
 public enum WorkFlowStatus {
+    /**
+     */
     CREATED("创建", 1),
     DEPLOYED("发布", 2);
 
+    /**
+     名称
+     */
     private String name;
+    /**
+     存储值
+     */
     private Integer value;
 
     public String getName() {
@@ -68,6 +76,10 @@ public enum WorkFlowStatus {
         return map;
     }
 
+    /**
+     查询所有
+     @return
+     */
     public static List all() {
         List list = new ArrayList<>();
         for (WorkFlowStatus flowType : WorkFlowStatus.values()) {

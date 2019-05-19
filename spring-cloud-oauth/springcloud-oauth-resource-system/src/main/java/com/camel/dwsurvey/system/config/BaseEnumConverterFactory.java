@@ -11,15 +11,15 @@ import java.util.WeakHashMap;
 public class BaseEnumConverterFactory implements ConverterFactory<String, BaseEnum> {
 
     @SuppressWarnings("rawtypes")
-    private static final Map<Class, Converter> converterMap = new WeakHashMap<>();
+    private static final Map<Class, Converter> CONVERTERMAP = new WeakHashMap<>();
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public <T extends BaseEnum> Converter<String, T> getConverter(Class<T> targetType) {
-        Converter result = converterMap.get(targetType);
+        Converter result = CONVERTERMAP.get(targetType);
         if(result == null) {
             result = new IntegerStrToEnum<T>(targetType);
-            converterMap.put(targetType, result);
+            CONVERTERMAP.put(targetType, result);
         }
         return result;
     }

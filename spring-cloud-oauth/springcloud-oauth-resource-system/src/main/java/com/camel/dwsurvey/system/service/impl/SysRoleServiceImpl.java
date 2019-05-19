@@ -56,7 +56,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Override
     public boolean delete(Serializable serializable) {
-        SysRole sysRole = new SysRole((Integer) serializable, RoleStatus.NORMAL.UNVALID.getCode());
+        SysRole sysRole = new SysRole((Integer) serializable, RoleStatus.UNVALID.getCode());
         return mapper.updateById(sysRole) > -1;
     }
 }

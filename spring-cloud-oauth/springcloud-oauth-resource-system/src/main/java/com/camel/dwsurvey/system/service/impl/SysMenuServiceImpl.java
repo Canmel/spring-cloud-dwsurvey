@@ -45,6 +45,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         return mapper.selectList(menuWrapper);
     }
 
+    @Override
     public PageInfo<SysMenu> selectPage(SysMenu entity) {
         PageInfo pageInfo = PaginationUtil.startPage(entity, () -> {
             mapper.list(entity);

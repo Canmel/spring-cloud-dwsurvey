@@ -1,9 +1,11 @@
-package com.camel.oauth.server.service;
+package com.camel.oauth.server.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.camel.oauth.server.entity.MyUserDetails;
 import com.camel.oauth.server.entity.SysUser;
 import com.camel.oauth.server.enums.EntityStatus;
+import com.camel.oauth.server.service.SysRoleService;
+import com.camel.oauth.server.service.SysUserService;
 import com.camel.oauth.server.utils.SerizlizeUtil;
 import com.camel.redis.entity.RedisUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private SysUserService userService;
 
@@ -52,7 +53,7 @@ public class MyUserDetailsService implements UserDetailsService {
         }
 
         boolean userAccountNonLocked = !ObjectUtils.isEmpty(user.getLoginFailureCount()) && user.getLoginFailureCount() < 3;
-        boolean accountNonExpired = !ObjectUtils.isEmpty(user.getPasswordExpiredTime()) && user.getPasswordExpiredTime().getTime() > new Date().getTime();
+        boolean accountNonExpired = !ObjectUtils.isEmpty(user.getPasswordExpiredTime()) && user.getPasswordExpiredTime().getTime() > System.currentTimeMillis();
         boolean userEnable = EntityStatus.ENABLE.getCode().equals(user.getStatus());
         MyUserDetails myUserDetails = new MyUserDetails(user.getEmail(), user.getPassword(), userEnable, accountNonExpired, true, userAccountNonLocked, user.roles2Names(rolePrefix));
         return myUserDetails;

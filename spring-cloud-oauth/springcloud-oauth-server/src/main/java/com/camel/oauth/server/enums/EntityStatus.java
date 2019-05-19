@@ -1,11 +1,16 @@
 package com.camel.oauth.server.enums;
 
-import lombok.Data;
-
 public enum EntityStatus {
-    UNAVAILABLE("0", "不可用"),ENABLE("1", "可用");
+    /**/
+    UNAVAILABLE("0", "不可用"), ENABLE("1", "可用");
 
+    /**
+     数据代码
+     */
     private String code;
+    /**
+     备注
+     */
     private String description;
 
     EntityStatus(String code, String description) {

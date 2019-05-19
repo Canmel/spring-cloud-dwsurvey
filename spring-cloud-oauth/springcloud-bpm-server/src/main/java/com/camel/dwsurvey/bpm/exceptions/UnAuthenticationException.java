@@ -1,6 +1,10 @@
 package com.camel.dwsurvey.bpm.exceptions;
 
-public class UnAuthenticationException extends Throwable {
-    public UnAuthenticationException(String 当前用户不存在) {
+/**
+ @author baily 
+ */
+public class UnAuthenticationException extends RuntimeException {
+    public UnAuthenticationException(String msg) {
+        super(msg);
     }
 }

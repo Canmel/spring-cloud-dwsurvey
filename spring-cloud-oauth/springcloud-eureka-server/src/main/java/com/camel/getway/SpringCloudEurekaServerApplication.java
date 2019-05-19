@@ -26,6 +26,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  *              ┗┓┓┏━━━━━┳┓┏┛ + + + +
  *               ┃┫┫     ┃┫┫
  *               ┗┻┛     ┗┻┛+ + + +
+ * @author baily
  */
 @EnableEurekaServer
 @SpringBootApplication

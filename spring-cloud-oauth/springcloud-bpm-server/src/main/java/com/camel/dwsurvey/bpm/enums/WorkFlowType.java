@@ -34,6 +34,7 @@ import java.util.Map;
  * @since 2018年08月17日
  */
 public enum WorkFlowType {
+    /* */
     FLOW_NORMAL("普通流程", 1),
     FINANCE("财务流程", 2),
     REIMBURSEMENT("报销流程", 3);

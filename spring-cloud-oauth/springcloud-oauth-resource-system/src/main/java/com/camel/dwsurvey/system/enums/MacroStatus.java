@@ -1,11 +1,19 @@
 package com.camel.dwsurvey.system.enums;
 
-import jdk.nashorn.internal.parser.JSONParser;
-
 public enum MacroStatus implements BaseEnum {
+    /**/
     NORMAL("正常", 1), INVALID("无效", 0);
+    /**
+     备注
+     */
     private String description;
+    /**
+     数据代码
+     */
     private Integer code;
+    /**
+     数据列名
+     */
     private String column;
 
     public String getDescription() {
