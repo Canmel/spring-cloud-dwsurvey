@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  <p>
@@ -22,6 +23,8 @@ import javax.annotation.Resource;
  @since 2019-05-17 */
 @Service
 public class ReimbursementServiceImpl extends ServiceImpl<ReimbursementMapper, Reimbursement> implements ReimbursementService {
+    public static final String PROCESSDEFINITIONKEY = "REIMBURSEMENT";
+
     @Autowired
     private ReimbursementMapper mapper;
 
@@ -30,7 +33,8 @@ public class ReimbursementServiceImpl extends ServiceImpl<ReimbursementMapper, R
 
     @Override
     public Boolean apply(Integer id, String flowId) {
-        Result result = springCloudBpmFeignClient.apply(Reimbursement.class.getSimpleName().toUpperCase() + id, flowId);
+
+        Result result = springCloudBpmFeignClient.applyById(Reimbursement.class.getSimpleName().toUpperCase() + id, flowId);
         return ObjectUtils.isEmpty(result) ? false : result.isSuccess();
     }
 
@@ -40,5 +44,11 @@ public class ReimbursementServiceImpl extends ServiceImpl<ReimbursementMapper, R
             mapper.list(entity);
         });
         return pageInfo;
+    }
+
+    @Override
+    public Result current(Integer id) {
+        Result result = springCloudBpmFeignClient.current(Reimbursement.class.getSimpleName().toUpperCase() + id, PROCESSDEFINITIONKEY);
+        return result;
     }
 }

@@ -54,6 +54,11 @@ public class ReimbursementController extends BaseCommonController {
         return service.apply(id, flowId) ? ResultUtil.success("发起流程成功") : ResultUtil.error(HttpStatus.BAD_REQUEST.value(), "发起流程失败");
     }
 
+    @GetMapping("/current/{id}")
+    public Result current(@PathVariable Integer id){
+        return service.current(id);
+    }
+
     @Override
     public IService getiService() {
         return service;

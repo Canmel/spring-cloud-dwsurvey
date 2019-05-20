@@ -1,17 +1,24 @@
 package com.camel.dwsurvey.bpm.service.impl;
 
+import com.camel.core.entity.process.UserTask;
+import com.camel.dwsurvey.bpm.exceptions.ProcessNotFoundException;
 import com.camel.dwsurvey.bpm.mapper.WorkFlowMapper;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.camel.dwsurvey.bpm.service.BpmService;
 import com.camel.dwsurvey.bpm.utils.ActivitiObj2HashMapUtils;
 import com.github.pagehelper.PageInfo;
+import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
+import org.apache.commons.lang3.ObjectUtils;
 import org.codehaus.jackson.map.ser.impl.SimpleBeanPropertyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +41,12 @@ public class BpmServiceImpl implements BpmService {
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private RuntimeService runtimeService;
+
+    @Autowired
+    private HistoryService historyService;
 
     @Autowired
     private WorkFlowMapper mapper;
@@ -105,5 +118,32 @@ public class BpmServiceImpl implements BpmService {
         TaskQuery query = taskService.createTaskQuery();
         List<Task> tasks = query.taskCandidateGroupIn(groupId).list();
         return tasks;
+    }
+
+    @Override
+    public boolean apply(String busniessKey, String flowKey) {
+        ProcessInstance instance = runtimeService.startProcessInstanceByKey(flowKey, busniessKey);
+        return ObjectUtils.allNotNull(instance);
+    }
+
+    @Override
+    public boolean applyById(String busniessKey, String flowId) {
+        ProcessInstance instance = runtimeService.startProcessInstanceById(flowId, busniessKey);
+        return ObjectUtils.allNotNull(instance);
+    }
+
+    @Override
+    public List<Task> current(String busniessKey, String processDifinitionKey) {
+        ProcessInstance instance =runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(busniessKey, processDifinitionKey).active().singleResult();
+        if(org.springframework.util.ObjectUtils.isEmpty(instance)){
+            // The current process is empty, and there may be value in the history.
+            List<HistoricProcessInstance> hpi = historyService.createHistoricProcessInstanceQuery().processInstanceBusinessKey(busniessKey).list();
+            if(!org.springframework.util.ObjectUtils.isEmpty(hpi)){
+                return new ArrayList<>();
+            }
+            throw new ProcessNotFoundException();
+        }else {
+            return taskService.createTaskQuery().processInstanceId(instance.getId()).active().list();
+        }
     }
 }

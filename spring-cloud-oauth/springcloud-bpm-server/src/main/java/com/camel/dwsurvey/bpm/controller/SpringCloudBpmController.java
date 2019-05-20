@@ -1,12 +1,14 @@
 package com.camel.dwsurvey.bpm.controller;
 
 import com.camel.core.entity.Result;
+import com.camel.core.entity.process.UserTask;
 import com.camel.core.utils.ResultUtil;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.camel.dwsurvey.bpm.service.BpmService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.CollectionUtils;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,13 +85,37 @@ public class SpringCloudBpmController {
 
 
     /**
-     发起申请 TODO
+     发起申请 (流程ID)
+     @return
+     */
+    @GetMapping("/applyById")
+    public Result applyById(String busniessKey, String flowId) {
+        service.applyById(busniessKey, flowId);
+        return ResultUtil.success("发起流程成功");
+    }
+
+    /**
+     发起申请 （流程KEY）
      @return
      */
     @GetMapping("/apply")
-    public Result apply(String busniessKey, String flowKey) {
-        System.out.println(busniessKey + "-------------------------------TODO--------" + flowKey);
-        return ResultUtil.success("收到");
+    public Result appl(String busniessKey, String flowKey) {
+        service.apply(busniessKey, flowKey);
+        return ResultUtil.success("发起流程成功");
+    }
+
+    @GetMapping("/current")
+    public Result current(String busniessKey, String flowKey){
+        List<Task> tasks = service.current(busniessKey, flowKey);
+        List<UserTask> userTasks = new ArrayList<>();
+        tasks.forEach(task -> {
+            UserTask userTask = new UserTask();
+            userTask.setName(task.getName());
+            userTask.setDescription(task.getDescription());
+            userTask.setEnd(false);
+            userTasks.add(userTask);
+        });
+        return ResultUtil.success(userTasks);
     }
 
     @GetMapping("/index")

@@ -3,6 +3,7 @@ package com.camel.dwsurvey.bpm.service;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.github.pagehelper.PageInfo;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.task.Task;
 
 import java.util.List;
 
@@ -52,4 +53,28 @@ public interface BpmService {
      * @return
      */
     PageInfo<Deployment> defWorkflows(WorkFlow entity);
+
+    /**
+     通过流程KEY发起流程，并绑定业务key
+     @param busniessKey
+     @param flowKey
+     @return
+     */
+    boolean apply(String busniessKey, String flowKey);
+
+    /**
+     通过流程ID发起流程，并绑定业务key
+     @param busniessKey
+     @param flowId
+     @return
+     */
+    boolean applyById(String busniessKey, String flowId);
+
+    /**
+     查询当前流程
+     @param busniessKey
+     @param processDifinitionKey
+     @return
+     */
+    List<Task> current(String busniessKey, String processDifinitionKey);
 }
