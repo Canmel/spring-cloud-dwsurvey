@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ErrorFilter extends ZuulFilter {
 
     private static final String ERROR_STATUS_CODE_KEY = "error.status_code";
+    private static final String ERROR_EXCEPTION = "error.exception";
+    private static final String ERROR_MESSAGE = "error.message";
 
     private Logger log = LoggerFactory.getLogger(ErrorFilter.class);
 
@@ -40,9 +42,9 @@ public class ErrorFilter extends ZuulFilter {
             HttpServletRequest request = ctx.getRequest();
 
             int statusCode = (Integer) ctx.get(ERROR_STATUS_CODE_KEY);
-            String message = (String) ctx.get("error.message");
-            if (ctx.containsKey("error.exception")) {
-                Throwable e = (Exception) ctx.get("error.exception");
+            String message = (String) ctx.get(ERROR_MESSAGE);
+            if (ctx.containsKey(ERROR_EXCEPTION)) {
+                Throwable e = (Exception) ctx.get(ERROR_EXCEPTION);
                 Throwable re = getOriginException(e);
                 if (re instanceof java.net.ConnectException) {
                     message = "Real Service Connection refused";

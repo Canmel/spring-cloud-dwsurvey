@@ -19,5 +19,10 @@ import java.util.List;
 @Mapper
 @Repository
 public interface WorkFlowMapper extends BaseMapper<WorkFlow> {
+    /**
+     * 查询工作流列表
+     * @param workFlow
+     * @return
+     */
     List<WorkFlow> list(WorkFlow workFlow);
 }

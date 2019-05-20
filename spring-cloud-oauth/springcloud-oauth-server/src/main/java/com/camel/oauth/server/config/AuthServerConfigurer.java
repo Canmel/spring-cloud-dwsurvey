@@ -110,7 +110,6 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setTokenStore(redisTokenStore());
         tokenServices.setSupportRefreshToken(true);
-        //tokenServices.setClientDetailsService(clientDetails());
         // token有效期自定义设置，默认12小时
         tokenServices.setAccessTokenValiditySeconds(60*60*12);
         // refresh_token默认30天

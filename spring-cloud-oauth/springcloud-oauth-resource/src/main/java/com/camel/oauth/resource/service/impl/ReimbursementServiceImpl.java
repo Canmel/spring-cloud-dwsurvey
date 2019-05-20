@@ -2,7 +2,7 @@ package com.camel.oauth.resource.service.impl;
 
 import com.camel.core.entity.Result;
 import com.camel.core.utils.PaginationUtil;
-import com.camel.oauth.resource.feign.SpringCloudBpmFeignClient;
+import com.canmel.dwsurvey.springcloudfeign.bpm.SpringCloudBpmFeignClient;
 import com.camel.oauth.resource.model.Reimbursement;
 import com.camel.oauth.resource.mapper.ReimbursementMapper;
 import com.camel.oauth.resource.service.ReimbursementService;

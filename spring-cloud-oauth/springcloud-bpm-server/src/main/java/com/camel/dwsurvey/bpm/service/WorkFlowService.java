@@ -17,9 +17,24 @@ import java.util.Map;
  * @since 2019-05-16
  */
 public interface WorkFlowService extends IService<WorkFlow> {
+    /**
+     * 工作流分页查询
+     * @param entity
+     * @return
+     */
     PageInfo<WorkFlow> pageQuery(WorkFlow entity);
 
+    /**
+     * 已部署流程分页查询
+     * @param entity
+     * @return
+     */
     PageInfo<Deployment> pageQueryDeployed(WorkFlow entity);
 
+    /**
+     * 已发布流程集合
+     * @param workFlow
+     * @return
+     */
     List<Map<String, Object>> deployed(WorkFlow workFlow);
 }
