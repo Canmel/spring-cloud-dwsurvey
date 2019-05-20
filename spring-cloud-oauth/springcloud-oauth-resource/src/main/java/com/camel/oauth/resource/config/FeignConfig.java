@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author baily
+ */
 @Configuration
 public class FeignConfig {
     @Bean

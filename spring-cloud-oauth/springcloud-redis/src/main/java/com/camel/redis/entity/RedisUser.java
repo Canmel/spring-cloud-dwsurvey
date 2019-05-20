@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/** @author baily */
 @Data
 public class RedisUser implements Serializable {
     private Integer id;

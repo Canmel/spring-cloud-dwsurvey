@@ -20,5 +20,10 @@ import java.util.List;
 @Repository
 public interface ReimbursementMapper extends BaseMapper<Reimbursement> {
 
+    /**
+     * 查询报销列表
+     * @param entity
+     * @return
+     */
     List<Reimbursement> list(Reimbursement entity);
 }

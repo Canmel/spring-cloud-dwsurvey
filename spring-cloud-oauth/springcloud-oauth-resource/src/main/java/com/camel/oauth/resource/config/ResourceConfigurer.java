@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
            |   | \\\  -  /// |   |
            | \_|  ''\---/''  |   |
            \  .-\__  `-`  ___/-. /
-         ___`. .'  /--.--\  `. . __
+         ___`. .'  /--.--\  `. . __     @author baily
       ."" '<  `.___\_<|>_/___.'  >'"".
      | | :  `- \`.;`\ _ /`;.`/ - ` : | |
      \  \ `-.   \_ __\ /__ _/   .-` /  /
@@ -32,7 +32,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @Configuration
 @EnableWebSecurity
 @EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true) // Allow method annotations like @PreAuthorize
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceConfigurer extends ResourceServerConfigurerAdapter {
 
     @Override

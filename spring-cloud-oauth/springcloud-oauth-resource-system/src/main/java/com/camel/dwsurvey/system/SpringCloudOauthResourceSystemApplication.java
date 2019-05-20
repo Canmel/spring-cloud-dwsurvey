@@ -27,6 +27,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * 　　　　　　　  ┗┓┓┏━━━━━┳┓┏┛ + + + +
  * 　　　　　　　   ┃┫┫     ┃┫┫
  * 　　　　　　　   ┗┻┛     ┗┻┛+ + + +
+ * @author baily
  */
 @MapperScan("com.canmel.dwsurvey.system.mapper")
 @EnableEurekaClient

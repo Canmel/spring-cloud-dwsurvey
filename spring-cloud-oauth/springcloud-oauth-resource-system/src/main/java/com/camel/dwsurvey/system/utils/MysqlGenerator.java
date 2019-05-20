@@ -29,6 +29,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * 　　　　　　　  ┗┓┓┏━━━━━┳┓┏┛ + + + +
  * 　　　　　　　   ┃┫┫     ┃┫┫
  * 　　　　　　　   ┗┻┛     ┗┻┛+ + + +
+ * @author baily
  */
 public class MysqlGenerator {
     public static void main(String[] args) {

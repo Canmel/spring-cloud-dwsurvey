@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * 　　　　　　　  ┃   ┃+ 　　　　神兽保佑,代码无bug
  * 　　　　　　　  ┃   ┃
  * 　　　　　　　  ┃   ┃　　+
- * 　　　　　　　  ┃   ┗━━━━━━━┓ + +
+ * 　　　　　　　  ┃   ┗━━━━━━━┓ + +      @author baily
  * 　　　　　　　  ┃           ┣┓
  * 　　　　　　　  ┃           ┏┛
  * 　　　　　　　  ┗┓┓┏━━━━━┳┓┏┛ + + + +

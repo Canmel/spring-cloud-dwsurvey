@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author baily
+ */
 @ControllerAdvice
 @RestController
 public class CommonExceptionHandler {

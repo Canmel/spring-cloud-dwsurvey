@@ -18,5 +18,10 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SysLogMapper extends BaseMapper<SysLog> {
+    /**
+     * 查询日志列表
+     * @param sysLog
+     * @return
+     */
     List<SysLog> list(SysLog sysLog);
 }

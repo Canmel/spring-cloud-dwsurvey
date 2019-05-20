@@ -32,5 +32,10 @@ import java.util.List;
  * @since 2019-04-19
  */
 public interface SysRoleService extends IService<SysRole> {
+    /**
+     * 通过用户查找角色列表
+     * @param sysUser
+     * @return
+     */
     List<SysRole> selectRoleByUser(SysUser sysUser);
 }

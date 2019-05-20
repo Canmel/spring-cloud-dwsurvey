@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
+/**@author baily */
 @Aspect
 @Component
 public class LogAspect {

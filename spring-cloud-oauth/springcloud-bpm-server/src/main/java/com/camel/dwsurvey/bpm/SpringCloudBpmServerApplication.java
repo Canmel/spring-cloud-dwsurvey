@@ -28,7 +28,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  *　　　　　　　  ┃           ┏┛
  *              ┗┓┓┏━━━━━┳┓┏┛ + + + +
  *               ┃┫┫     ┃┫┫
- *               ┗┻┛     ┗┻┛+ + + +
+ *               ┗┻┛     ┗┻┛+ + + +	@author baily
  */
 @Slf4j
 @EnableEurekaClient

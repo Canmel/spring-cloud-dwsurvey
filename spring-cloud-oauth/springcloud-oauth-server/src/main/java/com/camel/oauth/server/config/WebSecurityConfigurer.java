@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 /**
                    _ooOoo_
                   o8888888o
-                  88" . "88			安全配置
+                  88" . "88			安全配置 @author baily
                   (| -_- |)
                   O\  =  /O
                ____/`---'\____

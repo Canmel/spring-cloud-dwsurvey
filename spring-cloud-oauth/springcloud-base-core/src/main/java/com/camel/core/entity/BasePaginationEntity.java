@@ -3,7 +3,7 @@ package com.camel.core.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import lombok.Data;
 
-
+/** @author baily */
 @Data
 public class BasePaginationEntity extends BaseEntity{
 

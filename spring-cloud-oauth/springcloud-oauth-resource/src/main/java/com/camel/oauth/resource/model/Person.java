@@ -16,7 +16,7 @@ package com.camel.oauth.resource.model;
  *　　　　　　　  ┃   ┃+ 　　　　神兽保佑,代码无bug　　
  *　　　　　　　  ┃   ┃
  *　　　　　　　  ┃   ┃　　+　　　　　　　　　
- *　　　　　　　  ┃   ┗━━━━━━━┓ + +
+ *　　　　　　　  ┃   ┗━━━━━━━┓ + +  @author baily
  *　　　　　　　  ┃           ┣┓
  *　　　　　　　  ┃           ┏┛
  *              ┗┓┓┏━━━━━┳┓┏┛ + + + +

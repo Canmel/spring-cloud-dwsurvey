@@ -18,5 +18,10 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SysRoleMapper extends BaseMapper<SysRole> {
+    /**
+     * 查询角色列表
+     * @param sysRole
+     * @return
+     */
     List<SysRole> list(SysRole sysRole);
 }

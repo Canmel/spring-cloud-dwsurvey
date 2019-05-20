@@ -49,7 +49,7 @@ public class WorkFlowServiceImpl extends ServiceImpl<WorkFlowMapper, WorkFlow> i
         Collections.reverse(list);
         list.forEach((item) -> {
             DeploymentEntity deploymentEntity = (DeploymentEntity) item;
-            deploymentEntity.setResources(new HashMap<>());
+            deploymentEntity.setResources(new HashMap<>(16));
         });
         List<Deployment> deployments = list.subList((entity.getPageNum() - 1) * entity.getPageSize(), list.size());
         page.setList(deployments);

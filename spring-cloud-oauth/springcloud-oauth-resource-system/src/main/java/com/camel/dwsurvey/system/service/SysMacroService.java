@@ -13,5 +13,10 @@ import com.github.pagehelper.PageInfo;
  * @since 2019-05-15
  */
 public interface SysMacroService extends IService<SysMacro> {
+    /**
+     * 分页查询字典
+     * @param entity
+     * @return
+     */
     PageInfo<SysMacro> selectPage(SysMacro entity);
 }

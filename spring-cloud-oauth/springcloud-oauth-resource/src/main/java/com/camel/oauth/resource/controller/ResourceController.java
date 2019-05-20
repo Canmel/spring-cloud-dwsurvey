@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
                    `=---='
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             佛祖保佑       永无BUG
+ @author baily
 */
 @RestController
 public class ResourceController {

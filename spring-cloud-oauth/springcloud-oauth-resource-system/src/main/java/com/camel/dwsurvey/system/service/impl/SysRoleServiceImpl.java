@@ -51,7 +51,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             roleWrapper.notIn("role_id", id);
         }
         Integer count = mapper.selectCount(roleWrapper);
-        return !(count > 0);
+        return count <= 0;
     }
 
     @Override

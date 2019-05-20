@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
                    _ooOoo_
                   o8888888o
                   88" . "88
-                  (| -_- |)		Mvc配置
+                  (| -_- |)		Mvc配置 @author baily
                   O\  =  /O
                ____/`---'\____
              .'  \\|     |//  `.

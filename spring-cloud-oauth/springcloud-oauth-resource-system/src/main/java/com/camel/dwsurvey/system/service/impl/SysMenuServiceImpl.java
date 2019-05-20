@@ -61,7 +61,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             menuWrapper.notIn("menu_id", id);
         }
         Integer count = mapper.selectCount(menuWrapper);
-        return !(count > 0);
+        return count <= 0;
     }
 
     @Override

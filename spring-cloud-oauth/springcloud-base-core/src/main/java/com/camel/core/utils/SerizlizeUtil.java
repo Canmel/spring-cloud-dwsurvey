@@ -2,9 +2,14 @@ package com.camel.core.utils;
 
 import java.io.*;
 
+/** @author baily */
 public class SerizlizeUtil {
 
-    //序列化
+    /**
+     * 序列化
+     * @param obj
+     * @return
+     */
     public static byte [] serialize(Object obj){
         ObjectOutputStream obi=null;
         ByteArrayOutputStream bai=null;
@@ -20,7 +25,11 @@ public class SerizlizeUtil {
         return null;
     }
 
-    //反序列化
+    /**
+     * 反序列化
+     * @param byt
+     * @return
+     */
     public static Object unserizlize(byte[] byt){
         ObjectInputStream oii=null;
         ByteArrayInputStream bis=null;

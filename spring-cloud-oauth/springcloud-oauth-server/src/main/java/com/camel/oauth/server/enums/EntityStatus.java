@@ -1,5 +1,6 @@
 package com.camel.oauth.server.enums;
 
+/** @author baily */
 public enum EntityStatus {
     /**/
     UNAVAILABLE("0", "不可用"), ENABLE("1", "可用");

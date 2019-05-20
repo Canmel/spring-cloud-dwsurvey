@@ -36,5 +36,10 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SysRoleMapper extends BaseMapper<SysRole> {
+    /**
+     * 通过用户查找角色列表
+     * @param sysUser
+     * @return
+     */
     List<SysRole> selectRoleByUser(SysUser sysUser);
 }

@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
+/** @author baily */
 public class MyUserDetails extends User {
     private SysUser user;
 

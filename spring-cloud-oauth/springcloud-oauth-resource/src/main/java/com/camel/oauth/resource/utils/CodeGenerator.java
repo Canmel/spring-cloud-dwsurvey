@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * 　　　　　　　  ┃   ┃+ 　　　　神兽保佑,代码无bug
  * 　　　　　　　  ┃   ┃
  * 　　　　　　　  ┃   ┃　　+
- * 　　　　　　　  ┃   ┗━━━━━━━┓ + +
+ * 　　　　　　　  ┃   ┗━━━━━━━┓ + +    @author baily
  * 　　　　　　　  ┃           ┣┓
  * 　　　　　　　  ┃           ┏┛
  * 　　　　　　　  ┗┓┓┏━━━━━┳┓┏┛ + + + +
@@ -49,7 +49,8 @@ public class CodeGenerator {
                 .setDbColumnUnderline(true)
                 .setNaming(NamingStrategy.underline_to_camel);
         config.setActiveRecord(false)
-                .setEnableCache(false) // 这里就直接输出到项目里面，不用再复制进来
+                // 这里就直接输出到项目里面，不用再复制进来
+                .setEnableCache(false)
                 .setOutputDir(path)
                 .setFileOverride(true)
                 .setServiceName("%sService");

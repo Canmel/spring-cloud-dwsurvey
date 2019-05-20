@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+/** @author baily */
 public class BaseEnumConverterFactory implements ConverterFactory<String, BaseEnum> {
 
     @SuppressWarnings("rawtypes")

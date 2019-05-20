@@ -13,7 +13,18 @@ import com.github.pagehelper.PageInfo;
  * @since 2019-05-17
  */
 public interface ReimbursementService extends IService<Reimbursement> {
+    /**
+     * 分页查询报销信息
+     * @param entity
+     * @return
+     */
     PageInfo<Reimbursement> selectPage(Reimbursement entity);
 
+    /**
+     * 发起申请
+     * @param id
+     * @param flowId
+     * @return
+     */
     Boolean apply(Integer id, String flowId);
 }

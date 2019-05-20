@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author baily
+ */
 @Service
 public class BpmServiceImpl implements BpmService {
 
@@ -71,7 +74,7 @@ public class BpmServiceImpl implements BpmService {
         query.active().taskAssignee(key);
         List list = new ArrayList();
         query.list().forEach(task -> {
-            Map map = new HashMap();
+            Map<String, Object> map = new HashMap<>(16);
             map.put("id", task.getId());
             map.put("assignee", task.getAssignee());
             map.put("name", task.getName());

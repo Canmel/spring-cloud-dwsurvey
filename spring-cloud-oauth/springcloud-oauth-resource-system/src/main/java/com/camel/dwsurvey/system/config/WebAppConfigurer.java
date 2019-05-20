@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * @author baily
+ */
 @Configuration
 public class WebAppConfigurer extends WebMvcConfigurerAdapter {
     @Override

@@ -2,20 +2,26 @@ package com.camel.core;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.entity.BaseEntity;
-import com.camel.core.entity.BasePaginationEntity;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
 
+/** @author baily */
 public abstract class BaseCommonController {
 
+    /**
+     * 获取服务
+     * @return
+     */
     abstract public IService getiService();
 
+    /**
+     * 获取模块名称
+     * @return
+     */
     abstract public String getMouduleName();
 
     public Result details(Serializable serializable) {

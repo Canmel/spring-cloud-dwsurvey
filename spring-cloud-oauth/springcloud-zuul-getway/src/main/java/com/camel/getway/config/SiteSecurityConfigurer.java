@@ -14,7 +14,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 /**
  //                   _ooOoo_
- //                  o8888888o     站点安全配置
+ //                  o8888888o     站点安全配置  @author baily
  //                  88" . "88
  //                  (| -_- |)
  //                  O\  =  /O

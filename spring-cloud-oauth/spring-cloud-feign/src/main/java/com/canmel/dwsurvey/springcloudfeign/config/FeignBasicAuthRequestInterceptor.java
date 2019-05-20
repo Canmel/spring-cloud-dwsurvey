@@ -9,6 +9,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
+/**
+ * @author baily
+ */
 @Slf4j
 public class FeignBasicAuthRequestInterceptor implements RequestInterceptor {
     public FeignBasicAuthRequestInterceptor() {

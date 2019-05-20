@@ -1,7 +1,6 @@
 package com.camel.dwsurvey.system.config;
 
 import com.camel.dwsurvey.system.enums.BaseEnum;
-import com.camel.dwsurvey.system.utils.CodeEnumUtil;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
@@ -11,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/** @author baily */
 public class BaseEnumTypeHandler<E extends BaseEnum> extends BaseTypeHandler<E> {
     /**
      * 枚举的class

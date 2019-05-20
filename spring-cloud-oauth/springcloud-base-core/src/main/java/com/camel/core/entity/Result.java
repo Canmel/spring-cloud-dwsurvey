@@ -2,6 +2,7 @@ package com.camel.core.entity;
 
 import lombok.Data;
 
+/** @author baily */
 @Data
 public class Result {
     private Integer code;

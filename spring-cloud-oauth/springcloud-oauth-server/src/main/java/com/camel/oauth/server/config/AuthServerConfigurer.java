@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
                   o8888888o
                   88" . "88
                   (| -_- |)
-                  O\  =  /O				授权服务配置
+                  O\  =  /O				授权服务配置 @author baily
                ____/`---'\____
              .'  \\|     |//  `.
             /  \\|||  :  |||//  \

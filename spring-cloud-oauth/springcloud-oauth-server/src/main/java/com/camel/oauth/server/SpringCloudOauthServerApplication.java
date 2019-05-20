@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /**
  *　　　　　　　 ┏┓    ┏┓+ +
  *　　　　　　　┏┛┻━━━━┛┻┓ + +
- *　　　　　　　┃        ┃ 　springcloud oauth 授权服务器
+ *　　　　　　　┃        ┃ 　springcloud oauth 授权服务器  @author baily
  *　　　　　　　┃     ━  ┃ ++ + + +
  *           ████━████ ┃+
  *　　　　　　　┃        ┃ +

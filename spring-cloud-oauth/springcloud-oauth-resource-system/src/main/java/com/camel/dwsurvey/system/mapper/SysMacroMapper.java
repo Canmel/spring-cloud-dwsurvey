@@ -19,5 +19,10 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SysMacroMapper extends BaseMapper<SysMacro> {
+    /**
+     * 查询字典列表
+     * @param sysMacro
+     * @return
+     */
     List<SysMacro> list(SysMacro sysMacro);
 }

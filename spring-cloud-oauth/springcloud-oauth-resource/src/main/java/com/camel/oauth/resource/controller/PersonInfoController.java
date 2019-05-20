@@ -28,6 +28,7 @@ import com.camel.oauth.resource.model.Person;
                    `=---='
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             佛祖保佑       永无BUG
+ @author baily
 */
 @RestController
 public class PersonInfoController {

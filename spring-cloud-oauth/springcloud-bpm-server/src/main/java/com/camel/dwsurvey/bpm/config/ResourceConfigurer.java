@@ -28,11 +28,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
                    `=---='
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             佛祖保佑       永无BUG
+@author baily
 */
 @Configuration
 @EnableWebSecurity
 @EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true) // Allow method annotations like @PreAuthorize
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceConfigurer extends ResourceServerConfigurerAdapter {
 
     @Override

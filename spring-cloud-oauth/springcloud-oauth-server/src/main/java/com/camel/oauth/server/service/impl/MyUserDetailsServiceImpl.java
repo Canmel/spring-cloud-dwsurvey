@@ -21,6 +21,9 @@ import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
 
+/**
+ * @author baily
+ */
 @Service
 public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Autowired

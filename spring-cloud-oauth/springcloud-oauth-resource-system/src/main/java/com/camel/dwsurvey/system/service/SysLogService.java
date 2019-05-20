@@ -11,5 +11,10 @@ import com.github.pagehelper.PageInfo;
  @author ${author}
  @since 2019-05-09 */
 public interface SysLogService extends IService<SysLog> {
+    /**
+     * 分页查询
+     * @param entity
+     * @return
+     */
     PageInfo<SysLog> pageQuery(SysLog entity);
 }

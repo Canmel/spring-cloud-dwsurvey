@@ -60,7 +60,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }
 
         Integer count = mapper.selectCount(userWrapper);
-        return !(count > 0);
+        return count <= 0;
     }
 
     @Override

@@ -19,5 +19,10 @@ import java.util.List;
 @Repository
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
+    /**
+     * 查询菜单列表
+     * @param sysMenu
+     * @return
+     */
     List<SysMenu> list(SysMenu sysMenu);
 }

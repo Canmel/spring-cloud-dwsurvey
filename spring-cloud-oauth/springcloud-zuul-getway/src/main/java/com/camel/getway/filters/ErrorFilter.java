@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
+/** @author baily */
 public class ErrorFilter extends ZuulFilter {
 
     private static final String ERROR_STATUS_CODE_KEY = "error.status_code";

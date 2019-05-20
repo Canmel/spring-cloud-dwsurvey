@@ -18,5 +18,10 @@ import java.util.List;
 @Repository
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
+    /**
+     * 查询用户列表
+     * @param sysUser
+     * @return
+     */
     List<SysUser> list(SysUser sysUser);
 }

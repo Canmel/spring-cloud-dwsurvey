@@ -1,5 +1,6 @@
 package com.camel.core.enums;
 
+/** @author baily */
 public enum ResultEnum {
     /**/
     UNKONW_ERROR(-1, "未知错误"),

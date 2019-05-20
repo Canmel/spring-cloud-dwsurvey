@@ -6,6 +6,9 @@ import org.activiti.engine.repository.Deployment;
 
 import java.util.List;
 
+/**
+ * @author baily
+ */
 public interface BpmService {
     /**
      * 部署流程

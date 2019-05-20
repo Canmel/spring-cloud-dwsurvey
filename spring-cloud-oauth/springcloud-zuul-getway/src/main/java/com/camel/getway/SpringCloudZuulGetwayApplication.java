@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Bean;
  *　　　　　　　  ┃           ┏┛
  *              ┗┓┓┏━━━━━┳┓┏┛ + + + +
  *               ┃┫┫     ┃┫┫
- *               ┗┻┛     ┗┻┛+ + + +
+ *               ┗┻┛     ┗┻┛+ + + + @author baily
  */
 @EnableEurekaClient
 @SpringBootApplication
