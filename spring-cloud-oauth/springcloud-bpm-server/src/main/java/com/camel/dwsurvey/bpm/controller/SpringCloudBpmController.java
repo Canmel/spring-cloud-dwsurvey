@@ -2,7 +2,9 @@ package com.camel.dwsurvey.bpm.controller;
 
 import com.camel.core.entity.Result;
 import com.camel.core.entity.process.UserTask;
+import com.camel.core.utils.IoUtils;
 import com.camel.core.utils.ResultUtil;
+import com.camel.dwsurvey.bpm.exceptions.WorkFlowImageGenerateFaildException;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.camel.dwsurvey.bpm.service.BpmService;
 import org.activiti.engine.ProcessEngine;
@@ -10,13 +12,16 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +31,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/flow")
 public class SpringCloudBpmController {
+
     @Autowired
     private ProcessEngine engine;
 
@@ -113,9 +119,27 @@ public class SpringCloudBpmController {
             userTask.setName(task.getName());
             userTask.setDescription(task.getDescription());
             userTask.setEnd(false);
+            userTask.setId(task.getId());
             userTasks.add(userTask);
         });
         return ResultUtil.success(userTasks);
+    }
+
+    /**
+     * 流程跟踪图
+     * @param response  响应
+     * @param id        任务ID
+     */
+    @GetMapping("/trace/{id}")
+    public void taskImage(HttpServletResponse response, @PathVariable String id) {
+        InputStream inputStream = service.processTraceImage(id);
+
+        try {
+            OutputStream outputStream = response.getOutputStream();
+            IoUtils.writeToOtputStream(outputStream, inputStream);
+        } catch (IOException e) {
+            throw new WorkFlowImageGenerateFaildException();
+        }
     }
 
     @GetMapping("/index")

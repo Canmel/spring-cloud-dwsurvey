@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.task.Task;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -77,4 +78,11 @@ public interface BpmService {
      @return
      */
     List<Task> current(String busniessKey, String processDifinitionKey);
+
+    /**
+     流程追踪图
+     @param taskId 任务ID
+     @return
+     */
+    InputStream processTraceImage(String taskId);
 }
