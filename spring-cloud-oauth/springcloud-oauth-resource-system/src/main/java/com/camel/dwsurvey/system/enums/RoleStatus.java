@@ -1,7 +1,9 @@
 package com.camel.dwsurvey.system.enums;
 
+import com.camel.core.enums.BaseEnum;
+
 /** @author baily */
-public enum RoleStatus implements BaseEnum{
+public enum RoleStatus implements BaseEnum {
     /**/
     NORMAL("1", "正常"), UNVALID("0", "无效");
 

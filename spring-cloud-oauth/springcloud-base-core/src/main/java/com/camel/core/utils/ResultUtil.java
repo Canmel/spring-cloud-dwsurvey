@@ -25,6 +25,12 @@ public class ResultUtil {
         return success(msg, null);
     }
 
+    public static Result success(String msg, boolean success) {
+        Result result =  success(msg, null);
+        result.setSuccess(success);
+        return result;
+    }
+
     public static Result success(ResultEnum resultEnum) {
         return new Result(resultEnum.getCode(), resultEnum.getMsg(), null, true);
     }

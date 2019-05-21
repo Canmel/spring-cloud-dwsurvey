@@ -1,5 +1,7 @@
 package com.camel.dwsurvey.system.enums;
 
+import com.camel.core.enums.BaseEnum;
+
 /** @author baily */
 public enum MenuStatus implements BaseEnum {
     /**/

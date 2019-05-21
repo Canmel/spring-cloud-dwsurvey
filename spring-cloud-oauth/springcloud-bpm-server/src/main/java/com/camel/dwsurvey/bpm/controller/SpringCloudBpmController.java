@@ -5,8 +5,10 @@ import com.camel.core.entity.process.UserTask;
 import com.camel.core.utils.IoUtils;
 import com.camel.core.utils.ResultUtil;
 import com.camel.dwsurvey.bpm.exceptions.WorkFlowImageGenerateFaildException;
+import com.camel.core.entity.process.ActivitiForm;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.camel.dwsurvey.bpm.service.BpmService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -23,7 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author baily
@@ -37,6 +41,9 @@ public class SpringCloudBpmController {
 
     @Autowired
     private BpmService service;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     /**
      部署
@@ -106,8 +113,10 @@ public class SpringCloudBpmController {
      */
     @GetMapping("/apply")
     public Result appl(String busniessKey, String flowKey) {
-        service.apply(busniessKey, flowKey);
-        return ResultUtil.success("发起流程成功");
+        if(service.apply(busniessKey, flowKey)){
+            return ResultUtil.success("发起流程成功");
+        }
+        return ResultUtil.success("发起流程失败", false);
     }
 
     @GetMapping("/current")
@@ -140,6 +149,58 @@ public class SpringCloudBpmController {
         } catch (IOException e) {
             throw new WorkFlowImageGenerateFaildException();
         }
+    }
+
+    /**
+     * 通过
+     * @param id
+     * @return
+     */
+    @GetMapping("/pass")
+    public Result pass(String id, String comment, String businessId) {
+        ActivitiForm activitiForm = new ActivitiForm(comment, businessId);
+        Map paramMap = objectMapper.convertValue(activitiForm, HashMap.class);
+        boolean isPass = service.passProcess(id, paramMap, ()->{
+            System.out.println("通过回调");
+        });
+        return ResultUtil.success("审批成功");
+    }
+
+    /**
+     * 驳回
+     * @param id
+     * @return
+     */
+    @GetMapping("/back")
+    public Result back(String id, String comment, String businessId) {
+        ActivitiForm activitiForm = new ActivitiForm(comment, businessId);
+        Map paramMap = objectMapper.convertValue(activitiForm, HashMap.class);
+        boolean isBack = service.backProcess(id, null, paramMap, ()-> {
+            System.out.println("工作流控制器中调用");
+        });
+        return ResultUtil.success("驳回成功");
+    }
+
+    /**
+     * 获取评论信息列表
+     * @param id
+     * @return
+     */
+    @GetMapping("/comments")
+    public Result comments(String id){
+        List<UserTask> list = service.comments(id);
+        return ResultUtil.success(list);
+    }
+
+    /**
+     * 获取评论信息列表
+     * @param id
+     * @return
+     */
+    @GetMapping("/commentsByInstanceId")
+    public Result commentsByInstanceId(String id){
+        List<UserTask> list = service.commentsByInstanceId(id);
+        return ResultUtil.success(list);
     }
 
     @GetMapping("/index")

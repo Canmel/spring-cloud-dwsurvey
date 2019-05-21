@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.enums.IdType;
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.camel.core.entity.BasePaginationEntity;
+import com.camel.core.entity.BaseProcessPaginationEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ import java.io.Serializable;
  * @since 2019-05-17
  */
 @Data
-public class Reimbursement extends BasePaginationEntity implements Serializable {
+public class Reimbursement extends BaseProcessPaginationEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

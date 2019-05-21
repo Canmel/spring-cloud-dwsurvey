@@ -1,4 +1,4 @@
-package com.camel.dwsurvey.system.config;
+package com.camel.oauth.resource.config;
 
 import com.camel.core.config.BaseEnumConverterFactory;
 import org.springframework.context.annotation.Configuration;

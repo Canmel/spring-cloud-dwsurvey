@@ -7,7 +7,7 @@
         <result column="code" property="code" jdbcType="VARCHAR"></result>
         <result column="name" property="name" jdbcType="VARCHAR"></result>
         <result column="value" property="value" jdbcType="VARCHAR"></result>
-        <result column="status" property="macroStatus" jdbcType="INTEGER" javaType="com.camel.dwsurvey.system.enums.MacroStatus" typeHandler="com.camel.dwsurvey.system.config.BaseEnumTypeHandler"></result>
+        <result column="status" property="macroStatus" jdbcType="INTEGER" javaType="com.camel.dwsurvey.system.enums.MacroStatus" typeHandler="com.camel.core.config.BaseEnumTypeHandler"></result>
         <result column="status" property="status" jdbcType="INTEGER"></result>
         <result column="type" property="type" jdbcType="INTEGER"></result>
         <result column="order_num" property="orderNum" jdbcType="INTEGER"></result>

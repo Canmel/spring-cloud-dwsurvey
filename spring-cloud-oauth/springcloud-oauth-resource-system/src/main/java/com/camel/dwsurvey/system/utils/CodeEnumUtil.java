@@ -1,6 +1,6 @@
 package com.camel.dwsurvey.system.utils;
 
-import com.camel.dwsurvey.system.enums.BaseEnum;
+import com.camel.core.enums.BaseEnum;
 
 /**
  * @author baily

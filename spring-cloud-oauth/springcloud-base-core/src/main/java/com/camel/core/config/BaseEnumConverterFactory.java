@@ -1,6 +1,6 @@
-package com.camel.dwsurvey.system.config;
+package com.camel.core.config;
 
-import com.camel.dwsurvey.system.enums.BaseEnum;
+import com.camel.core.enums.BaseEnum;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 
@@ -8,17 +8,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/** @author baily */
+/**
+ @author baily */
 public class BaseEnumConverterFactory implements ConverterFactory<String, BaseEnum> {
 
     @SuppressWarnings("rawtypes")
     private static final Map<Class, Converter> CONVERTERMAP = new WeakHashMap<>();
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public <T extends BaseEnum> Converter<String, T> getConverter(Class<T> targetType) {
         Converter result = CONVERTERMAP.get(targetType);
-        if(result == null) {
+        if (result == null) {
             result = new IntegerStrToEnum<T>(targetType);
             CONVERTERMAP.put(targetType, result);
         }
@@ -33,7 +34,7 @@ public class BaseEnumConverterFactory implements ConverterFactory<String, BaseEn
         public IntegerStrToEnum(Class<T> enumType) {
             this.enumType = enumType;
             T[] enums = enumType.getEnumConstants();
-            for(T e : enums) {
+            for (T e : enums) {
                 enumMap.put(e.getValue() + "", e);
             }
         }
@@ -42,7 +43,7 @@ public class BaseEnumConverterFactory implements ConverterFactory<String, BaseEn
         @Override
         public T convert(String source) {
             T result = enumMap.get(source);
-            if(result == null) {
+            if (result == null) {
                 throw new IllegalArgumentException("No element matches " + source);
             }
             return result;

@@ -1,6 +1,6 @@
-package com.camel.dwsurvey.system.config;
+package com.camel.core.config;
 
-import com.camel.dwsurvey.system.enums.BaseEnum;
+import com.camel.core.enums.BaseEnum;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 

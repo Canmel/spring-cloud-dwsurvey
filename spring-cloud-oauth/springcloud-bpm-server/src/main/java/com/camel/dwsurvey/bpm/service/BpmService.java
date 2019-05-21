@@ -1,5 +1,7 @@
 package com.camel.dwsurvey.bpm.service;
 
+import com.camel.core.entity.process.ActivitiEndCallBack;
+import com.camel.core.entity.process.UserTask;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.github.pagehelper.PageInfo;
 import org.activiti.engine.repository.Deployment;
@@ -7,6 +9,7 @@ import org.activiti.engine.task.Task;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author baily
@@ -77,7 +80,7 @@ public interface BpmService {
      @param processDifinitionKey
      @return
      */
-    List<Task> current(String busniessKey, String processDifinitionKey);
+    List current(String busniessKey, String processDifinitionKey);
 
     /**
      流程追踪图
@@ -85,4 +88,38 @@ public interface BpmService {
      @return
      */
     InputStream processTraceImage(String taskId);
+
+    /**
+     审批 --> 通过
+     @param taskId
+     @param variables
+     @param activitiEndCallBack
+     @return
+     */
+    boolean passProcess(String taskId, Map<String, Object> variables, ActivitiEndCallBack activitiEndCallBack);
+
+
+    /**
+     审批 --> 驳回
+     @param taskId
+     @param activityId
+     @param variables
+     @param activitiEndCallBack
+     @return
+     */
+    boolean backProcess(String taskId, String activityId, Map<String, Object> variables, ActivitiEndCallBack activitiEndCallBack);
+
+    /**
+     获取评论及其审核内容
+     @param id
+     @return
+     */
+    List<UserTask> comments(String id);
+
+    /**
+     获取评论及其审核内容
+     @param id
+     @return
+     */
+    List<UserTask> commentsByInstanceId(String id);
 }

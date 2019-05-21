@@ -22,4 +22,14 @@ public class Comment {
     private String type;
 
     private String fullMessage;
+
+    public Comment() {
+    }
+
+    public Comment(String userId, Date time, String taskId, String fullMessage) {
+        this.userId = userId;
+        this.time = time;
+        this.taskId = taskId;
+        this.fullMessage = fullMessage;
+    }
 }

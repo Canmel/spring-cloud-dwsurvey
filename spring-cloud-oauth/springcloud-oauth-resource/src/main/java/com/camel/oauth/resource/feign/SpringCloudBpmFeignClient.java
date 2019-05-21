@@ -3,6 +3,7 @@ package com.camel.oauth.resource.feign;
 import com.camel.core.entity.Result;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,4 +40,32 @@ public interface SpringCloudBpmFeignClient {
      */
     @RequestMapping(value = "/flow/current", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
     Result current(@RequestParam("busniessKey") String busniessKey, @RequestParam("flowKey") String flowKey);
+
+    /**
+     审批通过当前流程
+     @param comment
+     @param businessId
+     @param id
+     @return
+     */
+    @RequestMapping(value = "/flow/pass", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    Result pass(@RequestParam("id") String id, @RequestParam("comment") String comment, @RequestParam("businessId") String businessId);
+
+    /**
+     审批驳回当前流程
+     @param comment
+     @param businessId
+     @param id
+     @return
+     */
+    @RequestMapping(value = "/flow/back", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    Result back(@RequestParam("id") String id, @RequestParam("comment") String comment, @RequestParam("businessId") String businessId);
+
+    /**
+     获取审批意见
+     @param id
+     @return
+     */
+    @RequestMapping(value = "/flow/comments", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    Result comment(@RequestParam("id") String id);
 }

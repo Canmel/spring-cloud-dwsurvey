@@ -1,4 +1,4 @@
-package com.camel.dwsurvey.system.enums;
+package com.camel.core.enums;
 
 /** @author baily */
 public interface BaseEnum {

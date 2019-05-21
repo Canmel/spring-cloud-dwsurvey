@@ -1,12 +1,14 @@
 package com.camel.dwsurvey.system.enums;
 
+import com.camel.core.enums.BaseEnum;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /** @author baily*/
-public enum MenuType implements BaseEnum{
+public enum MenuType implements BaseEnum {
     /**/
     TOP(0, "一级菜单"), SUB(1, "二级菜单");
 
