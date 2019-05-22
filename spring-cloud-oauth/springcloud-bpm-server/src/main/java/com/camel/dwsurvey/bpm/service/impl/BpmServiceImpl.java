@@ -187,7 +187,8 @@ public class BpmServiceImpl implements BpmService {
         if (!org.springframework.util.ObjectUtils.isEmpty(task)) {
             processInstanceId = task.getProcessInstanceId();
         } else {
-            processInstanceId = taskId;
+            HistoricTaskInstance taskInstance = historyService.createHistoricTaskInstanceQuery().taskId(taskId).singleResult();
+            processInstanceId = taskInstance.getProcessInstanceId();
         }
 
         HistoricTaskInstance historicTaskInstance = historyService.createHistoricTaskInstanceQuery().taskId(taskId).singleResult();
@@ -208,7 +209,7 @@ public class BpmServiceImpl implements BpmService {
         if(CollectionUtils.isEmpty(highLightedActivitiIds)){
             List<HistoricTaskInstance> entities = historyService.createHistoricTaskInstanceQuery().processInstanceId(historicTaskInstance.getProcessInstanceId()).list();
             for (HistoricTaskInstance entity: entities) {
-                highLightedActivitiIds.add(entity.getTaskDefinitionKey());
+                highLightedActivitiIds.add(entity.getId());
             }
             historyService.createHistoricTaskInstanceQuery();
         }
@@ -216,9 +217,8 @@ public class BpmServiceImpl implements BpmService {
         List<HistoricProcessInstance> historicFinishedProcessInstances = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).finished()
                 .list();
 
-        processEngineConfiguration.setXmlEncoding("utf-8");
-        processEngineConfiguration.setActivityFontName("宋体");
-        processEngineConfiguration.setLabelFontName("宋体");
+        setProcessEngineConfiguration(processEngineConfiguration);
+
         // 生成图片的工具
         ProcessDiagramGenerator processDiagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
 
@@ -481,7 +481,8 @@ public class BpmServiceImpl implements BpmService {
         List<HistoricTaskInstance> tasks = new ArrayList<>();
         if (org.springframework.util.ObjectUtils.isEmpty(task)) {
             // 去历史记录中寻找
-            tasks = historyService.createHistoricTaskInstanceQuery().processInstanceId(id).list();
+            HistoricTaskInstance task1 = historyService.createHistoricTaskInstanceQuery().taskId(id).singleResult();
+            tasks = historyService.createHistoricTaskInstanceQuery().processInstanceId(task1.getProcessInstanceId()).list();
         } else {
             String processInstanceId = task.getProcessInstanceId();
             tasks = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).list();
@@ -498,4 +499,20 @@ public class BpmServiceImpl implements BpmService {
         return userTasks;
     }
 
+    public void setProcessEngineConfiguration(ProcessEngineConfiguration processEngineConfiguration){
+        processEngineConfiguration.setXmlEncoding("utf-8");
+        processEngineConfiguration.setActivityFontName("宋体");
+        processEngineConfiguration.setLabelFontName("宋体");
+    }
+
+    /**
+     通过业务KEY 获取流程实例
+     @param businessKey
+     @return
+     */
+    @Override
+    public ProcessInstance processInstance(String businessKey) {
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey).singleResult();
+        return processInstance;
+    }
 }

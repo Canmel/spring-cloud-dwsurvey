@@ -1,7 +1,7 @@
 package com.camel.dwsurvey.system.aop;
 
 
-import com.camel.core.utils.SerizlizeUtil;
+import com.camel.redis.utils.SerizlizeUtil;
 import com.camel.dwsurvey.system.annotation.Log;
 import com.camel.dwsurvey.system.model.SysLog;
 import com.camel.dwsurvey.system.service.SysLogService;

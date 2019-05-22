@@ -9,12 +9,18 @@ import com.camel.core.utils.ResultUtil;
 import com.camel.oauth.resource.enums.ReimbursementStatus;
 import com.camel.oauth.resource.model.Reimbursement;
 import com.camel.oauth.resource.service.ReimbursementService;
+import com.camel.redis.entity.RedisUser;
+import com.camel.redis.utils.SessionContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.RedisConnectionFailureException;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +38,9 @@ public class ReimbursementController extends BaseCommonController {
     @Autowired
     private ReimbursementService service;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @GetMapping
     public Result index(Reimbursement reimbursement) {
         return ResultUtil.success(service.selectPage(reimbursement));
@@ -44,6 +53,8 @@ public class ReimbursementController extends BaseCommonController {
 
     @PostMapping
     public Result save(@RequestBody Reimbursement reimbursement) {
+        RedisUser currentUser = SessionContextUtils.getInstance().currentUser(redisTemplate);
+        reimbursement.setCreator(currentUser.getId());
         return super.save(reimbursement);
     }
 
@@ -59,7 +70,10 @@ public class ReimbursementController extends BaseCommonController {
 
     @GetMapping("/apply/{id}")
     public Result apply(@PathVariable Integer id, String flowId) {
-        return service.apply(id, flowId) ? ResultUtil.success("发起流程成功") : ResultUtil.error(HttpStatus.BAD_REQUEST.value(), "发起流程失败");
+        Result result = service.apply(id, flowId) ? ResultUtil.success("发起流程成功") : ResultUtil.error(HttpStatus.BAD_REQUEST.value(), "发起流程失败");
+        Reimbursement reimbursement = new Reimbursement(id, ReimbursementStatus.APPLY.getValue());
+        service.updateById(reimbursement);
+        return result;
     }
 
     @GetMapping("/current/{id}")
@@ -88,17 +102,8 @@ public class ReimbursementController extends BaseCommonController {
     }
 
     @GetMapping("/back/{id}")
-    public Result back(@PathVariable Integer id, ActivitiForm activitiForm) {
-        Result result = service.current(id);
-        if(!ObjectUtils.isEmpty(result.getData())){
-            List<Map<String, Object>> list = (List) result.getData();
-            Map<String, Object> userTask = list.get(0);
-            if(StringUtils.isEmpty(userTask.get(USER_ID_PROP_NAME))){
-                return ResultUtil.success("审批失败");
-            }
-            return service.back(userTask.get(USER_ID_PROP_NAME).toString(), activitiForm);
-        }
-        return ResultUtil.success("审批失败");
+    public Result back(@PathVariable String id, ActivitiForm activitiForm) {
+        return service.back(id, activitiForm);
     }
 
     @Override

@@ -5,10 +5,9 @@ import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
 import com.camel.core.utils.ResultUtil;
-import com.camel.core.utils.SerizlizeUtil;
+import com.camel.redis.utils.SerizlizeUtil;
 import com.camel.dwsurvey.system.annotation.Log;
 import com.camel.dwsurvey.system.model.SysUser;
-import com.camel.dwsurvey.system.service.SysUserRoleService;
 import com.camel.dwsurvey.system.service.SysUserService;
 import com.camel.redis.entity.RedisUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.io.Serializable;
 
 /**

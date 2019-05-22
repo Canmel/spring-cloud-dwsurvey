@@ -5,6 +5,7 @@ import com.camel.core.entity.process.UserTask;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.github.pagehelper.PageInfo;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
 import java.io.InputStream;
@@ -122,4 +123,6 @@ public interface BpmService {
      @return
      */
     List<UserTask> commentsByInstanceId(String id);
+
+    ProcessInstance processInstance(String businessKey);
 }

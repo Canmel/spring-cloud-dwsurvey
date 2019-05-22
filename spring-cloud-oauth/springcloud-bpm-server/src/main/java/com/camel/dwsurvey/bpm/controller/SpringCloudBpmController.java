@@ -15,6 +15,7 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -163,7 +164,14 @@ public class SpringCloudBpmController {
         boolean isPass = service.passProcess(id, paramMap, ()->{
             System.out.println("通过回调");
         });
-        return ResultUtil.success("审批成功");
+        ProcessInstance processInstance = service.processInstance(businessId);
+        Map<String, Object> result = new HashMap<>(16);
+        if(!ObjectUtils.isEmpty(processInstance) && !processInstance.isEnded()){
+            result.put("isEnd", false);
+            return ResultUtil.success("审批成功", result);
+        }
+        result.put("isEnd", true);
+        return ResultUtil.success("审批成功", result);
     }
 
     /**

@@ -1,13 +1,12 @@
 package com.camel.dwsurvey.bpm.controller;
 
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.camel.core.BaseCommonController;
 import com.camel.core.entity.Result;
 import com.camel.core.enums.ResultEnum;
 import com.camel.core.utils.ResultUtil;
-import com.camel.core.utils.SerizlizeUtil;
+import com.camel.redis.utils.SerizlizeUtil;
 import com.camel.dwsurvey.bpm.enums.WorkFlowStatus;
 import com.camel.dwsurvey.bpm.enums.WorkFlowType;
 import com.camel.dwsurvey.bpm.exceptions.UnAuthenticationException;
@@ -17,16 +16,12 @@ import com.camel.redis.entity.RedisUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.security.Principal;
-import java.util.List;
 
 /**
  * <p>

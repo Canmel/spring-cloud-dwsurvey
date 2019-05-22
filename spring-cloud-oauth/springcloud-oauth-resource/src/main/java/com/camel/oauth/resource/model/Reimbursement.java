@@ -51,6 +51,18 @@ public class Reimbursement extends BaseProcessPaginationEntity implements Serial
      */
     private String description;
 
+    public Reimbursement(Integer id) {
+        this.id = id;
+    }
+
+    public Reimbursement(Integer id, Integer status) {
+        this.id = id;
+        this.status = status;
+    }
+
+    public Reimbursement() {
+    }
+
     @Override
     public String toString() {
         return "Reimbursement{" +

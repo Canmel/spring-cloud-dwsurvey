@@ -1,4 +1,4 @@
-package com.camel.core.utils;
+package com.camel.redis.utils;
 
 import java.io.*;
 
