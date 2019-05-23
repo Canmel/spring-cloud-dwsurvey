@@ -1,6 +1,8 @@
 package com.camel.oauth.resource.feign;
 
 import com.camel.core.entity.Result;
+import com.camel.oauth.resource.config.KeepErrMsgConfiguration;
+import com.camel.oauth.resource.feign.fallback.SpringCloudBpmApprovalFallback;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author baily
  */
-@FeignClient(value = "springcloud-bpm-server")
+@FeignClient(value = "springcloud-bpm-server", fallback = SpringCloudBpmApprovalFallback.class, configuration = {KeepErrMsgConfiguration.class})
 public interface SpringCloudBpmFeignClient {
 
     /**

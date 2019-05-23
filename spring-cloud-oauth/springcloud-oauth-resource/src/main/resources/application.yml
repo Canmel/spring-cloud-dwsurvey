@@ -24,6 +24,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:8888/eureka/
+    fetch-registry: true
 
 spring:
   application:
@@ -44,4 +45,7 @@ pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
-
+hystrix:
+  metrics:
+    enabled: true
+    polling-interval-ms: 2000

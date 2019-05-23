@@ -2,7 +2,9 @@ package com.camel.oauth.resource.controller;
 
 
 import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.toolkit.MapUtils;
 import com.camel.core.BaseCommonController;
+import com.camel.core.config.ProcessProperties;
 import com.camel.core.entity.Result;
 import com.camel.core.entity.process.ActivitiForm;
 import com.camel.core.utils.ResultUtil;
@@ -12,15 +14,13 @@ import com.camel.oauth.resource.service.ReimbursementService;
 import com.camel.redis.entity.RedisUser;
 import com.camel.redis.utils.SessionContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -96,7 +96,12 @@ public class ReimbursementController extends BaseCommonController {
             if(StringUtils.isEmpty(userTask.get(USER_ID_PROP_NAME))){
                 return ResultUtil.success("审批失败");
             }
-            return service.pass(userTask.get(USER_ID_PROP_NAME).toString(), activitiForm);
+            Result r = service.pass(userTask.get(USER_ID_PROP_NAME).toString(), activitiForm);
+            HashMap<String, Object> rMapData = (HashMap<String, Object>) r.getData();
+            if(MapUtils.isNotEmpty(rMapData) && (boolean)rMapData.get(ProcessProperties.PROCESS_ISEND_KEY)){
+                service.updateById(new Reimbursement(id, ReimbursementStatus.APPLY_SUCCESS.getValue()));
+            }
+            return ResultUtil.success("审批成功", result.getData());
         }
         return ResultUtil.success("审批失败");
     }

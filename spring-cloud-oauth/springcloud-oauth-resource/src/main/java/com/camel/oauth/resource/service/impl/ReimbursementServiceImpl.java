@@ -9,6 +9,7 @@ import com.camel.oauth.resource.mapper.ReimbursementMapper;
 import com.camel.oauth.resource.service.ReimbursementService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
+import feign.FeignException;
 import javafx.concurrent.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
