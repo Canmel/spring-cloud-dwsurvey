@@ -1,32 +1,21 @@
 package com.camel.core.entity.process;
 
+import lombok.Data;
+
+@Data
 public class ActivitiForm {
     private String comment;
 
     private String businessId;
 
-    public String getComment() {
-        return comment;
-    }
+    private boolean isPass;
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getBusinessId() {
-        return businessId;
-    }
-
-    public void setBusinessId(String businessId) {
-        this.businessId = businessId;
-    }
-
-    public ActivitiForm(String comment, String businessId) {
+    public ActivitiForm(String comment, String businessId, boolean isPass) {
         this.comment = comment;
         this.businessId = businessId;
+        this.isPass = isPass;
     }
 
     public ActivitiForm() {
-
     }
 }

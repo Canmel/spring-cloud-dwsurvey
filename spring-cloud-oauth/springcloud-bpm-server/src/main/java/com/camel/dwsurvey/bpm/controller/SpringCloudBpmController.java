@@ -159,7 +159,7 @@ public class SpringCloudBpmController {
      */
     @GetMapping("/pass")
     public Result pass(String id, String comment, String businessId) {
-        ActivitiForm activitiForm = new ActivitiForm(comment, businessId);
+        ActivitiForm activitiForm = new ActivitiForm(comment, businessId, true);
         Map paramMap = objectMapper.convertValue(activitiForm, HashMap.class);
         boolean isPass = service.passProcess(id, paramMap, ()->{
             System.out.println("通过回调");
@@ -181,7 +181,7 @@ public class SpringCloudBpmController {
      */
     @GetMapping("/back")
     public Result back(String id, String comment, String businessId) {
-        ActivitiForm activitiForm = new ActivitiForm(comment, businessId);
+        ActivitiForm activitiForm = new ActivitiForm(comment, businessId, false);
         Map paramMap = objectMapper.convertValue(activitiForm, HashMap.class);
         boolean isBack = service.backProcess(id, null, paramMap, ()-> {
             System.out.println("工作流控制器中调用");

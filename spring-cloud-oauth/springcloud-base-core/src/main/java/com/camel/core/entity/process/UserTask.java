@@ -26,6 +26,14 @@ public class UserTask {
      */
     private boolean isEnd;
     /**
+     用户名，这个任务的操作人
+     */
+    private String username;
+    /**
+     是否通过
+     */
+    private boolean isPass;
+    /**
      评论与回复
      */
     private List<Comment> comment;

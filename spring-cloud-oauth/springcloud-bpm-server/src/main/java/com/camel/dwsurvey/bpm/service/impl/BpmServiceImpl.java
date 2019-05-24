@@ -8,6 +8,7 @@ import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.camel.dwsurvey.bpm.service.BpmService;
 import com.camel.dwsurvey.bpm.utils.ActivitiObj2HashMapUtils;
 import com.camel.dwsurvey.bpm.utils.ActivitiObj2SystemObjUtils;
+import com.camel.redis.utils.SessionContextUtils;
 import com.github.pagehelper.PageInfo;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.FlowNode;
@@ -16,7 +17,9 @@ import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.history.HistoricVariableInstance;
 import org.activiti.engine.impl.RepositoryServiceImpl;
+import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.persistence.entity.HistoricTaskInstanceEntity;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
@@ -35,6 +38,7 @@ import org.activiti.image.ProcessDiagramGenerator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -68,6 +72,9 @@ public class BpmServiceImpl implements BpmService {
 
     @Autowired
     private ProcessEngineConfiguration processEngineConfiguration;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public Deployment deploy(Integer id) {
@@ -307,6 +314,8 @@ public class BpmServiceImpl implements BpmService {
 
     @Override
     public boolean passProcess(String taskId, Map<String, Object> variables, ActivitiEndCallBack activitiEndCallBack) {
+        variables.put("isPass", true);
+        Authentication.setAuthenticatedUserId(SessionContextUtils.getInstance().currentUser(redisTemplate).getUsername());
         taskService.addComment(taskId, null, (String) variables.get("comment"));
         try {
             commitProcess(taskId, variables, null);
@@ -323,6 +332,7 @@ public class BpmServiceImpl implements BpmService {
 
     @Override
     public boolean backProcess(String taskId, String activityId, Map<String, Object> variables, ActivitiEndCallBack activitiEndCallBack) {
+        variables.put("isPass", false);
         taskService.addComment(taskId, null, (String) variables.get("comment"));
         try {
             ActivityImpl endActivity = findActivitiImpl(taskId, "end");
@@ -494,6 +504,11 @@ public class BpmServiceImpl implements BpmService {
             userTask.setName(t.getName());
 
             userTask.setComment(ActivitiObj2SystemObjUtils.getInstance().commentsToObj(comments));
+            HistoricTaskInstance historicTaskInstance = historyService.createHistoricTaskInstanceQuery().taskId(t.getId()).singleResult();
+            Map<String, Object> map = historicTaskInstance.getProcessVariables();
+            HistoricVariableInstance hvi = historyService.createHistoricVariableInstanceQuery().executionId(t.getExecutionId()).variableName("pass").singleResult();
+            hvi.getValue();
+            userTask.setPass((Boolean) hvi.getValue());
             userTasks.add(userTask);
         }
         return userTasks;

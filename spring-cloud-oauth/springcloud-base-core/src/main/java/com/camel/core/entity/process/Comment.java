@@ -23,6 +23,8 @@ public class Comment {
 
     private String fullMessage;
 
+    private String username;
+
     public Comment() {
     }
 
