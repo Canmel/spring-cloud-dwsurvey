@@ -174,7 +174,7 @@ public class BpmServiceImpl implements BpmService {
                         .finished().list();
                 List<Task> result = new ArrayList<>();
                 historicTaskInstanceList.forEach(htask -> {
-                    TaskEntity task =  new TaskEntity();
+                    TaskEntity task = new TaskEntity();
                     task.setName(htask.getName());
                     task.setId(htask.getId());
                     result.add(task);
@@ -213,9 +213,9 @@ public class BpmServiceImpl implements BpmService {
             highLightedActivitiIds.add(historicActivityInstance.getActivityId());
         }
 
-        if(CollectionUtils.isEmpty(highLightedActivitiIds)){
+        if (CollectionUtils.isEmpty(highLightedActivitiIds)) {
             List<HistoricTaskInstance> entities = historyService.createHistoricTaskInstanceQuery().processInstanceId(historicTaskInstance.getProcessInstanceId()).list();
-            for (HistoricTaskInstance entity: entities) {
+            for (HistoricTaskInstance entity : entities) {
                 highLightedActivitiIds.add(entity.getId());
             }
             historyService.createHistoricTaskInstanceQuery();
@@ -507,14 +507,15 @@ public class BpmServiceImpl implements BpmService {
             HistoricTaskInstance historicTaskInstance = historyService.createHistoricTaskInstanceQuery().taskId(t.getId()).singleResult();
             Map<String, Object> map = historicTaskInstance.getProcessVariables();
             HistoricVariableInstance hvi = historyService.createHistoricVariableInstanceQuery().executionId(t.getExecutionId()).variableName("pass").singleResult();
-            hvi.getValue();
-            userTask.setPass((Boolean) hvi.getValue());
+            if (ObjectUtils.allNotNull(hvi)) {
+                userTask.setPass((Boolean) hvi.getValue());
+            }
             userTasks.add(userTask);
         }
         return userTasks;
     }
 
-    public void setProcessEngineConfiguration(ProcessEngineConfiguration processEngineConfiguration){
+    public void setProcessEngineConfiguration(ProcessEngineConfiguration processEngineConfiguration) {
         processEngineConfiguration.setXmlEncoding("utf-8");
         processEngineConfiguration.setActivityFontName("宋体");
         processEngineConfiguration.setLabelFontName("宋体");

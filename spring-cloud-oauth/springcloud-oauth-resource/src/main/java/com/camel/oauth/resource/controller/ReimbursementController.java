@@ -108,7 +108,11 @@ public class ReimbursementController extends BaseCommonController {
 
     @GetMapping("/back/{id}")
     public Result back(@PathVariable String id, ActivitiForm activitiForm) {
-        return service.back(id, activitiForm);
+        Result result = service.back(id, activitiForm);
+        if(!ObjectUtils.isEmpty(result) && result.isSuccess()) {
+            service.updateById(new Reimbursement(Integer.parseInt(activitiForm.getBusinessId()), ReimbursementStatus.APPLY_FAILD.getValue()));
+        }
+        return result;
     }
 
     @Override

@@ -40,11 +40,13 @@ mybatis-plus:
   type-aliases-package: com.camel.oauth.resource.model
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
+
 hystrix:
   metrics:
     enabled: true
