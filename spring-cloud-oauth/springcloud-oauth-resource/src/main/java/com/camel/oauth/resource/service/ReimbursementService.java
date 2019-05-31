@@ -47,4 +47,6 @@ public interface ReimbursementService extends IService<Reimbursement> {
     Result back(String id, ActivitiForm activitiForm);
 
     Result comment(String id);
+
+    Result toDO();
 }

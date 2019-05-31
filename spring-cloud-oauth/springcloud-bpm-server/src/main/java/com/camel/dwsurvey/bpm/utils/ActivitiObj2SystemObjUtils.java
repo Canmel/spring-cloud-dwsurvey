@@ -1,6 +1,8 @@
 package com.camel.dwsurvey.bpm.utils;
 
 import com.camel.core.entity.process.Comment;
+import com.camel.core.entity.process.UserTask;
+import org.activiti.engine.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,5 +22,17 @@ public class ActivitiObj2SystemObjUtils {
             result.add(c1);
         });
         return result;
+    }
+
+    public List<UserTask> tasks2UserTasks(List<Task> tasks) {
+        List<UserTask> userTaskList = new ArrayList<>();
+        tasks.forEach(task -> {
+            UserTask userTask = new UserTask();
+            userTask.setUsername(task.getAssignee());
+            userTask.setEnd(false);
+            userTask.setName(task.getName());
+            userTaskList.add(userTask);
+        });
+        return userTaskList;
     }
 }

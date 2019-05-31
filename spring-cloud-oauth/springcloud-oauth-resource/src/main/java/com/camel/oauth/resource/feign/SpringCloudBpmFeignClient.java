@@ -70,4 +70,11 @@ public interface SpringCloudBpmFeignClient {
      */
     @RequestMapping(value = "/flow/comments", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
     Result comment(@RequestParam("id") String id);
+
+    /**
+     获取当前用户的任务列表
+     @return
+     */
+    @RequestMapping(value = "/flow/todo", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    Result toDo();
 }

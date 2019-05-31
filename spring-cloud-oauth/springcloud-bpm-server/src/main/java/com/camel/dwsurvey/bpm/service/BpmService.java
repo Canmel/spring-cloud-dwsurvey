@@ -1,5 +1,6 @@
 package com.camel.dwsurvey.bpm.service;
 
+import com.camel.core.entity.Result;
 import com.camel.core.entity.process.ActivitiEndCallBack;
 import com.camel.core.entity.process.UserTask;
 import com.camel.dwsurvey.bpm.model.WorkFlow;
@@ -125,4 +126,6 @@ public interface BpmService {
     List<UserTask> commentsByInstanceId(String id);
 
     ProcessInstance processInstance(String businessKey);
+
+    List<UserTask> toDo();
 }

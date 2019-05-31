@@ -31,8 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author baily
- */
+ @author baily */
 @RestController
 @RequestMapping("/flow")
 public class SpringCloudBpmController {
@@ -51,7 +50,7 @@ public class SpringCloudBpmController {
      @return
      */
     @GetMapping("/deploy/{id}")
-    public Result deploy(@PathVariable Integer id){
+    public Result deploy(@PathVariable Integer id) {
         Deployment deployment = service.deploy(id);
         return ResultUtil.success("部署完成" + deployment.getId(), deployment);
     }
@@ -62,9 +61,9 @@ public class SpringCloudBpmController {
      @return
      */
     @GetMapping("/def/{key}")
-    public Result definition(@PathVariable String key){
+    public Result definition(@PathVariable String key) {
         List result = service.definition(key);
-        if(CollectionUtils.isEmpty(result)){
+        if (CollectionUtils.isEmpty(result)) {
             return ResultUtil.success("未找到相关流程", result);
         }
         return ResultUtil.success("查询成功", result);
@@ -76,7 +75,7 @@ public class SpringCloudBpmController {
      @return
      */
     @GetMapping("/start/{definitionId}")
-    public Result start(@PathVariable String definitionId){
+    public Result start(@PathVariable String definitionId) {
         ProcessInstance instance = engine.getRuntimeService().startProcessInstanceById(definitionId);
         return ResultUtil.success("启动完成", instance.getId());
     }
@@ -87,13 +86,13 @@ public class SpringCloudBpmController {
      @return
      */
     @GetMapping("/task/{assignee}")
-    public Result queryTask(@PathVariable String assignee){
+    public Result queryTask(@PathVariable String assignee) {
         List list = service.queryTask(assignee);
         return CollectionUtils.isEmpty(list) ? ResultUtil.success("未找到相关流程", list) : ResultUtil.success("查询成功", list);
     }
 
     @GetMapping("/defWorkflows")
-    public Result defWorkflows(WorkFlow workFlow){
+    public Result defWorkflows(WorkFlow workFlow) {
         return ResultUtil.success(service.defWorkflows(workFlow));
     }
 
@@ -114,14 +113,14 @@ public class SpringCloudBpmController {
      */
     @GetMapping("/apply")
     public Result appl(String busniessKey, String flowKey) {
-        if(service.apply(busniessKey, flowKey)){
+        if (service.apply(busniessKey, flowKey)) {
             return ResultUtil.success("发起流程成功");
         }
         return ResultUtil.success("发起流程失败", false);
     }
 
     @GetMapping("/current")
-    public Result current(String busniessKey, String flowKey){
+    public Result current(String busniessKey, String flowKey) {
         List<Task> tasks = service.current(busniessKey, flowKey);
         List<UserTask> userTasks = new ArrayList<>();
         tasks.forEach(task -> {
@@ -136,9 +135,11 @@ public class SpringCloudBpmController {
     }
 
     /**
-     * 流程跟踪图
-     * @param response  响应
-     * @param id        任务ID
+     流程跟踪图
+     @param response
+     响应
+     @param id
+     任务ID
      */
     @GetMapping("/trace/{id}")
     public void taskImage(HttpServletResponse response, @PathVariable String id) {
@@ -153,20 +154,20 @@ public class SpringCloudBpmController {
     }
 
     /**
-     * 通过
-     * @param id
-     * @return
+     通过
+     @param id
+     @return
      */
     @GetMapping("/pass")
     public Result pass(String id, String comment, String businessId) {
         ActivitiForm activitiForm = new ActivitiForm(comment, businessId, true);
         Map paramMap = objectMapper.convertValue(activitiForm, HashMap.class);
-        boolean isPass = service.passProcess(id, paramMap, ()->{
+        boolean isPass = service.passProcess(id, paramMap, () -> {
             System.out.println("通过回调");
         });
         ProcessInstance processInstance = service.processInstance(businessId);
         Map<String, Object> result = new HashMap<>(16);
-        if(!ObjectUtils.isEmpty(processInstance) && !processInstance.isEnded()){
+        if (!ObjectUtils.isEmpty(processInstance) && !processInstance.isEnded()) {
             result.put("isEnd", false);
             return ResultUtil.success("审批成功", result);
         }
@@ -175,44 +176,50 @@ public class SpringCloudBpmController {
     }
 
     /**
-     * 驳回
-     * @param id
-     * @return
+     驳回
+     @param id
+     @return
      */
     @GetMapping("/back")
     public Result back(String id, String comment, String businessId) {
         ActivitiForm activitiForm = new ActivitiForm(comment, businessId, false);
         Map paramMap = objectMapper.convertValue(activitiForm, HashMap.class);
-        boolean isBack = service.backProcess(id, null, paramMap, ()-> {
+        boolean isBack = service.backProcess(id, null, paramMap, () -> {
             System.out.println("工作流控制器中调用");
         });
         return ResultUtil.success("驳回成功");
     }
 
     /**
-     * 获取评论信息列表
-     * @param id
-     * @return
+     获取评论信息列表
+     @param id
+     @return
      */
     @GetMapping("/comments")
-    public Result comments(String id){
+    public Result comments(String id) {
         List<UserTask> list = service.comments(id);
         return ResultUtil.success(list);
     }
 
     /**
-     * 获取评论信息列表
-     * @param id
-     * @return
+     获取评论信息列表
+     @param id
+     @return
      */
     @GetMapping("/commentsByInstanceId")
-    public Result commentsByInstanceId(String id){
+    public Result commentsByInstanceId(String id) {
         List<UserTask> list = service.commentsByInstanceId(id);
         return ResultUtil.success(list);
     }
 
+    @GetMapping("/todo")
+    public Result toDo() {
+        List<UserTask> tasks = service.toDo();
+        return ResultUtil.success(tasks);
+    }
+
     @GetMapping("/index")
-    public String index(){
+    public String index() {
         return "bpm服务启动成功";
     }
 }

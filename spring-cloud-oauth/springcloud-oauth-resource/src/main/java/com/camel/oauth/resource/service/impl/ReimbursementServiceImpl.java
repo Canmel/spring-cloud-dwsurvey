@@ -78,4 +78,10 @@ public class ReimbursementServiceImpl extends ServiceImpl<ReimbursementMapper, R
         Result result = springCloudBpmFeignClient.comment(id);
         return result;
     }
+
+    @Override
+    public Result toDO() {
+        Result result = springCloudBpmFeignClient.toDo();
+        return result;
+    }
 }

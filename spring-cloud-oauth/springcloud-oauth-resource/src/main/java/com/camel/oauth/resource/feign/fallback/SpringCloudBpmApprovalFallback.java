@@ -50,6 +50,11 @@ public class SpringCloudBpmApprovalFallback implements FallbackFactory<SpringClo
             public Result comment(String id) {
                 return null;
             }
+
+            @Override
+            public Result toDo() {
+                return null;
+            }
         };
     }
 }

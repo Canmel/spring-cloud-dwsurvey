@@ -531,4 +531,11 @@ public class BpmServiceImpl implements BpmService {
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey).singleResult();
         return processInstance;
     }
+
+    @Override
+    public List<UserTask> toDo() {
+        List<Task> tasks = taskService.createTaskQuery().list();
+        List<UserTask> userTasks = ActivitiObj2SystemObjUtils.getInstance().tasks2UserTasks(tasks);
+        return userTasks;
+    }
 }
