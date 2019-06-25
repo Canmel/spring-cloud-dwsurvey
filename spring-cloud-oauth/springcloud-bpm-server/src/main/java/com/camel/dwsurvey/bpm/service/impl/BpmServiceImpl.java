@@ -8,6 +8,7 @@ import com.camel.dwsurvey.bpm.model.WorkFlow;
 import com.camel.dwsurvey.bpm.service.BpmService;
 import com.camel.dwsurvey.bpm.utils.ActivitiObj2HashMapUtils;
 import com.camel.dwsurvey.bpm.utils.ActivitiObj2SystemObjUtils;
+import com.camel.redis.entity.RedisUser;
 import com.camel.redis.utils.SessionContextUtils;
 import com.github.pagehelper.PageInfo;
 import org.activiti.bpmn.model.BpmnModel;
@@ -534,7 +535,8 @@ public class BpmServiceImpl implements BpmService {
 
     @Override
     public List<UserTask> toDo() {
-        List<Task> tasks = taskService.createTaskQuery().list();
+        RedisUser redisUser = SessionContextUtils.getInstance().currentUser(redisTemplate);
+        List<Task> tasks = taskService.createTaskQuery().active().taskCandidateGroupIn(redisUser.getRoles()).list();
         List<UserTask> userTasks = ActivitiObj2SystemObjUtils.getInstance().tasks2UserTasks(tasks);
         return userTasks;
     }

@@ -28,9 +28,12 @@ public class ActivitiObj2SystemObjUtils {
         List<UserTask> userTaskList = new ArrayList<>();
         tasks.forEach(task -> {
             UserTask userTask = new UserTask();
+            userTask.setId(task.getId());
+            userTask.setProcessInstanceId(task.getProcessInstanceId());
             userTask.setUsername(task.getAssignee());
             userTask.setEnd(false);
             userTask.setName(task.getName());
+            userTask.setProcessDefinitionId(task.getProcessDefinitionId());
             userTaskList.add(userTask);
         });
         return userTaskList;

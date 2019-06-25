@@ -19,5 +19,4 @@ public class ApplicationUtils {
         HttpServletResponse response = servletRequestAttributes.getResponse();
         return response;
     }
-
 }

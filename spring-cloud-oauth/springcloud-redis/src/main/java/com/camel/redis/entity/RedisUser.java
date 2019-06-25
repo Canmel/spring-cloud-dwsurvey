@@ -3,8 +3,10 @@ package com.camel.redis.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
-/** @author baily */
+/**
+ @author baily */
 @Data
 public class RedisUser implements Serializable {
     private Integer id;
@@ -20,6 +22,8 @@ public class RedisUser implements Serializable {
     private String remark;
 
     private String email;
+
+    private List<String> roles;
 
     public RedisUser() {
     }
@@ -38,5 +42,16 @@ public class RedisUser implements Serializable {
         this.mobile = mobile;
         this.remark = remark;
         this.email = email;
+    }
+
+    public RedisUser(Integer id, String username, String nickname, String address, String mobile, String remark, String email, List<String> roles) {
+        this.id = id;
+        this.username = username;
+        this.nickname = nickname;
+        this.address = address;
+        this.mobile = mobile;
+        this.remark = remark;
+        this.email = email;
+        this.roles = roles;
     }
 }

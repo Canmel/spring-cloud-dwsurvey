@@ -153,4 +153,12 @@ public class SysUser implements Serializable {
         ", address=" + address +
         "}";
     }
+
+    public List<String> getRolesName() {
+        List<String> roleNames = new ArrayList<>();
+        this.getRoles().forEach((role) -> {
+            roleNames.add(role.getRoleName().toUpperCase());
+        });
+        return roleNames;
+    }
 }

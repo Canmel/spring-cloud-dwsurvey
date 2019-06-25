@@ -37,4 +37,14 @@ public class UserTask {
      评论与回复
      */
     private List<Comment> comment;
+
+    /**
+     流程实例ID
+     */
+    private String processInstanceId;
+
+    /**
+     流程定义ID
+     */
+    private String processDefinitionId;
 }
