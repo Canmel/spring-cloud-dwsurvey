@@ -26,7 +26,7 @@ security:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8888/eureka/
+      defaultZone: http://${APPLICATION_IP}:8888/eureka/
 spring:
   resources:
     static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
@@ -38,7 +38,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1234
-    url: jdbc:mysql://127.0.0.1:3306/dw_oauth2?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://${APPLICATION_IP}:3306/dw_oauth2?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     tomcat:
       initial-size: 5
@@ -54,7 +54,7 @@ spring:
     dbcp2:
       pool-prepared-statements: true
   redis:
-    host: 127.0.0.1
+    host: ${APPLICATION_IP}
     password:
   application:
     name: springcloud-oauth-server

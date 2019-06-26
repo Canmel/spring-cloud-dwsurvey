@@ -11,17 +11,17 @@ server:
 security:
   oauth2:
     client:
-      accessTokenUri: http://127.0.0.1:7070/authserver/oauth/token
-      userAuthorizationUri: http://127.0.0.1:7070/authserver/oauth/authorize
+      accessTokenUri: http://${APPLICATION_IP}:7070/authserver/oauth/token
+      userAuthorizationUri: http://${APPLICATION_IP}:7070/authserver/oauth/authorize
       clientId: first
       clientSecret: passwordforauthserver
       refresh-token-validity-seconds: 3600
       access-token-validity-seconds: 3000
     resource:
-      userInfoUri: http://127.0.0.1:9000/user
+      userInfoUri: http://${APPLICATION_IP}:9000/user
 
 person:
-  url: http://127.0.0.1:9000/person
+  url: http://${APPLICATION_IP}:9000/person
 
 # Proxies the calls to http://localhost:8080/api/* to our REST service at http://localhost:9000/*
 # and automatically includes our OAuth2 token in the request headers
@@ -32,19 +32,19 @@ zuul:
   routes:
     resource:
       path: /api/**
-      url: http://127.0.0.1:9000
+      url: http://${APPLICATION_IP}:9000
     system:
       path: /system/**
-      url: http://127.0.0.1:9001
+      url: http://${APPLICATION_IP}:9001
     user: 
       path: /user/**
-      url: http://127.0.0.1:9000/user
+      url: http://${APPLICATION_IP}:9000/user
     auth:
       path: /auth/**
-      url: http://127.0.0.1:7070
+      url: http://${APPLICATION_IP}:7070
     bpm:
       path: /bpm/**
-      url: http://127.0.0.1:6789
+      url: http://${APPLICATION_IP}:6789
 
 # Make sure the OAuth2 token is only relayed when using the internal API,
 # do not pass any authentication to the external API
@@ -57,7 +57,7 @@ proxy:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8888/eureka/
+      defaultZone: http://${APPLICATION_IP}:8888/eureka/
 spring:
   application:
     name: springcloud-zuul-getway-server
