@@ -28,22 +28,28 @@ zuul:
   SendErrorFilter:
     post:
       desable: true
+  ignoredServices: '*'
   routes:
     resource:
       path: /api/**
       url: http://${APPLICATION_IP}:9000
+      sensitiveHeaders: "*"
     system:
       path: /system/**
       url: http://${APPLICATION_IP}:9001
-    user: 
+      sensitiveHeaders: "*"
+    user:
       path: /user/**
       url: http://${APPLICATION_IP}:9000/user
-    auth:
-      path: /auth/**
+      sensitiveHeaders: "*"
+    authserver:
+      path: /authserver/**
       url: http://${APPLICATION_IP}:7070
+      sensitiveHeaders: "*"
     bpm:
       path: /bpm/**
       url: http://${APPLICATION_IP}:6789
+      sensitiveHeaders: "*"
 
 # Make sure the OAuth2 token is only relayed when using the internal API,
 # do not pass any authentication to the external API
@@ -63,9 +69,3 @@ spring:
     database: 0
     host: ${APPLICATION_IP}
     password:
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0

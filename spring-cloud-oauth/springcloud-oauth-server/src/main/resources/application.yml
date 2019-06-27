@@ -28,6 +28,8 @@ eureka:
     serviceUrl:
       defaultZone: http://${APPLICATION_IP}:8888/eureka/
 spring:
+  session:
+    store-type: redis
   resources:
     static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
   mvc:

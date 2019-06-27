@@ -27,6 +27,8 @@ eureka:
     fetch-registry: true
 
 spring:
+  session:
+    store-type: redis
   application:
     name: springcloud-oauth-resource
   datasource:

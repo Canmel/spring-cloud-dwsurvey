@@ -54,16 +54,4 @@ public class CloudSiteController {
         return mav;
     }
 
-    @GetMapping("/logout")
-    @ResponseBody
-    public String revokeToken(Principal principal, HttpSession session) {
-        session.invalidate();
-//        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-//        byte[] cu = (byte[]) operations.get("access");
-//        RedisUser sysUser = (RedisUser) SerizlizeUtil.unserizlize(cu);
-//        session.removeAttribute("org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN");
-//        session.removeAttribute("SPRING_SECURITY_CONTEXT");
-        return "注销成功";
-    }
-
 }

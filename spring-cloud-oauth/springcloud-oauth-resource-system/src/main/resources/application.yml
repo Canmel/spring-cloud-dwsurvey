@@ -26,6 +26,8 @@ eureka:
       defaultZone: http://${APPLICATION_IP}:8888/eureka/
 
 spring:
+  session:
+    store-type: redis
   datasource:
     url: jdbc:mysql://${APPLICATION_IP}:3306/dw_oauth2?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
     username: root

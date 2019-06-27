@@ -24,6 +24,8 @@ eureka:
       defaultZone: http://${APPLICATION_IP}:8888/eureka/
 
 spring:
+  session:
+    store-type: redis
   datasource:
     url: jdbc:mysql://${APPLICATION_IP}:3306/dw_bpm?useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC
     username: root
@@ -31,6 +33,16 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   application:
     name: springcloud-bpm-server
+  redis:
+    database: 0
+    host: ${APPLICATION_IP}
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
 
 
 mybatis-plus:
