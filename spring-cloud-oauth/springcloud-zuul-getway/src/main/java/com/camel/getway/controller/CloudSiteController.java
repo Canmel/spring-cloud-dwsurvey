@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+
 /**
  * 　　　　　　　 ┏┓　　　┏┓
  * 　　　　　　　┏┛┻━━━━━┛┻┓
@@ -49,6 +52,18 @@ public class CloudSiteController {
         String personResourceUrl = "http://localhost:9000/person";
         mav.addObject("person", restOperations.getForObject(personResourceUrl, String.class));
         return mav;
+    }
+
+    @GetMapping("/logout")
+    @ResponseBody
+    public String revokeToken(Principal principal, HttpSession session) {
+        session.invalidate();
+//        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+//        byte[] cu = (byte[]) operations.get("access");
+//        RedisUser sysUser = (RedisUser) SerizlizeUtil.unserizlize(cu);
+//        session.removeAttribute("org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN");
+//        session.removeAttribute("SPRING_SECURITY_CONTEXT");
+        return "注销成功";
     }
 
 }
