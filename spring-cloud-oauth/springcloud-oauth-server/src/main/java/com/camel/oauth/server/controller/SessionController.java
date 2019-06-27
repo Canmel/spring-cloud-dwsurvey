@@ -55,7 +55,7 @@ public class SessionController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "logout",method = RequestMethod.GET)
+    @RequestMapping(value = "/signout",method = RequestMethod.GET)
     public String logout(HttpSession session){
         session.invalidate();//使Session变成无效，及用户退出
         return "logout";
