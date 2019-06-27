@@ -61,3 +61,13 @@ eureka:
 spring:
   application:
     name: springcloud-zuul-getway-server
+  redis:
+    database: 0
+    host: ${APPLICATION_IP}
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0

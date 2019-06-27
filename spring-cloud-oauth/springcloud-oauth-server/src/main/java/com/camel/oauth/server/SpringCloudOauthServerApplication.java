@@ -7,6 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 /**
  *　　　　　　　 ┏┓    ┏┓+ +
@@ -34,6 +35,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @MapperScan("com.camel.oauth.server.mapper")
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableRedisHttpSession
 public class SpringCloudOauthServerApplication {
 
     public static void main(String[] args) {
