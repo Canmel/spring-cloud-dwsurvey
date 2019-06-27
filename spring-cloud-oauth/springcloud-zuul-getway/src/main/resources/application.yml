@@ -23,8 +23,7 @@ security:
 person:
   url: http://${APPLICATION_IP}:9000/person
 
-# Proxies the calls to http://localhost:8080/api/* to our REST service at http://localhost:9000/*
-# and automatically includes our OAuth2 token in the request headers
+# zuul 代理
 zuul:
   SendErrorFilter:
     post:
