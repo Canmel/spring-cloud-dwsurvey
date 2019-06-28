@@ -40,8 +40,8 @@ zuul:
       path: /user/**
       url: http://${APPLICATION_IP}:9000/user
     auth:
-      path: /auth/**
-      url: http://${APPLICATION_IP}:7070
+      path: /authserver/**
+      url: http://${APPLICATION_IP}:7070/authserver
     bpm:
       path: /bpm/**
       url: http://${APPLICATION_IP}:6789
