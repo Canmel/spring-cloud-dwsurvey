@@ -26,8 +26,6 @@ eureka:
       defaultZone: http://${APPLICATION_IP}:8888/eureka/
 
 spring:
-  session:
-    store-type: redis
   datasource:
     url: jdbc:mysql://${APPLICATION_IP}:3306/dw_oauth2?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
     username: root
@@ -37,16 +35,6 @@ spring:
     auto: true
   application:
     name: springcloud-oauth-system-server
-  redis:
-    database: 0
-    host: ${APPLICATION_IP}
-    password:
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

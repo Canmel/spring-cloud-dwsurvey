@@ -23,33 +23,28 @@ security:
 person:
   url: http://${APPLICATION_IP}:9000/person
 
-# zuul 代理
+# Proxies the calls to http://localhost:8080/api/* to our REST service at http://localhost:9000/*
+# and automatically includes our OAuth2 token in the request headers
 zuul:
   SendErrorFilter:
     post:
       desable: true
-  ignoredServices: '*'
   routes:
     resource:
       path: /api/**
       url: http://${APPLICATION_IP}:9000
-      sensitiveHeaders: "*"
     system:
       path: /system/**
       url: http://${APPLICATION_IP}:9001
-      sensitiveHeaders: "*"
-    user:
+    user: 
       path: /user/**
       url: http://${APPLICATION_IP}:9000/user
-      sensitiveHeaders: "*"
-    authserver:
-      path: /authserver/**
+    auth:
+      path: /auth/**
       url: http://${APPLICATION_IP}:7070
-      sensitiveHeaders: "*"
     bpm:
       path: /bpm/**
       url: http://${APPLICATION_IP}:6789
-      sensitiveHeaders: "*"
 
 # Make sure the OAuth2 token is only relayed when using the internal API,
 # do not pass any authentication to the external API
@@ -58,6 +53,7 @@ proxy:
     routes:
       api: oauth2
 
+
 eureka:
   client:
     serviceUrl:
@@ -65,13 +61,3 @@ eureka:
 spring:
   application:
     name: springcloud-zuul-getway-server
-  redis:
-    database: 0
-    host: ${APPLICATION_IP}
-    password:
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0

@@ -28,8 +28,6 @@ eureka:
     serviceUrl:
       defaultZone: http://${APPLICATION_IP}:8888/eureka/
 spring:
-  session:
-    store-type: redis
   resources:
     static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
   mvc:
@@ -56,15 +54,8 @@ spring:
     dbcp2:
       pool-prepared-statements: true
   redis:
-    database: 0
     host: ${APPLICATION_IP}
     password:
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
   application:
     name: springcloud-oauth-server
 #mybatis
