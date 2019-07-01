@@ -1,0 +1,65 @@
+# Make the application available at http://localhost:9000
+
+server:
+  port: 9000
+
+# Configure the public key to use for verifying the incoming JWT tokens
+security:
+  sessions: NEVER
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |
+            -----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhiiifKv6Otf5PyqIE+LQ
+            EiJRRh6q8piPY9Okq+RfRu9Bue0D8hq7aFxcgkLZ6Bg9CAS+w1KdaE5MMeOCVVxv
+            rpRETzVpAsh6GL5nBc679jSqMzjr3V4uty46ilL4VHKSxlZh5Nmz5EMHPI5iwpNs
+            8U5n3QiwsTk514FXad54xPSPH3i/pDzGSZHrVcwDVaOKn7gFiIqP86vkJB47JZv8
+            T6P5RK7Rj06zoG45DMGWG3DQv6o1/Jm4IJQWj0AUD3bSHqzXkPr7qyMYvkE4kyMH
+            6aVAsAYMxilZFlJMv2b8N883gdi3LEeOJo8zZr5IWyyROfepdeOL7UkAXddAj+dL
+            WQIDAQAB
+            -----END PUBLIC KEY-----
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${APPLICATION_IP}:8888/eureka/
+    fetch-registry: true
+
+spring:
+  application:
+    name: springcloud-oauth-resource
+  datasource:
+    url: jdbc:mysql://${APPLICATION_IP}:3306/dwsurvey?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: ${REDIS_HOST}
+    port: 6379
+    password:
+    timeout: 6000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    database: 0
+
+mybatis-plus:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.camel.oauth.resource.model
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+
+hystrix:
+  metrics:
+    enabled: true
+    polling-interval-ms: 2000

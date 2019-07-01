@@ -1,0 +1,24 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.canmel.dwsurvey</groupId>
+        <artifactId>spring-cloud-examples</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>spring-cloud-oauth</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>springcloud-oauth-server</module>
+        <module>springcloud-oauth-resource</module>
+        <module>springcloud-zuul-getway</module>
+        <module>springcloud-eureka-server</module>
+        <module>springcloud-base-core</module>
+        <module>springcloud-oauth-resource-system</module>
+        <module>springcloud-redis</module>
+        <module>springcloud-bpm-server</module>
+        <module>spring-cloud-config</module>
+        <module>spring-cloud-feign</module>
+        <module>springcloud-base-oauth</module>
+    </modules>
+</project>

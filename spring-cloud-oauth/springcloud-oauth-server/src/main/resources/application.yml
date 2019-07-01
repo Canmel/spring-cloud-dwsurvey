@@ -1,0 +1,84 @@
+# Make the application available at http://localhost:7070/authserver
+server:
+  port: 7070
+  contextPath: /authserver
+
+# Our certificate settings for enabling JWT tokens
+jwt:
+  certificate:
+    store:
+      file: classpath:/certificate/mykeystore.jks
+      password: abirkhan04
+    key:
+      alias: myauthkey
+      password: abirkhan04
+
+      
+security:
+  oauth2:
+    resource: 
+      filter-order: 3
+    client:
+      refresh-token-validity-seconds: 3600
+      access-token-validity-seconds: 1800
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${APPLICATION_IP}:8888/eureka/
+spring:
+  session:
+    store-type: redis
+  resources:
+    static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  mvc:
+    static-path-pattern: /**
+  thymeleaf:
+    prefix: classpath:/templates/
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    url: jdbc:mysql://${APPLICATION_IP}:3306/dw_oauth2?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    tomcat:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM sys_user
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+    dbcp2:
+      pool-prepared-statements: true
+  redis:
+    host: ${REDIS_HOST}
+    port: 6379
+    password:
+    timeout: 6000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    database: 0
+  application:
+    name: springcloud-oauth-server
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.camel.oauth.server.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+springcloud:
+  oauth:
+    signin:
+      colum: email
+    role:
+      prefix: ROLE_

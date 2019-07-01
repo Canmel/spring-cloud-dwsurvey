@@ -1,0 +1,83 @@
+# Make the application available at http://localhost:8080
+# These are default settings, but we add them for clarity.
+server:
+  port: 8080
+  contextPath: /
+  session:
+    timeout: 1800
+
+
+# Configure the Authorization Server and User Info Resource Server details
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://${APPLICATION_IP}:7070/authserver/oauth/token
+      userAuthorizationUri: http://${APPLICATION_IP}:7070/authserver/oauth/authorize
+      clientId: first
+      clientSecret: passwordforauthserver
+      refresh-token-validity-seconds: 3600
+      access-token-validity-seconds: 3000
+    resource:
+      userInfoUri: http://${APPLICATION_IP}:9000/user
+
+person:
+  url: http://${APPLICATION_IP}:9000/person
+
+# Proxies the calls to http://localhost:8080/api/* to our REST service at http://localhost:9000/*
+# and automatically includes our OAuth2 token in the request headers
+zuul:
+  ignoredServices: '*'
+  SendErrorFilter:
+    post:
+      desable: true
+  routes:
+    resource:
+      path: /api/**
+      url: http://${APPLICATION_IP}:9000
+      sensitiveHeaders: "*"
+    system:
+      path: /system/**
+      url: http://${APPLICATION_IP}:9001
+      sensitiveHeaders: "*"
+    user: 
+      path: /user/**
+      url: http://${APPLICATION_IP}:9000/user
+      sensitiveHeaders: "*"
+    auth:
+      path: /auth/**
+      url: http://${APPLICATION_IP}:7070
+      sensitiveHeaders: "*"
+    bpm:
+      path: /bpm/**
+      url: http://${APPLICATION_IP}:6789
+      sensitiveHeaders: "*"
+
+# Make sure the OAuth2 token is only relayed when using the internal API,
+# do not pass any authentication to the external API
+proxy:
+  auth:
+    routes:
+      api: oauth2
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${APPLICATION_IP}:8888/eureka/
+spring:
+  session:
+    store-type: redis
+  redis:
+    host: ${REDIS_HOST}
+    port: 6379
+    password:
+    timeout: 6000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    database: 0
+  application:
+    name: springcloud-zuul-getway-server
