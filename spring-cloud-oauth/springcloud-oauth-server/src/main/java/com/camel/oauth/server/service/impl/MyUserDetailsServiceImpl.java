@@ -1,7 +1,7 @@
 package com.camel.oauth.server.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.camel.oauth.server.entity.MyUserDetails;
+import com.camel.entity.MyUserDetails;
 import com.camel.oauth.server.entity.SysUser;
 import com.camel.oauth.server.enums.EntityStatus;
 import com.camel.oauth.server.service.SysRoleService;

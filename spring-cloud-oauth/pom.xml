@@ -19,5 +19,6 @@
         <module>springcloud-bpm-server</module>
         <module>spring-cloud-config</module>
         <module>spring-cloud-feign</module>
+        <module>springcloud-base-oauth</module>
     </modules>
 </project>

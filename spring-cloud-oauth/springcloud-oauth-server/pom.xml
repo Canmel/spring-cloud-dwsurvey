@@ -37,6 +37,17 @@
 			<!-- <version>${spring-cloud-starter-oauth2.version}</version> -->
 		</dependency>
 		<dependency>
+			<groupId>com.canmel.dwsurvey</groupId>
+			<artifactId>springcloud-base-oauth</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.security.oauth</groupId>
+					<artifactId>spring-security-oauth2</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
 			<version>4.4.8</version>
