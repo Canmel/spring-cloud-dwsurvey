@@ -1,6 +1,8 @@
 package com.camel.getway.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,7 +41,7 @@ public class CloudSiteController {
 
     @GetMapping("/")
     @ResponseBody
-    public String hello() {
+    public String hello(DefaultOAuth2ClientContext oAuth2ClientContext) {
         return "Hello From Auth-Client!";
     }
 

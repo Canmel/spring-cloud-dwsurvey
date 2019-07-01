@@ -44,10 +44,13 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	@Autowired
+	private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/login**", "/static/**", "/images/**", "/plugins/**", "/css/**", "/js/**", "/session/**").permitAll().anyRequest().authenticated().and().csrf().and()
-				.formLogin().loginPage("/login");
+				.formLogin().loginPage("/login").successHandler(myAuthenticationSuccessHandler);
 	}
 
 	@Override
@@ -56,3 +59,4 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	}
 
 }
+//ForwardAuthenticationSuccessHandler

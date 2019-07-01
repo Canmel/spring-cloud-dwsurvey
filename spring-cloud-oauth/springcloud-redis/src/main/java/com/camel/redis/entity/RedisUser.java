@@ -9,6 +9,9 @@ import java.util.List;
  @author baily */
 @Data
 public class RedisUser implements Serializable {
+
+    private long serialVersionUID = 1L;
+
     private Integer id;
 
     private String username;

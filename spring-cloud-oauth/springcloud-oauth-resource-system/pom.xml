@@ -94,12 +94,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-redis -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
-			<version>1.4.7.RELEASE</version>
-		</dependency>
 		<dependency>
 			<groupId>com.canmel.dwsurvey</groupId>
 			<artifactId>springcloud-redis</artifactId>

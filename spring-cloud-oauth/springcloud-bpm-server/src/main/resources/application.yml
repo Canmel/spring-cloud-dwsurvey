@@ -31,6 +31,20 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   application:
     name: springcloud-bpm-server
+  redis:
+    host: ${REDIS_HOST}
+    port: 6379
+    password:
+    timeout: 6000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    database: 0
+  session:
+    store-type: redis
 
 
 mybatis-plus:
