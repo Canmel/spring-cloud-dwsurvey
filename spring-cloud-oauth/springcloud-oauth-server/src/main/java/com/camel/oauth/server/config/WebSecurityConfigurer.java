@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
@@ -44,13 +43,10 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Autowired
-	private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/login**", "/static/**", "/images/**", "/plugins/**", "/css/**", "/js/**", "/session/**").permitAll().anyRequest().authenticated().and().csrf().and()
-				.formLogin().loginPage("/login").successHandler(myAuthenticationSuccessHandler);
+				.formLogin().loginPage("/login");
 	}
 
 	@Override

@@ -47,8 +47,6 @@ spring:
         max-idle: 8
         min-idle: 0
     database: 0
-  session:
-    store-type: redis
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

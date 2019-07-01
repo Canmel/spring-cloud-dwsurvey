@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 　　　　　　　 ┏┓　　　┏┓
@@ -46,11 +49,11 @@ public class CloudSiteController {
     }
 
     @GetMapping("/personInfo")
-    public ModelAndView person(DefaultOAuth2ClientContext oAuth2ClientContext) {
-        ModelAndView mav = new ModelAndView("personinfo");
-        String personResourceUrl = "http://localhost:9000/person";
-        mav.addObject("person", restOperations.getForObject(personResourceUrl, String.class));
-        return mav;
+    public String person(DefaultOAuth2ClientContext oAuth2ClientContext, HttpSession session, SessionStatus sessionStatus) {
+        session.invalidate();
+        sessionStatus.setComplete();
+        return "成功";
+
     }
 
 }
