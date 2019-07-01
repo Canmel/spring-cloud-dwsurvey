@@ -46,7 +46,7 @@ public class CloudSiteController {
     }
 
     @GetMapping("/personInfo")
-    public ModelAndView person() {
+    public ModelAndView person(DefaultOAuth2ClientContext oAuth2ClientContext) {
         ModelAndView mav = new ModelAndView("personinfo");
         String personResourceUrl = "http://localhost:9000/person";
         mav.addObject("person", restOperations.getForObject(personResourceUrl, String.class));

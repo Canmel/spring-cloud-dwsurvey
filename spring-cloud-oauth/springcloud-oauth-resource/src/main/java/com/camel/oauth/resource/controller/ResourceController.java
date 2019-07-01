@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResourceController {
 
     @RequestMapping("/user")
-    public Principal user(Principal user, DefaultOAuth2ClientContext defaultOAuth2ClientContext) {
+    public Principal user(Principal user) {
       return user;
     }
 }
