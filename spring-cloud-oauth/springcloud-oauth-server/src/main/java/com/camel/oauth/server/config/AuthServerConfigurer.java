@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -64,6 +66,12 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private MyUserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
@@ -81,12 +89,10 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.accessTokenConverter(jwtAccessTokenConverter()).userDetailsService(userDetailsService);
+        endpoints.authenticationManager(authenticationManager).tokenStore(redisTokenStore());
         endpoints.reuseRefreshTokens(true);
     }
 
-
-    @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
     /**
      * redis token 配置
      */
@@ -99,22 +105,13 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(keystore, keystorePassword.toCharArray());
         KeyPair keyPair = keyStoreKeyFactory.getKeyPair(keyAlias, keyPassword.toCharArray());
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        final JwtAccessTokenConverter converter = new JwtAccessToken();
         converter.setKeyPair(keyPair);
         return converter;
     }
 
-    @Primary
-    @Bean
-    public DefaultTokenServices defaultTokenServices(){
-        DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setTokenStore(redisTokenStore());
-        tokenServices.setSupportRefreshToken(true);
-        // token有效期自定义设置，默认12小时
-        tokenServices.setAccessTokenValiditySeconds(60*60*12);
-        // refresh_token默认30天
-        tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
-        return tokenServices;
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.allowFormAuthenticationForClients();
     }
-
 }
