@@ -1,11 +1,12 @@
 package com.camel.getway.controller;
 
-import com.camel.entity.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.io.Serializable;
 import java.security.Principal;
 
@@ -52,9 +52,6 @@ public class CloudSiteController {
     @Autowired
     private RestOperations restOperations;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-
     @GetMapping("/")
     @ResponseBody
     public String hello(DefaultOAuth2ClientContext oAuth2ClientContext) {
@@ -62,12 +59,9 @@ public class CloudSiteController {
     }
 
     @GetMapping("/personInfo")
-    public String person(Principal principal, HttpSession session, SessionStatus sessionStatus, HttpServletResponse response) throws IOException {
+    public String person(Principal principal, HttpSession session, SessionStatus sessionStatus) {
         OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) principal;
-        OAuth2AuthenticationDetails auth2AuthenticationDetails = (OAuth2AuthenticationDetails) oAuth2Authentication.getDetails();
-        String token = auth2AuthenticationDetails.getTokenValue();
 
-        response.sendRedirect("");
         session.invalidate();
         sessionStatus.setComplete();
         DefaultAccessTokenRequest request = new DefaultAccessTokenRequest();
