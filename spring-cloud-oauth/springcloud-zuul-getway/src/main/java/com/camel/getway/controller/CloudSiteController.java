@@ -65,7 +65,7 @@ public class CloudSiteController {
         session.invalidate();
         sessionStatus.setComplete();
         DefaultAccessTokenRequest request = new DefaultAccessTokenRequest();
-        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+//        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
 //        operations.get(principal)
         return "成功";
 
